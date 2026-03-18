@@ -21,17 +21,18 @@ if (isset($_SESSION['user_name'])) {
 <body class="login-page">
 
     <div class="login-screen">
-        
         <div class="return-container" onclick="window.location.href='inicio1.php'">
             <i class="fas fa-angle-left"></i>
             <span>Volver</span>
         </div>
 
-        <form action="procesar_login.php" method="POST" class="login-form-container">
+        <form action="../Controller/procesar_login.php" method="POST" class="login-form-container">
             <img src="logoNight.png" class="logo-login" alt="Logo NightFest">
 
             <?php if (isset($_GET['error'])): ?>
-                <p class="error-msg">Correo o contraseña incorrectos.</p>
+                <p class="error-msg" style="color: #ff4d4d; text-align: center; margin-bottom: 10px;">
+                    Correo o contraseña incorrectos.
+                </p>
             <?php endif; ?>
 
             <div class="input-group">
@@ -46,12 +47,12 @@ if (isset($_SESSION['user_name'])) {
             </div>
 
             <p class="texto-cuenta">
-                ¿No tienes cuenta? <a href="registro.php" class="link-registro">Regístrate</a>
+                ¿No tienes cuenta? <a href="registro.html" class="link-registro">Regístrate</a>
             </p>
 
             <input type="submit" value="Iniciar sesión" class="btn-login-submit">
         </form>
-        
-    </div> </body>
+    </div>
+</body>
 
 </html>
