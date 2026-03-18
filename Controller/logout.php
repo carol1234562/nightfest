@@ -8,4 +8,5 @@ session_destroy();
 header("Location: inicio1.php"); 
 // Redirigimos al inicio ya como invitado
 exit();
+//exit
 ?>
