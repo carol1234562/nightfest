@@ -1,18 +1,16 @@
 <?php
 session_start();
 
-// 1. Identificar si es el administrador
-$es_admin = (isset($_SESSION['user_email']) && $_SESSION['user_email'] == "admin@nightfest.com");
+// identificacion de usuario 
+$is_logged = isset($_SESSION['user_id']);
+$es_admin = ($is_logged && $_SESSION['rol'] === 'admin');
 
-// 2. Definir a dónde va el botón "Más información" (si no está logueado, va a login)
-$destino = isset($_SESSION['user_name']) ? "reservar.php" : "login.php";
+$destino = $is_logged ? "reservar.php" : "login.php";
 
-// 3. Extraer la inicial para el círculo dorado
+// inicial 
 $inicial = "";
-if (isset($_SESSION['user_name'])) {
+if ($is_logged) {
     $inicial = strtoupper(substr($_SESSION['user_name'], 0, 1));
-} elseif (isset($_SESSION['user_email'])) {
-    $inicial = strtoupper(substr($_SESSION['user_email'], 0, 1));
 }
 ?>
 <!DOCTYPE html>
@@ -24,7 +22,7 @@ if (isset($_SESSION['user_name'])) {
     <title>NightFest - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="STYLE1.CSS">
+    <link rel="stylesheet" href="../assets/css/STYLE1.css">
 </head>
 
 <body id="inicio">
@@ -32,7 +30,7 @@ if (isset($_SESSION['user_name'])) {
     <header class="main-header">
         <div class="header-left">
             <a href="inicio1.php">
-                <img src="logoNight.png" class="logo" alt="NightFest Logo">
+                <img src="../assets/img/logoNight.png" class="logo" alt="NightFest Logo">
             </a>
         </div>
 
@@ -50,9 +48,9 @@ if (isset($_SESSION['user_name'])) {
         </nav>
 
         <div class="auth-buttons">
-            <?php if (isset($_SESSION['user_email'])): ?>
+            <?php if ($is_logged): ?>
                 <div class="user-panel">
-                    <a href="perfil.html" class="user-avatar-link">
+                    <a href="perfil.php" class="user-avatar-link">
                         <div class="user-avatar"><?php echo $inicial; ?></div>
                     </a>
 
@@ -70,7 +68,7 @@ if (isset($_SESSION['user_name'])) {
                 </div>
             <?php else: ?>
                 <a href="login.php" class="btn-login">Iniciar Sesión</a>
-                <a href="registro.php" class="btn-register">Registrarse</a>
+                <a href="registro.html" class="btn-register">Registrarse</a>
             <?php endif; ?>
         </div>
     </header>
@@ -78,7 +76,6 @@ if (isset($_SESSION['user_name'])) {
     <main class="container">
         <section class="section-top">
             <h2 class="section-title">Destacados</h2>
-            
             <div class="hero-container">
                 <div class="hero-item">
                     <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80" alt="Duro">
@@ -87,7 +84,6 @@ if (isset($_SESSION['user_name'])) {
                         <p>18 de nov. 2023 / 50€</p>
                     </div>
                 </div>
-
                 <div class="hero-sidebar">
                     <div class="hero-item">
                         <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/e6/28/1a/opium-mar-club.jpg?w=1200&h=-1&s=1" alt="Opium">
@@ -96,7 +92,6 @@ if (isset($_SESSION['user_name'])) {
                             <p>17 de nov / 25€</p>
                         </div>
                     </div>
-                    
                     <div class="hero-item">
                         <img src="https://youbarcelona.com/uploads/images/c/downtown%20barcelona%20club%20gente%202/400x300.webp?v=63811631314" alt="Downtown">
                         <div class="overlay-info">
@@ -161,60 +156,6 @@ if (isset($_SESSION['user_name'])) {
                 </div>
             </div>
         </section>
-
-        <section class="section-bottom">
-            <h2 class="section-title">Festivales</h2>
-            <div class="clubs-grid">
-                <div class="club-card">
-                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=400&q=80">
-                    <div class="club-info">
-                        <h4>SONAR</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
-                    </div>
-                </div>
-                <div class="club-card">
-                    <img src="https://i0.wp.com/allmusicspain.com/wp-content/uploads/2025/12/dreambeach-2026.jpg">
-                    <div class="club-info">
-                        <h4>DREAM BEACH</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
-                    </div>
-                </div>
-                <div class="club-card third-item">
-                    <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=400&q=80">
-                    <div class="club-info">
-                        <h4>SAOKO FEST</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-bottom">
-            <h2 class="section-title">Restaurantes</h2>
-            <div class="clubs-grid">
-                <div class="club-card">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80">
-                    <div class="club-info">
-                        <h4>MISTURA</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
-                    </div>
-                </div>
-                <div class="club-card">
-                    <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&q=80">
-                    <div class="club-info">
-                        <h4>OPIUM REST</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
-                    </div>
-                </div>
-                <div class="club-card third-item">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=400&q=80">
-                    <div class="club-info">
-                        <h4>SKY DINING</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="simple-footer">
@@ -235,5 +176,4 @@ if (isset($_SESSION['user_name'])) {
     </footer>
 
 </body>
-
 </html>

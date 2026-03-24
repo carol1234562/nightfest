@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['user_name'])) {
+// Si ya hay una sesión activa, lo mandamos al inicio (esto está perfecto)
+if (isset($_SESSION['user_id'])) {
     header("Location: inicio1.php");
     exit();
 }
@@ -14,8 +15,8 @@ if (isset($_SESSION['user_name'])) {
     <title>Login - NightFest</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="STYLE1.CSS">
-    <link rel="stylesheet" href="STYLE_LOGIN.CSS">
+    
+    <link rel="stylesheet" href="../assets/css/STYLE1.css">
 </head>
 
 <body class="login-page">
@@ -27,11 +28,19 @@ if (isset($_SESSION['user_name'])) {
         </div>
 
         <form action="../Controller/procesar_login.php" method="POST" class="login-form-container">
-            <img src="logoNight.png" class="logo-login" alt="Logo NightFest">
+            
+            <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
 
             <?php if (isset($_GET['error'])): ?>
-                <p class="error-msg" style="color: #ff4d4d; text-align: center; margin-bottom: 10px;">
-                    Correo o contraseña incorrectos.
+                <p class="error-msg" style="color: #ff4d4d; text-align: center; margin-bottom: 15px; font-weight: 600; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px;">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    <?php echo htmlspecialchars($_GET['error']); ?>
+                </p>
+            <?php endif; ?>
+
+            <?php if (isset($_GET['success'])): ?>
+                <p class="success-msg" style="color: #2ecc71; text-align: center; margin-bottom: 15px;">
+                    <?php echo htmlspecialchars($_GET['success']); ?>
                 </p>
             <?php endif; ?>
 
@@ -54,5 +63,4 @@ if (isset($_SESSION['user_name'])) {
         </form>
     </div>
 </body>
-
 </html>
