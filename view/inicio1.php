@@ -63,7 +63,7 @@ if (isset($_SESSION['user_name'])) {
                             </a>
                         <?php endif; ?>
 
-                        <a href="logout.php" class="btn-logout-icon" title="Cerrar Sesión">
+                        <a href="../Controller/logout.php" class="btn-logout-icon" title="Cerrar Sesión">
                             <i class="fas fa-sign-out-alt"></i>
                         </a>
                     </div>
