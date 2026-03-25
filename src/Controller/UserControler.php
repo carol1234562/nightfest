@@ -4,27 +4,40 @@ class UserController {
     private $connection;
 
     public function __construct() {
-        $this->connection = new mysqli("localhost", "tu_usuario", "tu_password", "tu_db");
+        // --- CONFIGURACIÓN DE CONEXIÓN ---
+        $host = "localhost";
+        $user = "root";      // Cambiar si usas otro usuario
+        $pass = "";          // Cambiar si tienes contraseña en MySQL
+        $db   = "tu_db";
+
+        $this->connection = new mysqli($host, $user, $pass, $db);
 
         if ($this->connection->connect_error) {
             die("Error de conexión: " . $this->connection->connect_error);
         }
+        
+        $this->connection->set_charset("utf8mb4");
     }
 
+    // --- MÉTODO: LOGIN ---
     public function login() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $email = $this->connection->real_escape_string($_POST['email']);
+            $email = $this->connection->real_escape_string(trim($_POST['email']));
             $password = $_POST['password'];
 
             $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";
             $result = $this->connection->query($sql);
 
-            if ($result->num_rows > 0) {
+            if ($result && $result->num_rows > 0) {
                 $user = $result->fetch_assoc();
+                
+                // Comparamos la clave escrita con el hash de la BD
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['rol'] = $user['rol']; 
+                    $_SESSION['nombre']  = $user['nombre'];
+                    $_SESSION['rol']     = $user['rol']; 
                     header("Location: ../view/perfil.php");
                     exit();
                 }
@@ -34,66 +47,58 @@ class UserController {
         }
     }
 
+    // --- MÉTODO: REGISTRO ---
     public function register() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
-        $email = $this->connection->real_escape_string(trim($_POST['email']));
-        $pass = $_POST['password'];
-        $rol_solicitado = $_POST['rol'];
-        $codigo_admin = $_POST['admin_code'] ?? '';
-        
-        // 4.5: Validaciones de servidor
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            header("Location: ../view/registro.php?error=Formato de email inválido"); exit();
-        }
-        if (strlen($pass) < 6) {
-            header("Location: ../view/registro.php?error=La contraseña debe tener 6 caracteres"); exit();
-        }
+            // Limpieza de datos
+            $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
+            $email  = $this->connection->real_escape_string(trim($_POST['email']));
+            $pass   = $_POST['password'];
+            $rol_solicitado = $_POST['rol'] ?? 'estandar';
+            $codigo_admin   = $_POST['admin_code'] ?? '';
 
-        // --- LÓGICA DE SEGURIDAD PARA ADMIN ---
-        $rol_final = 'estandar';
-        $nombre_foto = 'default.png';
-
-        if ($rol_solicitado === 'admin') {
-            // Especificación: Validar código secreto para ser admin
-            if ($codigo_admin !== "ADMIN123") { // Cambia este código por el que quieras
-                header("Location: ../view/registro.php?error=Código de administrador incorrecto");
-                exit();
+            // Validaciones básicas de servidor
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                header("Location: ../view/registro.php?error=Email no válido"); exit();
             }
-            $rol_final = 'admin';
+            if (strlen($pass) < 6) {
+                header("Location: ../view/registro.php?error=Clave muy corta"); exit();
+            }
 
-            // 2.5: Procesar Foto de Perfil
+            // Lógica de Rol y Foto
+            $rol_final = 'estandar';
+            $nombre_foto = 'default.png';
+
+            if ($rol_solicitado === 'admin' && $codigo_admin === "ADMIN123") {
+                $rol_final = 'admin';
+            }
+
             if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
-                $extension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
-                $nombre_foto = "perfil_" . time() . "." . $extension;
-                $ruta_destino = "../assets/img/" . $nombre_foto;
-                
-                if (!move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
-                    header("Location: ../view/registro.php?error=Error al subir la imagen"); exit();
-                }
+                $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+                $nombre_foto = "perfil_" . time() . "." . $ext;
+                move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
             }
-        }
 
-        // 2.2: Insertar en Base de Datos (con Password Hashing)
-        $passHash = password_hash($pass, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) 
-                VALUES ('$nombre', '$email', '$passHash', '$rol_final', '$nombre_foto')";
+            // Guardar en Base de Datos
+            $passHash = password_hash($pass, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) 
+                    VALUES ('$nombre', '$email', '$passHash', '$rol_final', '$nombre_foto')";
 
-        if ($this->connection->query($sql)) {
-            // 2.3: Redirigir al login o principal con éxito
-            header("Location: ../view/login.php?success=Usuario registrado como $rol_final");
-        } else {
-            header("Location: ../view/registro.php?error=El correo ya está registrado");
+            if ($this->connection->query($sql)) {
+                header("Location: ../view/login.php?success=Usuario creado correctamente");
+            } else {
+                header("Location: ../view/registro.php?error=El correo ya está registrado");
+            }
+            exit();
         }
-        exit();
     }
-}
 
+    // --- MÉTODO: LOGOUT ---
     public function logout() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) session_start();
         session_unset();
         session_destroy();
         header("Location: ../view/login.php");
         exit();
     }
-}
+} // Fin de la clase
