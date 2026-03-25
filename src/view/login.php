@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Volver</span>
         </div>
 
-        <form action="../Controller/procesar_login.php" method="POST" class="login-form-container">
+        <form action="../Controller/UserControler.php" method="POST" class="login-form-container">
             
             <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
 
@@ -59,7 +59,7 @@ if (isset($_SESSION['user_id'])) {
                 ¿No tienes cuenta? <a href="registro.html" class="link-registro">Regístrate</a>
             </p>
 
-            <input type="submit" value="Iniciar sesión" class="btn-login-submit">
+            <input type="submit" name= "login" value="Iniciar sesión" class="btn-login-submit">
         </form>
     </div>
 </body>

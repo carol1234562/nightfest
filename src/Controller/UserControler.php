@@ -1,5 +1,11 @@
 <?php
 
+
+// Scanner sc =new Scanner();
+// sc.nextLine();
+$uc = new UserController();
+$uc->login();
+
 class UserController {
     private $connection;
 
@@ -8,7 +14,7 @@ class UserController {
         $host = "localhost";
         $user = "root";      // Cambiar si usas otro usuario
         $pass = "";          // Cambiar si tienes contraseña en MySQL
-        $db   = "tu_db";
+        $db   = "NightFest";
 
         $this->connection = new mysqli($host, $user, $pass, $db);
 
@@ -21,16 +27,18 @@ class UserController {
 
     // --- MÉTODO: LOGIN ---
     public function login() {
+        echo __LINE__ ;
         if (session_status() === PHP_SESSION_NONE) session_start();
-
+        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $this->connection->real_escape_string(trim($_POST['email']));
             $password = $_POST['password'];
-
+            
             $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";
             $result = $this->connection->query($sql);
-
+            
             if ($result && $result->num_rows > 0) {
+                echo __LINE__ ;
                 $user = $result->fetch_assoc();
                 
                 // Comparamos la clave escrita con el hash de la BD
@@ -38,12 +46,15 @@ class UserController {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['nombre']  = $user['nombre'];
                     $_SESSION['rol']     = $user['rol']; 
-                    header("Location: ../view/perfil.php");
-                    exit();
-                }
-            }
-            header("Location: ../view/login.php?error=Credenciales incorrectas");
-            exit();
+                    // header("Location: ../view/perfil.php");
+                    // exit();
+                    }
+                    }else{
+                        echo __LINE__ ;
+
+                    }
+            // header("Location: ../view/login.php?error=Credenciales incorrectas");
+            // exit();
         }
     }
 
