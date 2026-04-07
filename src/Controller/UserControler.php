@@ -11,7 +11,7 @@ class UserController {
         $host = "localhost";
         $user = "root";      // Cambiar si usas otro usuario
         $pass = "";          // Cambiar si tienes contraseña en MySQL
-        $db   = "NightFest BD";
+        $db   = "NightFest";
 
         $this->connection = new mysqli($host, $user, $pass, $db);
 
