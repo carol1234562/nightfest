@@ -3,10 +3,12 @@
 $uc = new UserController();
 $uc->login();
 
-class UserController {
+class UserController
+{
     private $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         // --- CONFIGURACIÓN DE CONEXIÓN ---
         $host = "localhost";
         $user = "root";      // Cambiar si usas otro usuario
@@ -18,45 +20,47 @@ class UserController {
         if ($this->connection->connect_error) {
             die("Error de conexión: " . $this->connection->connect_error);
         }
-        
+
         $this->connection->set_charset("utf8mb4");
     }
 
     // --- MÉTODO: LOGIN ---
     public function login() {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $email = $this->connection->real_escape_string(trim($_POST['email']));
-            $password = $_POST['password'];
-            
-$sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";            $result = $this->connection->query($sql);
-            
-            if ($result && $result->num_rows > 0) {
-                $user = $result->fetch_assoc();
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $this->connection->real_escape_string(trim($_POST['email']));
+        $password = $_POST['password'];
+
+        // 1. Consulta con WHERE para buscar al usuario específico
+        $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";
+        $result = $this->connection->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+
+            // 2. Comparación de contraseña (usamos === porque no tienes hash en la BD aún)
+            if ($password === $user['password']) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['nombre']; // Usamos user_name para el avatar
+                $_SESSION['rol']     = $user['rol'];
                 
-                // Comparamos la clave escrita con el hash de la BD
-                if ($password === $user['password']) {
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['nombre']  = $user['nombre'];
-                    $_SESSION['rol']     = $user['rol']; 
-                    header("Location: ../view/perfil.php");
-                    exit();
-                } else {
-                // contraseña incorrecta
-                header("Location: ../view/login.php?error=Credenciales incorrectas");
+                header("Location: ../view/perfil.php");
                 exit();
-                }
             } else {
-            // usuario no existe
-            header("Location: ../view/login.php?error=Usuario no encontrado");
-            exit();
+                header("Location: ../view/login.php?error=Credenciales_incorrectas");
+                exit();
             }
+        } else {
+            header("Location: ../view/login.php?error=Usuario_no_encontrado");
+            exit();
         }
     }
+}
 
     // --- MÉTODO: REGISTRO ---
-    public function register() {
+    public function register()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Limpieza de datos
             $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
@@ -67,10 +71,12 @@ $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$em
 
             // Validaciones básicas de servidor
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                header("Location: ../view/registro.php?error=Email no válido"); exit();
+                header("Location: ../view/registro.php?error=Email no válido");
+                exit();
             }
             if (strlen($pass) < 6) {
-                header("Location: ../view/registro.php?error=Clave muy corta"); exit();
+                header("Location: ../view/registro.php?error=Clave muy corta");
+                exit();
             }
 
             // Lógica de Rol y Foto
@@ -102,7 +108,8 @@ $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$em
     }
 
     // --- MÉTODO: LOGOUT ---
-    public function logout() {
+    public function logout()
+    {
         if (session_status() === PHP_SESSION_NONE) session_start();
         session_unset();
         session_destroy();
