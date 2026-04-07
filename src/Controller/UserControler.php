@@ -1,8 +1,5 @@
 <?php
 
-
-// Scanner sc =new Scanner();
-// sc.nextLine();
 $uc = new UserController();
 $uc->login();
 
@@ -27,7 +24,6 @@ class UserController {
 
     // --- MÉTODO: LOGIN ---
     public function login() {
-        echo __LINE__ ;
         if (session_status() === PHP_SESSION_NONE) session_start();
         
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,7 +34,6 @@ class UserController {
             $result = $this->connection->query($sql);
             
             if ($result && $result->num_rows > 0) {
-                echo __LINE__ ;
                 $user = $result->fetch_assoc();
                 
                 // Comparamos la clave escrita con el hash de la BD
@@ -46,15 +41,18 @@ class UserController {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['nombre']  = $user['nombre'];
                     $_SESSION['rol']     = $user['rol']; 
-                    // header("Location: ../view/perfil.php");
-                    // exit();
-                    }
-                    }else{
-                        echo __LINE__ ;
-
-                    }
-            // header("Location: ../view/login.php?error=Credenciales incorrectas");
-            // exit();
+                    header("Location: ../view/perfil.php");
+                    exit();
+                } else {
+                // contraseña incorrecta
+                header("Location: ../view/login.php?error=Credenciales incorrectas");
+                exit();
+                }
+            } else {
+            // usuario no existe
+            header("Location: ../view/login.php?error=Usuario no encontrado");
+            exit();
+            }
         }
     }
 
