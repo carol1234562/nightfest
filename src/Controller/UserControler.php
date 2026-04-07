@@ -2,6 +2,16 @@
 
 $uc = new UserController();
 $uc->login();
+$action = $_GET['action'] ?? '';
+
+if ($action === 'logout') {
+    $uc->logout();
+} elseif ($action === 'register') {
+    $uc->register();
+} else {
+    // Por defecto, si viene por POST intentamos login
+    $uc->login();
+}
 
 class UserController
 {
