@@ -42,7 +42,7 @@ class UserController {
                 $user = $result->fetch_assoc();
                 
                 // Comparamos la clave escrita con el hash de la BD
-                if (($password === $user['password'])) {
+                if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['nombre']  = $user['nombre'];
                     $_SESSION['rol']     = $user['rol']; 
