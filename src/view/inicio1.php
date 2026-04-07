@@ -38,7 +38,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
         <nav class="nav-menu">
             <a href="inicio1.php" class="active">HOME</a>
             <a href="destacados_page.php">DESTACADOS</a>
-            
+
             <a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a>
             <a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a>
             <a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a>
@@ -63,7 +63,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                             </a>
                         <?php endif; ?>
 
-                        <a href="../Controller/logout.php" class="btn-logout-icon" title="Cerrar Sesión">
+                        <a href="../Controller/UserControler.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">
                             <i class="fas fa-sign-out-alt"></i>
                         </a>
                     </div>
@@ -232,4 +232,5 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     </footer>
 
 </body>
+
 </html>
