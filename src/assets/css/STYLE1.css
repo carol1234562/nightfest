@@ -514,3 +514,169 @@ body {
         left: 20px;
     }
 }
+/* ==========================================================================
+   NIGHTFEST - HOME PAGE STYLES (Solo para .home-page)
+   ========================================================================== */
+
+/* 1. Ajustes del Contenedor Principal */
+.home-page .container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 2. Título de Sección con barra dorada */
+.home-page .section-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+    border-left: 4px solid #D4AF37;
+    padding-left: 15px;
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+/* 3. Grid de Tarjetas (Adaptable) */
+.home-page .clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+/* 4. Estilo de las Tarjetas (Club Cards) */
+.home-page .club-card {
+    background-color: #0c0c0c; /* Un gris casi negro para contraste */
+    border: 1px solid #222;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-page .club-card:hover {
+    transform: translateY(-10px);
+    border-color: #D4AF37;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1);
+}
+
+.home-page .club-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    filter: brightness(0.8);
+    transition: 0.3s;
+}
+
+.home-page .club-card:hover img {
+    filter: brightness(1.1);
+}
+
+/* 5. Información de la Tarjeta */
+.home-page .club-info {
+    padding: 25px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.home-page .club-info h4 {
+    color: #D4AF37;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.home-page .club-info p {
+    color: #bbbbbb;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* 6. Botón Estilo NightFest */
+.home-page .btn {
+    display: inline-block;
+    color: #D4AF37;
+    text-decoration: none;
+    border: 1px solid #D4AF37;
+    padding: 10px 25px;
+    border-radius: 50px; /* Estilo píldora para los botones también */
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.3s;
+    background: transparent;
+}
+
+.home-page .btn:hover {
+    background-color: #D4AF37;
+    color: #000000;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* 7. Footer - Espaciado y Divider */
+.home-page .simple-footer {
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+    background: #000;
+}
+
+.home-page .footer-socials {
+    margin-bottom: 25px;
+}
+
+.home-page .footer-socials a {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 0 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.home-page .footer-socials a:hover {
+    color: #D4AF37;
+    transform: scale(1.2);
+}
+
+.home-page .footer-legal a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.home-page .footer-legal a:hover {
+    color: #D4AF37;
+}
+
+.home-page .divider {
+    color: #D4AF37;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.home-page .copyright {
+    color: #444;
+    font-size: 0.7rem;
+    margin-top: 25px;
+    letter-spacing: 1px;
+}
+
+/* 8. Ajustes Responsive para Móvil */
+@media (max-width: 768px) {
+    .home-page .section-title {
+        font-size: 1.4rem;
+        text-align: center;
+        border-left: none;
+        border-bottom: 2px solid #D4AF37;
+        padding-left: 0;
+        padding-bottom: 10px;
+    }
+}

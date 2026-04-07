@@ -3,82 +3,94 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>NightFest</title>
+    <title>NightFest | Official Website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="STYLE1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
-
-<body class="nf-body">
-
-    <header class="nf-header">
-        <div class="nf-menu">☰</div>
-
-        <div class="nf-logo">
+<body class="home-page">
+    <header class="main-header">
+        <div class="logo-container">
             <a href="inicioconlogin.html">
                 <img src="logo NightFestSinFondo.png" class="logo" alt="Logo NightFest">
             </a>
         </div>
 
-        <div class="nf-user">
-            <a href="perfil.html">Usuario</a>
+        <nav class="nav-menu">
+            <a href="#">Inicio</a>
+            <a href="#">Eventos</a>
+            <a href="#">Clubs</a>
+            <a href="#" class="admin-link">Admin</a>
+        </nav>
+
+        <div class="auth-buttons">
+            <div class="user-panel">
+                <a href="perfil.html" class="user-avatar-link">
+                    <div class="user-avatar">U</div>
+                </a>
+                <div class="user-actions">
+                    <a href="#" class="icon-plus" title="Añadir">+</a>
+                    <a href="#" class="btn-logout-icon" title="Salir">➜</a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="nf-container">
+    <main class="container">
+        
+        <h2 class="section-title">DESTACADOS</h2>
 
-        <h2 class="nf-title">DESTACADOS</h2>
+        <div class="clubs-grid">
+            
+            <article class="club-card">
+                <img src="https://images.unsplash.com/photo-1518972559570-7cc1309f3229" alt="Entradas">
+                <div class="club-info">
+                    <h4>PRÓXIMAS FECHAS</h4>
+                    <p>Mantenemos las localidades para el 22 de febrero o puedes canjearlas por otras fechas.</p>
+                    <a href="#" class="btn">VER DETALLES</a>
+                </div>
+            </article>
 
-        <div class="nf-grid">
+            <article class="club-card">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7" alt="Experiencia">
+                <div class="club-info">
+                    <h4>EXPERIENCIA NIGHT</h4>
+                    <p>Cuidamos cada detalle para ofrecerte una noche única en la ciudad condal.</p>
+                    <a href="#" class="btn">RESERVAR</a>
+                </div>
+            </article>
 
-            <div class="nf-col">
-                <img src="https://images.unsplash.com/photo-1518972559570-7cc1309f3229">
-                <p>
-                    Teniendo en cuenta este cambio, se ofrecen dos opciones:
-                    mantener las localidades para el día 22 de febrero o
-                    canjearlas por otras fechas disponibles.
-                </p>
-
-                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7">
-                <p>
-                    Desde que entras, notas el cuidado de cada detalle,
-                    pensado para ofrecer una experiencia nocturna única.
-                </p>
-            </div>
-
-            <div class="nf-col">
-                <p>
-                    Barcelona ofrece una vida nocturna vibrante con eventos,
-                    conciertos y fiestas para todos los gustos.
-                </p>
-
-                <img src="https://images.unsplash.com/photo-1521334884684-d80222895322">
-
-                <p>
-                    Illusion Barcelona se posiciona como uno de los locales
-                    más visitados por su ambiente, música y estética moderna.
-                </p>
-
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
-            </div>
+            <article class="club-card">
+                <img src="https://images.unsplash.com/photo-1521334884684-d80222895322" alt="Illusion">
+                <div class="club-info">
+                    <h4>ILLUSION BCN</h4>
+                    <p>El local más visitado por su ambiente, música de vanguardia y estética moderna.</p>
+                    <a href="#" class="btn">SABER MÁS</a>
+                </div>
+            </article>
 
         </div>
     </main>
 
-    <footer class="foot">
-        <div class="terms">
-            <span>Términos</span>
-            <span>Ayuda</span>
-            <span>Privacidad</span>
+    <footer class="simple-footer">
+        <div class="footer-socials">
+            <a href="#">🎵</a>
+            <a href="#">✖</a>
+            <a href="#">📷</a>
+            <a href="#">📘</a>
+        </div>
+        
+        <div class="footer-legal">
+            <a href="#">Términos</a>
+            <span class="divider">|</span>
+            <a href="#">Ayuda</a>
+            <span class="divider">|</span>
+            <a href="#">Privacidad</a>
         </div>
 
-        <div class="fot">
-            <span>🎵</span>
-            <span>✖</span>
-            <span>📷</span>
-            <span>📘</span>
-        </div>
+        <p class="copyright">© 2026 NIGHTFEST. NIGHTLIFE EXPERIENCES.</p>
     </footer>
+
 
 </body>
 
