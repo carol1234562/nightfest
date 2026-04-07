@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-// identificacion de usuario 
+// Identificación de usuario 
 $is_logged = isset($_SESSION['user_id']);
 $es_admin = ($is_logged && $_SESSION['rol'] === 'admin');
 
-$destino = $is_logged ? "reservar.php" : "login.php";
+// Lógica de destino para secciones privadas (Discotecas, Bares, etc.)
+$destino_privado = $is_logged ? "reservar.php" : "login.php";
 
-// inicial 
+// Inicial del nombre para el avatar
 $inicial = "";
-if ($is_logged) {
+if ($is_logged && isset($_SESSION['user_name'])) {
     $inicial = strtoupper(substr($_SESSION['user_name'], 0, 1));
 }
 ?>
@@ -36,11 +37,12 @@ if ($is_logged) {
 
         <nav class="nav-menu">
             <a href="inicio1.php" class="active">HOME</a>
-            <a href="nightfest.php">DESTACADOS</a>
-            <a href="discotecas.php">DISCOTECAS</a>
-            <a href="bares.php">BARES</a>
-            <a href="festivales.php">FESTIVALES</a>
-            <a href="restaurantes.php">RESTAURANTES</a>
+            <a href="destacados_page.php">DESTACADOS</a>
+            
+            <a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a>
+            <a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a>
+            <a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a>
+            <a href="<?php echo $is_logged ? 'restaurantes.php' : 'login.php'; ?>">RESTAURANTES</a>
 
             <?php if ($es_admin): ?>
                 <a href="mis_eventos.php" class="admin-link">MIS EVENTOS</a>
@@ -110,21 +112,21 @@ if ($is_logged) {
                     <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=400&q=80">
                     <div class="club-info">
                         <h4>SUTTON</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card">
                     <img src="https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=400&q=80">
                     <div class="club-info">
                         <h4>PACHA</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card third-item">
                     <img src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?auto=format&fit=crop&w=400&q=80">
                     <div class="club-info">
                         <h4>SAOKO</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
             </div>
@@ -137,25 +139,26 @@ if ($is_logged) {
                     <img src="https://privateaser-media.s3.eu-west-1.amazonaws.com/etab_photos/51437/original/427278.jpg">
                     <div class="club-info">
                         <h4>REY DE COPAS</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card">
                     <img src="https://i.etsystatic.com/37167070/r/il/7382dc/4585963861/il_570xN.4585963861_7zi0.jpg">
                     <div class="club-info">
                         <h4>NEON BAR</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card third-item">
                     <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/e6/28/1a/opium-mar-club.jpg?w=1200&h=-1&s=1">
                     <div class="club-info">
                         <h4>OPIUM BAR</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="section-bottom">
             <h2 class="section-title">FESTIVALES</h2>
             <div class="clubs-grid">
@@ -163,25 +166,26 @@ if ($is_logged) {
                     <img src="https://wololosound.com/wp-content/uploads/468153119_18030427481409963_1982800582124372713_n.jpg">
                     <div class="club-info">
                         <h4>DURO</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMmKfrEezCa8xnuyy5eSxAjH6L-ptWErxtxw&s">
                     <div class="club-info">
                         <h4>SONAR 2026</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card third-item">
                     <img src="https://youbarcelona.com/uploads/images/c/sala-apolo-barcelona-rock/original.jpg">
                     <div class="club-info">
                         <h4>BARCELONA ROCK</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="section-bottom">
             <h2 class="section-title">RESTAURANTES</h2>
             <div class="clubs-grid">
@@ -189,21 +193,21 @@ if ($is_logged) {
                     <img src="https://img.carta.menu/storage/media/company_gallery/9355408/conversions/contribution_gallery.jpg">
                     <div class="club-info">
                         <h4>TAGLIATELLA</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card">
                     <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/97/65/0a/caption.jpg?w=900&h=500&s=1">
                     <div class="club-info">
                         <h4>HARD ROCK CAFE</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
                 <div class="club-card third-item">
                     <img src="https://cdn.thefork.com/tf-lab/image/upload/w_500,h_500,c_fill,q_auto,f_auto,g_auto:subject/restaurant/765beae9-f2d2-413d-ad33-9cb3a8a1b588/dd5fe68f-4943-430c-ae0d-946d73c6cfbe.jpg">
                     <div class="club-info">
                         <h4>ABaC</h4>
-                        <a href="<?php echo $destino; ?>" class="btn">Más información</a>
+                        <a href="<?php echo $destino_privado; ?>" class="btn">Más información</a>
                     </div>
                 </div>
             </div>
