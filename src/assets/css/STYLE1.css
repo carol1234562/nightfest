@@ -514,11 +514,9 @@ body {
         left: 20px;
     }
 }
-/* ==========================================================================
-   NIGHTFEST - HOME PAGE STYLES (Solo para .home-page)
-   ========================================================================== */
 
-/* 1. Ajustes del Contenedor Principal */
+
+
 .home-page .container {
     max-width: 1200px;
     margin: 40px auto;
