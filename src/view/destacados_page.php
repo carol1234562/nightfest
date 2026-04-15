@@ -59,14 +59,14 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                             </a>
                         <?php endif; ?>
 
-                        <a href="../Controller/logout.php" class="btn-logout-icon" title="Cerrar Sesión">
+                        <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">
                             <i class="fas fa-sign-out-alt"></i>
                         </a>
                     </div>
                 </div>
             <?php else: ?>
                 <a href="login.php" class="btn-login">Iniciar Sesión</a>
-                <a href="registro.html" class="btn-register">Registrarse</a>
+                <a href="registro.php" class="btn-register">Registrarse</a>
             <?php endif; ?>
         </div>
     </header>

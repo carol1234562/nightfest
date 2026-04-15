@@ -1,25 +1,30 @@
 <?php
-session_start();
+require_once '../Controller/UserController.php';
+if (session_status() === PHP_SESSION_NONE) session_start();
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache"); 
+header("Expires: 0");
 
-// 1.5: Evitar acceso si no está logueado
+// 1. Verificar si está logueado
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Conectamos a la base de datos para traer los datos más recientes (como la foto)
-$conexion = new mysqli("localhost", "root", "", "nightfest_db");
-$user_id = $_SESSION['user_id'];
-$resultado = $conexion->query("SELECT * FROM usuarios WHERE id = '$user_id'");
-$user = $resultado->fetch_assoc();
+$uc = new UserController();
+$user = $uc->getUserData($_SESSION['user_id']);
 
-// Preparar datos para mostrar
+if (!$user) {
+    header("Location: ../Controller/UserController.php?action=logout");
+    exit();
+}
+
+// Preparar variables para la vista
 $nombre = $user['nombre'];
 $email = $user['email'];
 $rol = $user['rol'];
-$foto = $user['foto_perfil']; // Punto 2.5: Imagen de perfil
+$foto = $user['foto_perfil'];
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
