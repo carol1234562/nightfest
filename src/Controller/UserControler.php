@@ -21,8 +21,8 @@ class UserController
     {
         // --- CONFIGURACIÓN DE CONEXIÓN ---
         $host = "localhost";
-        $user = "root";      
-        $pass = "";          
+        $user = "root";
+        $pass = "";
         $db   = "nightfest";
 
         $this->connection = new mysqli($host, $user, $pass, $db);
@@ -35,38 +35,38 @@ class UserController
     }
 
     // --- MÉTODO: LOGIN ---
-    public function login() {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    public function login()
+    {
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = $this->connection->real_escape_string(trim($_POST['email']));
-        $password = $_POST['password'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $this->connection->real_escape_string(trim($_POST['email']));
+            $password = $_POST['password'];
 
-        // 1. Consulta con WHERE para buscar al usuario específico
-        $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";
-        $result = $this->connection->query($sql);
+            // 1. Consulta con WHERE para buscar al usuario específico
+            $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";
+            $result = $this->connection->query($sql);
 
-        if ($result && $result->num_rows > 0) {
-            $user = $result->fetch_assoc();
+            if ($result && $result->num_rows > 0) {
+                $user = $result->fetch_assoc();
+                $password = trim($_POST['password']);
+                $hash_db = trim($user['password']);
 
-            // 2. Comparación de contraseña (usamos === porque no tienes hash en la BD aún)
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user_name'] = $user['nombre']; // Usamos user_name para el avatar
-                $_SESSION['rol']     = $user['rol'];
-                
-                header("Location: ../view/perfil.php");
-                exit();
-            } else {
-                header("Location: ../view/login.php?error=Credenciales_incorrectas");
-                exit();
+                if (password_verify($password, $hash_db)) {
+                    if (session_status() === PHP_SESSION_NONE) session_start();
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['user_name'] = $user['nombre'];
+                    $_SESSION['rol'] = $user['rol'];
+
+                    header("Location: ../view/perfil.php");
+                    exit();
+                } else {
+                    header("Location: ../view/login.php?error=Credenciales_incorrectas");
+                    exit();
+                }
             }
-        } else {
-            header("Location: ../view/login.php?error=Usuario_no_encontrado");
-            exit();
         }
     }
-}
 
     // --- MÉTODO: REGISTRO ---
     public function register()

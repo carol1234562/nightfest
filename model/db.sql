@@ -15,3 +15,6 @@ CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO usuarios (nombre, email, password, rol) 
 VALUES ('Administrador', 'admin@correo.com', 'd4wphp1', 'admin');
+
+INSERT INTO usuarios (nombre, email, password, rol) 
+VALUES ('Administrador', 'carol@correo.com', '12345', 'admin');
