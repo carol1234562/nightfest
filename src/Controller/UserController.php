@@ -1,18 +1,5 @@
 <?php
 
-$uc = new UserController();
-$uc->login();
-$action = $_GET['action'] ?? '';
-
-if ($action === 'logout') {
-    $uc->logout();
-} elseif ($action === 'register') {
-    $uc->register();
-} else {
-    // Por defecto, si viene por POST intentamos login
-    $uc->login();
-}
-
 class UserController
 {
     private $connection;
@@ -23,7 +10,7 @@ class UserController
         $host = "localhost";
         $user = "root";
         $pass = "";
-        $db   = "nightfest";
+        $db   = "NightFest"; // Coincide con tu base de datos en Workbench
 
         $this->connection = new mysqli($host, $user, $pass, $db);
 
@@ -41,30 +28,27 @@ class UserController
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $this->connection->real_escape_string(trim($_POST['email']));
-            $password = $_POST['password'];
+            $password = trim($_POST['password']);
 
-            // 1. Consulta con WHERE para buscar al usuario específico
             $sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '$email'";
             $result = $this->connection->query($sql);
 
             if ($result && $result->num_rows > 0) {
                 $user = $result->fetch_assoc();
-                $password = trim($_POST['password']);
-                $hash_db = trim($user['password']);
-
-                if (password_verify($password, $hash_db)) {
-                    if (session_status() === PHP_SESSION_NONE) session_start();
-                    $_SESSION['user_id'] = $user['id'];
+                
+                // Verificación segura con el Hash de la base de datos
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['user_id']   = $user['id'];
                     $_SESSION['user_name'] = $user['nombre'];
-                    $_SESSION['rol'] = $user['rol'];
+                    $_SESSION['rol']       = $user['rol'];
 
                     header("Location: ../view/perfil.php");
                     exit();
-                } else {
-                    header("Location: ../view/login.php?error=Credenciales_incorrectas");
-                    exit();
                 }
             }
+            // Si llega aquí, es que el usuario no existe o la contraseña falló
+            header("Location: ../view/login.php?error=Credenciales_incorrectas");
+            exit();
         }
     }
 
@@ -72,30 +56,23 @@ class UserController
     public function register()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Limpieza de datos
             $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
             $email  = $this->connection->real_escape_string(trim($_POST['email']));
             $pass   = $_POST['password'];
             $rol_solicitado = $_POST['rol'] ?? 'estandar';
             $codigo_admin   = $_POST['admin_code'] ?? '';
 
-            // Validaciones básicas de servidor
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                header("Location: ../view/registro.php?error=Email no válido");
+                header("Location: ../view/registro.php?error=Email_no_valido");
                 exit();
             }
             if (strlen($pass) < 6) {
-                header("Location: ../view/registro.php?error=Clave muy corta");
+                header("Location: ../view/registro.php?error=Clave_muy_corta");
                 exit();
             }
 
-            // Lógica de Rol y Foto
-            $rol_final = 'estandar';
+            $rol_final = ($rol_solicitado === 'admin' && $codigo_admin === "ADMIN123") ? 'admin' : 'estandar';
             $nombre_foto = 'default.png';
-
-            if ($rol_solicitado === 'admin' && $codigo_admin === "ADMIN123") {
-                $rol_final = 'admin';
-            }
 
             if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
                 $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
@@ -103,15 +80,14 @@ class UserController
                 move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
             }
 
-            // Guardar en Base de Datos
             $passHash = password_hash($pass, PASSWORD_DEFAULT);
             $sql = "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) 
                     VALUES ('$nombre', '$email', '$passHash', '$rol_final', '$nombre_foto')";
 
             if ($this->connection->query($sql)) {
-                header("Location: ../view/login.php?success=Usuario creado correctamente");
+                header("Location: ../view/login.php?success=Usuario_creado");
             } else {
-                header("Location: ../view/registro.php?error=El correo ya está registrado");
+                header("Location: ../view/registro.php?error=Email_ya_registrado");
             }
             exit();
         }
@@ -126,4 +102,19 @@ class UserController
         header("Location: ../view/login.php");
         exit();
     }
-} // Fin de la clase
+}
+
+// --- LÓGICA DE CONTROL DE RUTAS ---
+$uc = new UserController();
+$action = $_GET['action'] ?? '';
+
+if ($action === 'logout') {
+    $uc->logout();
+} elseif ($action === 'register') {
+    $uc->register();
+} else {
+    // Si la página se carga por POST sin acción, es un intento de login
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $uc->login();
+    }
+}
