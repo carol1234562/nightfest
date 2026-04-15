@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Registro | NightFest</title>
     <link rel="stylesheet" href="../assets/css/STYLE1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body class="registro-page">
     <div class="registro-container">
-        <form action="../Controller/procesar_registro.php" method="POST" enctype="multipart/form-data">
+        <form action="../Controller/UserController.php?action=register" method="POST" enctype="multipart/form-data">
             <h2>Crear Cuenta</h2>
 
             <?php if (isset($_GET['error'])): ?>
@@ -60,4 +62,5 @@
         }
     </script>
 </body>
+
 </html>
