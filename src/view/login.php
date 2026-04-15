@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Volver</span>
         </div>
 
-        <form action="../Controller/UserControler.php" method="POST" class="login-form-container">
+        <form action="../Controller/UserController.php" method="POST" class="login-form-container">
             
             <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
 
