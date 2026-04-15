@@ -26,11 +26,9 @@ class UserController
         if (session_status() === PHP_SESSION_NONE) session_start();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Limpiamos los datos de entrada
             $email = $this->connection->real_escape_string(trim($_POST['email']));
             $password = $this->connection->real_escape_string(trim($_POST['password']));
 
-            // Validamos Email y Password JUNTOS
             $sql = "SELECT id, nombre, email, rol FROM usuarios 
                     WHERE email = '$email' AND password = '$password'";
             
@@ -50,25 +48,39 @@ class UserController
                 exit();
             }
         }
-    } // Llave de cierre de login añadida
+    } 
 
     public function register() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
-            $email  = $this->connection->real_escape_string(trim($_POST['email']));
-            $pass   = $this->connection->real_escape_string(trim($_POST['password']));
-            
-            // Guardamos la contraseña en texto plano
-            $sql = "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) 
-                    VALUES ('$nombre', '$email', '$pass', 'estandar', 'default.png')";
+        $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
+        $email  = $this->connection->real_escape_string(trim($_POST['email']));
+        $pass   = $this->connection->real_escape_string(trim($_POST['password']));
+        $rol_solicitado = $_POST['rol'] ?? 'estandar';
+        $codigo_admin   = $_POST['admin_code'] ?? '';
 
-            if ($this->connection->query($sql)) {
-                header("Location: ../view/login.php?success=Registrado");
-            } else {
-                header("Location: ../view/registro.php?error=Error_en_registro");
-            }
-            exit();
+        $rol_final = 'estandar';
+        if ($rol_solicitado === 'admin' && $codigo_admin === "ADMIN123") {
+            $rol_final = 'admin';
         }
+
+        $nombre_foto = 'default.png';
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
+            $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+            $nombre_foto = "perfil_" . time() . "." . $ext;
+            // Asegúrate de que esta carpeta exista
+            move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
+        }
+
+        $sql = "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) 
+                VALUES ('$nombre', '$email', '$pass', '$rol_final', '$nombre_foto')";
+
+        if ($this->connection->query($sql)) {
+            header("Location: ../view/login.php?success=Cuenta_creada_exitosamente");
+        } else {
+            header("Location: ../view/registro.php?error=El_correo_ya_existe_o_error_interno");
+        }
+        exit();
+    }
     }
 
     public function logout()
