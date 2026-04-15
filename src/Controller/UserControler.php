@@ -21,9 +21,9 @@ class UserController
     {
         // --- CONFIGURACIÓN DE CONEXIÓN ---
         $host = "localhost";
-        $user = "root";      // Cambiar si usas otro usuario
-        $pass = "";          // Cambiar si tienes contraseña en MySQL
-        $db   = "NightFest";
+        $user = "root";      
+        $pass = "";          
+        $db   = "nightfest";
 
         $this->connection = new mysqli($host, $user, $pass, $db);
 
@@ -50,7 +50,7 @@ class UserController
             $user = $result->fetch_assoc();
 
             // 2. Comparación de contraseña (usamos === porque no tienes hash en la BD aún)
-            if ($password === $user['password']) {
+            if (password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['nombre']; // Usamos user_name para el avatar
                 $_SESSION['rol']     = $user['rol'];
