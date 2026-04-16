@@ -825,167 +825,213 @@ body {
 }
 
 /* ==========================================================================
-   SECCIÓN PERFIL - NIGHTFEST (Añadir a STYLE1.CSS)
+   SECCIÓN PERFIL - NIGHTFEST 
    ========================================================================== */
+/* --- MEJORAS GENERALES --- */
+:root {
+    --gold: #D4AF37;
+    --gold-hover: #f1c40f;
+    --dark-card: rgba(20, 20, 20, 0.95);
+    --border-color: rgba(212, 175, 55, 0.3);
+}
 
 .pf-body {
-    background: radial-gradient(circle at top, #111 0%, #000 100%);
+    background: radial-gradient(circle at top, #1a1a1a 0%, #000 100%);
     min-height: 100vh;
-}
-
-/* Header de Perfil */
-.pf-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background: rgba(0, 0, 0, 0.9);
-    border-bottom: 1px solid var(--gold);
-}
-
-.pf-menu {
-    font-size: 1.5rem;
-    color: var(--gold);
-    cursor: pointer;
-}
-
-.pf-user {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 4px 12px;
-    border-radius: 20px;
-}
-
-/* Contenedor Principal */
-.pf-container {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 0 20px;
-    text-align: center;
-}
-
-.pf-title {
-    font-weight: 800;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
-    color: #fff;
-    font-size: 1.5rem;
-}
-
-/* Tarjeta de Perfil */
-.pf-card {
-    background: #111;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 20px;
-    padding: 40px 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.pf-avatar-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.pf-avatar {
-    width: 100px;
-    height: 100px;
-    background: #222;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--gold);
-}
-
-.pf-card h2 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-    color: #fff;
-}
-
-.pf-card p {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-}
-
-/* Botones de Opciones */
-.pf-options {
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
 
-.pf-options button {
+/* --- TARJETA DE PERFIL (Glassmorphism sutil) --- */
+.pf-profile-card {
+    display: flex;
+    background: var(--dark-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 40px;
+    gap: 50px;
+    align-items: center;
+    max-width: 950px;
+    margin: 50px auto;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    transition: all 0.4s ease;
+}
+
+.pf-profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(212, 175, 55, 0.1);
+    border-color: var(--gold);
+}
+
+/* --- SECCIÓN IZQUIERDA: USUARIO --- */
+.pf-card-header {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para mejor impacto visual */
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    min-width: 280px;
+    padding-right: 40px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pf-avatar-wrapper {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    padding: 5px; /* Espacio para el anillo */
+    background: linear-gradient(45deg, var(--gold), #555);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.pf-avatar-inner {
     width: 100%;
-    padding: 14px;
-    background: #1a1a1a;
-    border: 1px solid #333;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pf-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pf-user-info h2 {
     color: #fff;
-    border-radius: 8px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.pf-role-badge {
+    background: var(--gold);
+    color: #000;
+    padding: 4px 15px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+/* --- SECCIÓN DERECHA: OPCIONES --- */
+.pf-card-options {
+    flex-grow: 1;
+}
+
+.pf-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* --- BOTONES MEJORADOS --- */
+.pf-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #eee;
+    padding: 14px;
+    border-radius: 10px;
     font-weight: 600;
     font-size: 0.85rem;
+    text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.pf-options button:hover {
-    background: #222;
+.pf-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.02);
+    color: #fff;
+}
+
+/* --- BOTONES DE OPCIONES DE PERFIL --- */
+.pf-btn-admin {
+    color: var(--gold);
     border-color: var(--gold);
-    transform: translateY(-2px);
 }
 
-.pf-options .logout {
-    margin-top: 10px;
-    background: transparent;
-    color: #ff4d4d;
+.pf-btn-admin:hover {
+    background-color: var(--gold);
+    color: #000;
+}
+
+.pf-btn-logout {
+    grid-column: span 2; /* Ocupa las dos columnas */
+    background-color: rgba(255, 77, 77, 0.1);
     border-color: rgba(255, 77, 77, 0.3);
+    color: #ff4d4d;
+    margin-top: 10px;
 }
 
-.pf-options .logout:hover {
-    background: rgba(255, 77, 77, 0.1);
-    border-color: #ff4d4d;
+.pf-btn-logout:hover {
+    background-color: #ff4d4d;
+    color: #fff;
 }
 
-/* Footer de Perfil */
-.pf-footer {
-    margin-top: 50px;
-    padding: 30px 20px;
-    border-top: 1px solid #111;
-    text-align: center;
-}
-
-.pf-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
+.pf-btn-delete {
+    grid-column: span 2;
+    background-color: transparent;
     color: #666;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    border: none;
+    margin-top: 10px;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
-.pf-social {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    font-size: 1.2rem;
-    filter: grayscale(1);
-    opacity: 0.6;
+.pf-btn-delete:hover {
+    color: #ff4d4d;
 }
 
-/* Responsivo */
-@media (max-width: 480px) {
-    .pf-container {
-        margin: 20px auto;
+/* --- RESPONSIVE --- */
+@media (max-width: 850px) {
+    .pf-profile-card {
+        flex-direction: column;
+        padding: 30px;
+        margin: 20px;
     }
-    .pf-card {
-        padding: 30px 15px;
+    .pf-card-header {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-right: 0;
+        padding-bottom: 30px;
+        width: 100%;
+    }
+    .pf-options-grid {
+        grid-template-columns: 1fr;
+    }
+    .pf-btn-logout {
+        grid-column: span 1;
+    }
+}
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 850px) {
+    .pf-profile-card {
+        flex-direction: column;
+        padding: 30px;
+        margin: 20px;
+    }
+    .pf-card-header {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-right: 0;
+        padding-bottom: 30px;
+        width: 100%;
+    }
+    .pf-options-grid {
+        grid-template-columns: 1fr;
+    }
+    .pf-btn-logout {
+        grid-column: span 1;
     }
 }

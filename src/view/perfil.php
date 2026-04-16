@@ -2,7 +2,7 @@
 require_once '../Controller/UserController.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
+header("Pragma: no-cache"); 
 header("Expires: 0");
 
 // 1. Verificar si está logueado
@@ -19,7 +19,6 @@ if (!$user) {
     exit();
 }
 
-// Preparar variables para la vista
 $nombre = $user['nombre'];
 $email = $user['email'];
 $rol = $user['rol'];
@@ -32,78 +31,87 @@ $foto = $user['foto_perfil'];
     <meta charset="UTF-8">
     <title>Perfil | NightFest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/STYLE1.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/PROJECT1.DIS/src/assets/css/STYLE1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body class="pf-body">
 
-    <header class="pf-header">
-        <div class="pf-menu">☰</div>
-
-        <div class="pf-logo">
+    <header class="main-header">
+        <div class="logo">
             <a href="inicio1.php">
-                <img src="../assets/img/logoNight.png" class="logo" alt="Logo NightFest">
+                <img src="../assets/img/logonight.png" alt="Logo NightFest">
             </a>
         </div>
-
-        <div class="pf-user"><?php echo htmlspecialchars($rol); ?></div>
+        <nav class="nav-menu">
+            <a href="inicio1.php">HOME</a>
+            <a href="#">DESTACADOS</a>
+            <a href="#">DISCOTECAS</a>
+            <a href="#">BARES</a>
+            <a href="#">FESTIVALES</a>
+            <a href="#">RESTAURANTES</a>
+            <a href="#" class="btn-mis-eventos">MIS EVENTOS</a>
+        </nav>
+        <div class="user-panel">
+            <div class="user-avatar"><?php echo strtoupper(substr($rol, 0, 1)); ?></div>
+            <div class="user-actions">
+                <a href="#" class="icon-plus">+</a>
+                <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">➜</a>
+            </div>
+        </div>
     </header>
 
-    <main class="pf-container">
+    <main class="container pf-main-content">
+    <h2 class="section-title">MI PERFIL</h2>
 
-        <h2 class="pf-title">MI PERFIL</h2>
-
-        <div class="pf-card">
-
-            <div class="pf-avatar-container">
-                <?php if ($rol === 'admin' && $foto !== 'default.png'): ?>
-                    <img src="../assets/img/<?php echo $foto; ?>" alt="Foto Perfil" class="pf-avatar-img" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
-                <?php else: ?>
-                    <div class="pf-avatar" style="font-size: 50px;">👤</div>
-                <?php endif; ?>
+    <div class="pf-profile-card">
+        <div class="pf-card-header">
+            <div class="pf-avatar-wrapper">
+                <img src="../assets/img/<?php echo $foto; ?>" alt="Foto Perfil" class="pf-avatar-img">
             </div>
+            <div class="pf-user-info">
+                <h2><?php echo htmlspecialchars($nombre); ?></h2>
+                <p class="pf-email"><?php echo htmlspecialchars($email); ?></p>
+                <span class="pf-role-badge"><?php echo htmlspecialchars($rol); ?></span>
+            </div>
+        </div>
 
-            <h2><?php echo htmlspecialchars($nombre); ?></h2>
-            <p><?php echo htmlspecialchars($email); ?></p>
-
-            <div class="pf-options">
+        <div class="pf-card-options">
+            <h4 class="pf-options-title">Opciones de Cuenta</h4>
+            <div class="pf-options-grid">
                 <?php if ($rol === 'admin'): ?>
-                    <button style="background: #d4af37; color: black; font-weight: bold;">PANEL ADMIN</button>
+                    <button class="pf-btn pf-btn-admin">PANEL ADMIN</button>
                 <?php endif; ?>
-
-                <button>Publicaciones</button>
-                <button>Favoritos</button>
-                <button>Seguridad y privacidad</button>
-
-
-</button>
-<a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">
-                    <i class="fas fa-sign-out-alt"></i>
-                </a>
-</button>
-                
+                <button class="pf-btn">Publicaciones</button>
+                <button class="pf-btn">Favoritos</button>
+                <button class="pf-btn">Seguridad</button>
+                <button class="pf-btn pf-btn-logout" onclick="window.location.href='../Controller/logout.php'">Cerrar sesión</button>
+                <button class="pf-btn pf-btn-delete" onclick="confirmarBorrado()">Borrar cuenta</button>
             </div>
-
         </div>
+    </div>
+</main>
 
-    </main>
-
-    <footer class="pf-footer">
-        <div class="pf-links">
-            <span>Términos</span>
-            <span>Ayuda</span>
-            <span>Privacidad</span>
+    <footer class="simple-footer">
+        <div class="footer-legal">
+            <a href="#">Términos</a> <span class="divider">|</span>
+            <a href="#">Ayuda</a> <span class="divider">|</span>
+            <a href="#">Privacidad</a>
         </div>
-
-        <div class="pf-social">
-            <span>🎵</span>
-            <span>✖</span>
-            <span>📷</span>
-            <span>📘</span>
+        <div class="copyright">
+            NightFest © 2023 - Todos los derechos reservados
         </div>
     </footer>
 
-</body>
+    <script>
+    function confirmarBorrado() {
+        if (confirm("¿Estás COMPLETAMENTE SEGURO? Esta acción no se puede deshacer y perderás todos tus datos.")) {
+            // Aquí iría la redirección a la acción de borrado en el controlador
+            // window.location.href = "../Controller/UserController.php?action=deleteAccount";
+            alert("Acción de borrado simulada. Aquí redirigirías al controlador.");
+        }
+    }
+    </script>
 
+</body>
 </html>

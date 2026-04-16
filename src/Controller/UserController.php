@@ -67,7 +67,6 @@ class UserController
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
             $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
             $nombre_foto = "perfil_" . time() . "." . $ext;
-            // Asegúrate de que esta carpeta exista
             move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
         }
 
@@ -98,6 +97,25 @@ public function getUserData($id) {
         $resultado = $this->connection->query($sql);
         return $resultado->fetch_assoc();
     }
+public function deleteAccount($id) {
+        $id = $this->connection->real_escape_string($id);
+        
+        $user = $this->getUserData($id);
+        if ($user && $user['foto_perfil'] !== 'default.png') {
+            $rutaFoto = "../assets/img/" . $user['foto_perfil'];
+            if (file_exists($rutaFoto)) {
+                unlink($rutaFoto); 
+            }
+        }
+
+        $sql = "DELETE FROM usuarios WHERE id = '$id'";
+        if ($this->connection->query($sql)) {
+            $this->logout(); 
+        } else {
+            header("Location: ../view/perfil.php?error=no_se_pudo_borrar");
+            exit();
+        }
+    }
 }
 
 // --- LÓGICA DE CONTROL DE RUTAS ---
@@ -108,10 +126,16 @@ if ($action === 'logout') {
     $uc->logout();
 } elseif ($action === 'register') {
     $uc->register();
+} elseif ($action === 'deleteAccount') {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    if (isset($_SESSION['user_id'])) {
+        $uc->deleteAccount($_SESSION['user_id']);
+    } else {
+        header("Location: ../view/login.php");
+    }
 } else {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uc->login();
     }
 }
-
 ?>
