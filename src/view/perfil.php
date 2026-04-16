@@ -2,7 +2,7 @@
 require_once '../Controller/UserController.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache"); 
+header("Pragma: no-cache");
 header("Expires: 0");
 
 // 1. Verificar si está logueado
@@ -55,7 +55,7 @@ $foto = $user['foto_perfil'];
         <h2 class="pf-title">MI PERFIL</h2>
 
         <div class="pf-card">
-            
+
             <div class="pf-avatar-container">
                 <?php if ($rol === 'admin' && $foto !== 'default.png'): ?>
                     <img src="../assets/img/<?php echo $foto; ?>" alt="Foto Perfil" class="pf-avatar-img" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
@@ -71,12 +71,18 @@ $foto = $user['foto_perfil'];
                 <?php if ($rol === 'admin'): ?>
                     <button style="background: #d4af37; color: black; font-weight: bold;">PANEL ADMIN</button>
                 <?php endif; ?>
-                
+
                 <button>Publicaciones</button>
                 <button>Favoritos</button>
                 <button>Seguridad y privacidad</button>
+
+
+</button>
+<a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+</button>
                 
-                <button class="logout" onclick="window.location.href='../Controller/logout.php'">Cerrar sesión</button>
             </div>
 
         </div>
@@ -99,4 +105,5 @@ $foto = $user['foto_perfil'];
     </footer>
 
 </body>
+
 </html>

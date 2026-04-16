@@ -823,3 +823,169 @@ body {
     .nav-links-wrapper { flex-wrap: wrap; justify-content: center; }
     .hero-content h1 { font-size: 2rem; }
 }
+
+/* ==========================================================================
+   SECCIÓN PERFIL - NIGHTFEST (Añadir a STYLE1.CSS)
+   ========================================================================== */
+
+.pf-body {
+    background: radial-gradient(circle at top, #111 0%, #000 100%);
+    min-height: 100vh;
+}
+
+/* Header de Perfil */
+.pf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid var(--gold);
+}
+
+.pf-menu {
+    font-size: 1.5rem;
+    color: var(--gold);
+    cursor: pointer;
+}
+
+.pf-user {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* Contenedor Principal */
+.pf-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.pf-title {
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+/* Tarjeta de Perfil */
+.pf-card {
+    background: #111;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    padding: 40px 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.pf-avatar-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pf-avatar {
+    width: 100px;
+    height: 100px;
+    background: #222;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--gold);
+}
+
+.pf-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.pf-card p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* Botones de Opciones */
+.pf-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pf-options button {
+    width: 100%;
+    padding: 14px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pf-options button:hover {
+    background: #222;
+    border-color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.pf-options .logout {
+    margin-top: 10px;
+    background: transparent;
+    color: #ff4d4d;
+    border-color: rgba(255, 77, 77, 0.3);
+}
+
+.pf-options .logout:hover {
+    background: rgba(255, 77, 77, 0.1);
+    border-color: #ff4d4d;
+}
+
+/* Footer de Perfil */
+.pf-footer {
+    margin-top: 50px;
+    padding: 30px 20px;
+    border-top: 1px solid #111;
+    text-align: center;
+}
+
+.pf-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 0.75rem;
+}
+
+.pf-social {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-size: 1.2rem;
+    filter: grayscale(1);
+    opacity: 0.6;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .pf-container {
+        margin: 20px auto;
+    }
+    .pf-card {
+        padding: 30px 15px;
+    }
+}
