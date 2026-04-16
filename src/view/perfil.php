@@ -38,11 +38,7 @@ $foto = $user['foto_perfil'];
 <body class="pf-body">
 
     <header class="main-header">
-        <div class="logo">
-            <a href="inicio1.php">
-                <img src="../assets/img/logonight.png" alt="Logo NightFest">
-            </a>
-        </div>
+        
         <nav class="nav-menu">
             <a href="inicio1.php">HOME</a>
             <a href="#">DESTACADOS</a>
