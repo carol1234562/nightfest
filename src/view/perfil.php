@@ -81,7 +81,7 @@ $foto = $user['foto_perfil'];
                 <button class="pf-btn">Publicaciones</button>
                 <button class="pf-btn">Favoritos</button>
                 <button class="pf-btn">Seguridad</button>
-                <button class="pf-btn pf-btn-logout" onclick="window.location.href='../Controller/logout.php'">Cerrar sesión</button>
+                <button class="pf-btn pf-btn-logout" onclick="window.location.href='./Controller/UserController.php?action=logout'">Cerrar sesión</button>
                 <button class="pf-btn pf-btn-delete" onclick="confirmarBorrado()">Borrar cuenta</button>
             </div>
         </div>
