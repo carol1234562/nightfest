@@ -63,8 +63,7 @@ $foto = $user['foto_perfil'];
     <div class="pf-profile-card">
         <div class="pf-card-header">
             <div class="pf-avatar-wrapper">
-                <img src="../assets/img/<?php echo $foto; ?>" alt="Foto Perfil" class="pf-avatar-img">
-            </div>
+<img src="../assets/img/<?php echo $foto; ?>" alt="Foto Perfil" class="pf-avatar-img">            </div>
             <div class="pf-user-info">
                 <h2><?php echo htmlspecialchars($nombre); ?></h2>
                 <p class="pf-email"><?php echo htmlspecialchars($email); ?></p>
@@ -81,8 +80,10 @@ $foto = $user['foto_perfil'];
                 <button class="pf-btn">Publicaciones</button>
                 <button class="pf-btn">Favoritos</button>
                 <button class="pf-btn">Seguridad</button>
-                <button class="pf-btn pf-btn-logout" onclick="window.location.href='./Controller/UserController.php?action=logout'">Cerrar sesión</button>
-                <button class="pf-btn pf-btn-delete" onclick="confirmarBorrado()">Borrar cuenta</button>
+<button class="pf-btn pf-btn-logout" 
+        onclick="window.location.href='../Controller/UserController.php?action=logout'">
+    Cerrar sesión
+</button>
             </div>
         </div>
     </div>
@@ -102,8 +103,6 @@ $foto = $user['foto_perfil'];
     <script>
     function confirmarBorrado() {
         if (confirm("¿Estás COMPLETAMENTE SEGURO? Esta acción no se puede deshacer y perderás todos tus datos.")) {
-            // Aquí iría la redirección a la acción de borrado en el controlador
-            // window.location.href = "../Controller/UserController.php?action=deleteAccount";
             alert("Acción de borrado simulada. Aquí redirigirías al controlador.");
         }
     }
