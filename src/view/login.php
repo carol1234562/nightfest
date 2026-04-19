@@ -56,7 +56,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <p class="texto-cuenta">
-                ¿No tienes cuenta? <a href="registro.html" class="link-registro">Regístrate</a>
+                ¿No tienes cuenta? <a href="registro_admin.php" class="link-registro">Regístrate</a>
             </p>
 
             <input type="submit" name= "login" value="Iniciar sesión" class="btn-login-submit">
