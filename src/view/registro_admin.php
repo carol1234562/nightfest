@@ -54,7 +54,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <div class="input-group">
-                <label>Código de Seguridad</label>
+                <label>Código administrador</label>
                 <input type="password" name="admin_code" placeholder="Código de empresa" required
                     style="background:#111; border:1px solid #333; padding:14px; color:#fff; border-radius:6px; font-family:'Montserrat',sans-serif; font-size:0.95rem;">
             </div>

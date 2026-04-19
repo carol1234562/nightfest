@@ -49,12 +49,12 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <div class="input-group">
-                <label>Contraseña (mínimo 6 caracteres)</label>
+                <label>Contraseña</label>
                 <input type="password" name="password" placeholder="••••••••" required minlength="6">
             </div>
 
             <p class="texto-cuenta">
-                ¿Eres administrador? <a href="registro_admin.php" class="link-registro">Registro Admin</a>
+                ¿Eres administrador? <a href="registro_admin.php" class="link-registro">Registrate como administrador</a>
             </p>
             <p class="texto-cuenta">
                 ¿Ya tienes cuenta? <a href="login.php" class="link-registro">Iniciar sesión</a>
