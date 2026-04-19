@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 
             <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
 
-            <h2 style="text-align:center; color:#D4AF37; margin-bottom:25px; font-size:1rem; letter-spacing:2px; text-transform:uppercase;">Registro Cliente</h2>
+            <h2 style="text-align:center; color:#D4AF37; margin-bottom:25px; font-size:1rem; letter-spacing:2px; text-transform:uppercase;">Registro Estándar</h2>
 
             <?php if (isset($_GET['error'])): ?>
                 <p class="error-msg">
