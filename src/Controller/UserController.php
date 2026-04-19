@@ -72,6 +72,14 @@ public function register()
             exit();
         }
 
+        if ($rol === 'admin') {
+            $codigo = $_POST['admin_code'] ?? '';
+            if ($codigo !== "ADMIN123") {
+                header("Location: ../view/registro_admin.php?error=Codigo de administrador incorrecto");
+                exit();
+            }
+        }
+
         // Permite ponerse una foto de perfil solo para los que son administradores
         $nombre_foto = 'default.png';
         if ($rol === 'admin' && isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {

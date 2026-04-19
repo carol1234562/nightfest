@@ -70,7 +70,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 </div>
             <?php else: ?>
                 <a href="login.php" class="btn-login">Iniciar Sesión</a>
-                <a href="registro.php" class="btn-register">Registrarse</a>
+                <a href="registro_estandar.php" class="btn-register">Registrarse</a>
             <?php endif; ?>
         </div>
     </header>
