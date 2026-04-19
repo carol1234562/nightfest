@@ -50,37 +50,58 @@ class UserController
         }
     } 
 
-    public function register() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = $this->connection->real_escape_string(trim($_POST['nombre']));
-        $email  = $this->connection->real_escape_string(trim($_POST['email']));
-        $pass   = $this->connection->real_escape_string(trim($_POST['password']));
-        $rol_solicitado = $_POST['rol'] ?? 'estandar';
-        $codigo_admin   = $_POST['admin_code'] ?? '';
+public function register()
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
 
-        $rol_final = 'estandar';
-        if ($rol_solicitado === 'admin' && $codigo_admin === "ADMIN123") {
-            $rol_final = 'admin';
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombre = trim($_POST['nombre'] ?? '');
+        $email  = trim($_POST['email'] ?? '');
+        $pass   = trim($_POST['password'] ?? '');
+        $rol    = $_POST['rol'] ?? 'estandar';
+
+        // Hace una validación si es un formato email o no
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            header("Location: ../view/registro_" . $rol . ".php?error=Formato de email invalido");
+            exit();
         }
 
+        // Hace otra validación que la contraseña tiene que se de minimo 6 caracteres
+        if (strlen($pass) < 6) {
+            header("Location: ../view/registro_" . $rol . ".php?error=La contrasena debe tener minimo 6 caracteres");
+            exit();
+        }
+
+        // Permite ponerse una foto de perfil solo para los que son administradores
         $nombre_foto = 'default.png';
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
-            $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+        if ($rol === 'admin' && isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
+            $ext_permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+
+            if (!in_array($ext, $ext_permitidas)) {
+                header("Location: ../view/registro_admin.php?error=Formato de imagen no permitido. Usa jpg, png o gif");
+                exit();
+            }
+
             $nombre_foto = "perfil_" . time() . "." . $ext;
-            move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
+            move_uploaded_file($_FILES['foto']['tmp_name'], "../src/assets/img/" . $nombre_foto);
         }
 
-        $sql = "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) 
-                VALUES ('$nombre', '$email', '$pass', '$rol_final', '$nombre_foto')";
+        $stmt = $this->connection->prepare(
+            "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) VALUES (?, ?, ?, ?, ?)"
+        );
+        $stmt->bind_param("sssss", $nombre, $email, $pass, $rol, $nombre_foto);
 
-        if ($this->connection->query($sql)) {
-            header("Location: ../view/login.php?success=Cuenta_creada_exitosamente");
+        if ($stmt->execute()) {
+            // Redirige a la pagina principal si todo esta bien 
+            header("Location: ../view/inicio1.php");
         } else {
-            header("Location: ../view/registro.php?error=El_correo_ya_existe_o_error_interno");
+            // Mensaje de error
+            header("Location: ../view/registro_" . $rol . ".php?error=El correo ya esta registrado");
         }
         exit();
     }
-    }
+}
 
     public function logout()
     {
