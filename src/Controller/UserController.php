@@ -92,7 +92,7 @@ public function register()
             }
 
             $nombre_foto = "perfil_" . time() . "." . $ext;
-            move_uploaded_file($_FILES['foto']['tmp_name'], "../src/assets/img/" . $nombre_foto);
+            move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
         }
 
         $stmt = $this->connection->prepare(
