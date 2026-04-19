@@ -10,3 +10,6 @@
 1. Clona el repo.
 2. Importa el archivo `database.sql` en tu servidor local.
 3. Configura `config/db.php` con tus credenciales.
+
+Docs: See detailed documentation in the `docs/` folder for setup, controller
+references and security recommendations.
