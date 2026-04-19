@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro Admin | NightFest</title>
+    <title>Registro Administrador | NightFest</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/STYLE1.css">
@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 
             <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
 
-            <h2 style="text-align:center; color:#D4AF37; margin-bottom:25px; font-size:1rem; letter-spacing:2px; text-transform:uppercase;">Registro Admin</h2>
+            <h2 style="text-align:center; color:#D4AF37; margin-bottom:25px; font-size:1rem; letter-spacing:2px; text-transform:uppercase;">Registro Administrador</h2>
 
             <?php if (isset($_GET['error'])): ?>
                 <p class="error-msg">
@@ -49,12 +49,12 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <div class="input-group">
-                <label>Contraseña (mínimo 6 caracteres)</label>
+                <label>Contraseña</label>
                 <input type="password" name="password" placeholder="••••••••" required minlength="6">
             </div>
 
             <div class="input-group">
-                <label>Código de Seguridad Admin</label>
+                <label>Código de Seguridad</label>
                 <input type="password" name="admin_code" placeholder="Código de empresa" required
                     style="background:#111; border:1px solid #333; padding:14px; color:#fff; border-radius:6px; font-family:'Montserrat',sans-serif; font-size:0.95rem;">
             </div>
@@ -66,10 +66,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <p class="texto-cuenta">
-                ¿Eres cliente? <a href="registro_estandar.php" class="link-registro">Registro Cliente</a>
-            </p>
-            <p class="texto-cuenta">
-                ¿Ya tienes cuenta? <a href="login.php" class="link-registro">Iniciar sesión</a>
+                ¿Eres cliente? <a href="registro_estandar.php" class="link-registro">Registrate como Cliente</a>
             </p>
 
             <input type="submit" value="Crear Cuenta Admin" class="btn-login-submit">
