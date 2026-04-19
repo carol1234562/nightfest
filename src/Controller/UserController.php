@@ -74,7 +74,7 @@ public function register()
 
         if ($rol === 'admin') {
             $codigo = $_POST['admin_code'] ?? '';
-            if ($codigo !== "ADMIN123") {
+            if ($codigo !== "admin123") {
                 header("Location: ../view/registro_admin.php?error=Codigo de administrador incorrecto");
                 exit();
             }
