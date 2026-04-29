@@ -2,7 +2,7 @@
 
 class UserController
 {
-    private $connection;
+    private mysqli $connection;
 
     public function __construct()
     {
