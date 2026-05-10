@@ -5,7 +5,7 @@ session_start();
 $is_logged = isset($_SESSION['user_id']);
 $es_admin = ($is_logged && $_SESSION['rol'] === 'admin');
 
-// Lógica de destino para secciones privadas (Discotecas, Bares, etc.)
+// Lógica de destino para secciones privadas
 $destino_privado = $is_logged ? "reservar.php" : "login.php";
 
 // Inicial del nombre para el avatar
@@ -24,9 +24,25 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/STYLE1.css">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
 </head>
 
 <body id="inicio">
+    <div id="welcome-modal">
+        <div class="modal-content">
+            <h2 style="color:#D4AF37">¡BIENVENIDOS A NIGHTFEST!</h2>
+            <p style="margin: 15px 0;">Proyecto por Johan Agreda y Carolina Solorzano.</p>
+            <button id="close-welcome" style="background:#D4AF37; border:none; padding:10px 20px; cursor:pointer; font-weight:bold; border-radius:5px;">ENTRAR</button>
+        </div>
+    </div>
+
+    <div id="cookie-banner">
+        <span>NightFest utiliza cookies para mejorar tu experiencia. ¿Aceptas?</span>
+        <button id="accept-cookies">ACEPTAR</button>
+    </div>
 
     <header class="main-header">
         <div class="header-left">
@@ -34,16 +50,15 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 <img src="../assets/img/logoNight.png" class="logo" alt="NightFest Logo">
             </a>
         </div>
+        
 
         <nav class="nav-menu">
             <a href="inicio1.php" class="active">HOME</a>
             <a href="destacados_page.php">DESTACADOS</a>
-
             <a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a>
             <a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a>
             <a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a>
             <a href="<?php echo $is_logged ? 'restaurantes.php' : 'login.php'; ?>">RESTAURANTES</a>
-
             <?php if ($es_admin): ?>
                 <a href="mis_eventos.php" class="admin-link">MIS EVENTOS</a>
             <?php endif; ?>
@@ -55,17 +70,11 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                     <a href="perfil.php" class="user-avatar-link">
                         <div class="user-avatar"><?php echo $inicial; ?></div>
                     </a>
-
                     <div class="user-actions">
                         <?php if ($es_admin): ?>
-                            <a href="crear_evento.php" class="icon-plus" title="Crear Evento">
-                                <i class="fas fa-plus"></i>
-                            </a>
+                            <a href="crear_evento.php" class="icon-plus" title="Crear Evento"><i class="fas fa-plus"></i></a>
                         <?php endif; ?>
-
-                        <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </a>
+                        <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
                     </div>
                 </div>
             <?php else: ?>
@@ -105,8 +114,12 @@ if ($is_logged && isset($_SESSION['user_name'])) {
             </div>
         </section>
 
-        <section class="section-bottom">
-            <h2 class="section-title">Discotecas</h2>
+        <section class="hero-section">
+         <h2 class="section-title"></h2>
+        </section>
+
+        </section> <section class="section-bottom">
+             <h2 class="section-title">Discotecas</h2>
             <div class="clubs-grid">
                 <div class="club-card">
                     <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=400&q=80">
@@ -212,6 +225,35 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 </div>
             </div>
         </section>
+
+        <section class="slider-section">
+    <h2 class="section-title">Galería NightFest</h2>
+    
+    <div class="slider-galeria">
+        <div class="slick-box">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="G1">
+        </div>
+        <div class="slick-box">
+            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=500" alt="G2">
+        </div>
+        <div class="slick-box">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500" alt="G3">
+        </div>
+        <div class="slick-box">
+            <img src="https://images.ecestaticos.com/hpVN2sFeMh4Ryku5yiRFyH9o7VY=/40x9:1367x1004/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fcbe%2F472%2F961%2Fcbe472961f53a4a238bf493f79d42e51.jpg" alt="G4">
+        </div>
+    </div> </section>
+
+        <section class="slider-section">
+            <h2 class="section-title">Nuestros Promotores</h2>
+            <div class="slider-promotores">
+                <div class="promotor-item"><h3>BALUARD</h3><p>Techno Events</p></div>
+                <div class="promotor-item"><h3>MAINLINE</h3><p>Electronic Label</p></div>
+                <div class="promotor-item"><h3>SHOKO</h3><p>VIP Experience</p></div>
+                <div class="promotor-item"><h3>LIVE NATION</h3><p>World Tours</p></div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="simple-footer">
@@ -227,10 +269,13 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 <span class="divider">|</span>
                 <a href="#">Política de Privacidad</a>
             </div>
-            <p class="copyright">© 2026 NightFest. Todos los derechos reservados.</p>
+            <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
         </div>
     </footer>
 
-</body>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="../assets/css/jquery.js"></script>
 
+</body>
 </html>
