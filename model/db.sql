@@ -16,7 +16,6 @@ CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO usuarios (nombre, email, password, rol) 
 VALUES ('Administrador', 'admin@correo.com', '123456', 'admin');
 
-<<<<<<< HEAD
 INSERT INTO usuarios (nombre, email, password, rol) 
 VALUES ('Administrador', 'carol@correo.com', '12345', 'admin');
 
@@ -134,7 +133,3 @@ INSERT INTO eventos (artista, imagen, fecha_evento, hora, localidad, ubicacion, 
 ('ESPECIAL REYES', 'estandar2.jpg', '2027-01-05', '23:00', 'Madrid', 'Fabrik', 'DISPONIBLE'),
 ('AFTERLIFE', 'estandar.jpg', '2027-01-10', '22:00', 'Barcelona', 'Fira Gran Via', 'DISPONIBLE'),
 ('CIRCOLOCO', 'estandar2.jpg', '2027-01-15', '18:00', 'Madrid', 'IFEMA', 'DISPONIBLE');
-=======
-INSERT INTO usuarios (nombre, email, password, rol)
-VALUES ('Administrador', 'carol@correo.com', '12345', 'admin');
->>>>>>> origin/6-infraestructura
