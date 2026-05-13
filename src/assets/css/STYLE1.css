@@ -1,173 +1,169 @@
-/* Variables CSS */
+/* ==========================================================================
+   STYLE1.CSS - NIGHTFEST (BASES Y COMPONENTES GLOBALES)
+   ========================================================================== */
 
-:root {
-    --gold: #D4AF37;
-    --gold-hover: #f1c40f;
-    --black-deep: #050505;
-    --card-bg: #111111;
-    --text-gray: #cccccc;
-    --glass: rgba(0, 0, 0, 0.85);
-}
-
+/* --- 1. RESET Y BASES --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    background-color: #000;
+    background-color: #000; /* Fondo negro puro */
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-    transition: 0.3s ease;
+/* --- 2. IDENTIDAD VISUAL (VARIABLES) --- */
+:root {
+    --dorado: #D4AF37;
+    --negro-suave: #111111;
+    --gris-oscuro: #222222;
+    --blanco: #ffffff;
 }
 
-/* header universal */
+h1, h2, h3, h4 {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
+.text-gold {
+    color: var(--dorado);
+}
+
+/* --- 3. HEADER PRINCIPAL (FIJO) --- */
 .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 5%;
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--gold);
+    padding: 0 5%;
+    background-color: #000;
+    border-bottom: 2px solid var(--dorado);
     position: sticky;
     top: 0;
     z-index: 10000;
     height: 100px;
 }
 
-.logo {
-    height: 75px;
-    width: auto;
-}
-
-.nav-links-wrapper {
+/* Navegación */
+.nav-menu {
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    justify-content: center;
 }
 
-.nav-link {
-    color: #ffffff;
+.nav-menu a {
+    color: var(--dorado);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
     transition: 0.3s;
+    text-transform: uppercase;
 }
 
-.nav-link:hover, .nav-link.active {
-    color: var(--gold);
-    text-shadow: 0 0 10px var(--gold);
+.nav-menu a:hover, 
+.nav-menu a.active {
+    color: #fff;
+    text-shadow: 0 0 10px var(--dorado);
 }
 
-/* panel usuario y botones globales */
+/* --- 4. SISTEMA DE AUTENTICACIÓN Y USUARIO --- */
+.auth-buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
 
+.btn-login {
+    color: var(--dorado);
+    margin-right: 10px;
+}
+
+.btn-login:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--dorado);
+}
+
+.btn-register {
+    background-color: var(--dorado);
+    color: #000;
+}
+
+.btn-register:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+}
+
+/* Avatar de usuario logueado */
 .user-panel {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 5px 15px;
-    border-radius: 30px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
 .user-avatar {
-    width: 35px;
-    height: 35px;
-    background: var(--gold);
+    width: 45px;
+    height: 45px;
+    background: var(--dorado);
     color: #000;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: 900;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    cursor: pointer;
 }
 
-/* Estilo de botón sólido dorado */
-.btn-gold {
-    background-color: var(--gold);
-    color: #000000;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    border: 1px solid var(--gold);
-    display: inline-block;
+/* --- 5. COMPONENTES COMUNES (CONTAINERS Y TÍTULOS) --- */
+.container {
+    background-color: #000;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Título de sección estándar para todas las páginas */
+.section-title {
+    color: #fff;
+    font-size: 1.8rem;
+    margin: 40px 0 20px 5%;
+    border-left: 5px solid var(--dorado);
+    padding-left: 15px;
     text-transform: uppercase;
 }
 
-.btn-gold:hover {
-    background-color: transparent;
-    color: var(--gold);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-}
-
-/* footer general */
-
-.simple-footer {
-    padding: 40px 20px;
-    text-align: center;
-    background: #000;
-    border-top: 1px solid #222;
-    margin-top: 50px;
-}
-
-.footer-socials {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.footer-socials a {
-    color: #fff;
-    font-size: 1.2rem;
+/* --- 7. UTILIDADES GENERALES --- */
+.btn-gold-action {
+    background: var(--dorado);
+    color: #000;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
     transition: 0.3s;
 }
 
-.footer-socials a:hover {
-    color: var(--gold);
-    transform: scale(1.2);
+.btn-gold-action:hover {
+    background: #fff;
 }
 
-.copyright {
-    color: #444;
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+main.container {
+    background-color: #000000 !important; /* Asegura el negro puro */
+    position: relative;
+    z-index: 1;
 }
 
-/* contenedor general */
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.section-header {
-    margin: 40px 0 20px 0;
-    padding-left: 15px;
-    border-left: 4px solid var(--gold);
-}
-
-.section-title {
-    font-size: 1.8rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+section {
+    background-color: transparent !important; /* Evita que las secciones hereden el amarillo */
 }

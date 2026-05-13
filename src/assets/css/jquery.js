@@ -28,7 +28,7 @@ $(document).ready(function() {
     // --- 2. EFECTOS HOVER OPTIMIZADOS ---
     // Limpiamos antes de añadir para evitar duplicados al recargar
     $('.club-card .hover-overlay').remove();
-    $('.club-card').append('<div class="hover-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(212,175,55,0.2); display:flex; align-items:center; justify-content:center; pointer-events:none;"><span style="color:#fff; font-weight:bold; border:2px solid #fff; padding:10px 20px;">VER DETALLES</span></div>');
+    $('.club-card').append('<div class="hover-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(212,175,55,0.2); display:flex; align-items:center; justify-content:center; pointer-events:none;"><span style="color:#fff; font-weight:bold; padding:10px 20px;"></span></div>');
 
     $('.club-card').hover(
         function() {

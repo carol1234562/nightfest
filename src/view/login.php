@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
 
         <form action="../Controller/UserController.php" method="POST" class="login-form-container">
             
-            <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
+            <img src="../assets/img/logo.png" class="logo-login" alt="Logo NightFest">
 
             <?php if (isset($_GET['error'])): ?>
                 <p class="error-msg" style="color: #ff4d4d; text-align: center; margin-bottom: 15px; font-weight: 600; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px;">

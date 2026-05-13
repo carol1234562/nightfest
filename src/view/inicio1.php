@@ -23,8 +23,11 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     <title>NightFest - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/inicio1.css">
+
     <link rel="stylesheet" href="../assets/css/STYLE1.css">
+    <link rel="stylesheet" href="../assets/css/inicio1.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -47,13 +50,11 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     </div>
 
     <header class="main-header">
-        <div class="header-left">
-            <a href="inicio1.php">
-                <img src="../assets/img/logoNight.png" class="logo" alt="NightFest Logo">
-            </a>
-        </div>
+    <div class="header-left">
+        <a href="inicio1.php">
+            <img src="../assets/img/logoNight.png" class="logo-medium" alt="NightFest Logo">
+        </a>
         
-
         <nav class="nav-menu">
             <a href="inicio1.php" class="active">HOME</a>
             <a href="destacados_page.php">DESTACADOS</a>
@@ -65,26 +66,27 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 <a href="mis_eventos.php" class="admin-link">MIS EVENTOS</a>
             <?php endif; ?>
         </nav>
+    </div>
 
-        <div class="auth-buttons">
-            <?php if ($is_logged): ?>
-                <div class="user-panel">
-                    <a href="perfil.php" class="user-avatar-link">
-                        <div class="user-avatar"><?php echo $inicial; ?></div>
-                    </a>
-                    <div class="user-actions">
-                        <?php if ($es_admin): ?>
-                            <a href="crear_evento.php" class="icon-plus" title="Crear Evento"><i class="fas fa-plus"></i></a>
-                        <?php endif; ?>
-                        <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
-                    </div>
+    <div class="auth-buttons">
+        <?php if ($is_logged): ?>
+            <div class="user-panel">
+                <a href="perfil.php" class="user-avatar-link">
+                    <div class="user-avatar"><?php echo $inicial; ?></div>
+                </a>
+                <div class="user-actions">
+                    <?php if ($es_admin): ?>
+                        <a href="crear_evento.php" class="icon-plus" title="Crear Evento"><i class="fas fa-plus"></i></a>
+                    <?php endif; ?>
+                    <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
-            <?php else: ?>
-                <a href="login.php" class="btn-login">Iniciar Sesión</a>
-                <a href="registro_estandar.php" class="btn-register">Registrarse</a>
-            <?php endif; ?>
-        </div>
-    </header>
+            </div>
+        <?php else: ?>
+            <a href="login.php" class="btn-login">Iniciar Sesión</a>
+            <a href="registro_estandar.php" class="btn-register">Registrarse</a>
+        <?php endif; ?>
+    </div>
+</header>
 
     <main class="container">
         <section class="section-top">
@@ -129,8 +131,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
         </button>
     </div>
 </section>
-
-        </section> <section class="section-bottom">
+        <section class="section-bottom">
              <h2 class="section-title">Discotecas</h2>
             <div class="clubs-grid">
                 <div class="club-card">
@@ -268,22 +269,26 @@ if ($is_logged && isset($_SESSION['user_name'])) {
 
     </main>
 
-    <footer class="simple-footer">
-        <div class="footer-content">
-            <div class="footer-socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
-            <div class="footer-legal">
-                <a href="#">Términos y Condiciones</a>
-                <span class="divider">|</span>
-                <a href="#">Política de Privacidad</a>
-            </div>
-            <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
+    <footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
         </div>
-    </footer>
+
+        <div class="footer-legal">
+            <a href="#">Términos y Condiciones</a>
+            <span class="divider">|</span>
+            <a href="#">Política de Privacidad</a>
+            <span class="divider">|</span>
+            <a href="#">Ayuda</a>
+        </div>
+
+        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
+    </div>
+</footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

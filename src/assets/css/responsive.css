@@ -1,0 +1,53 @@
+/* ======================================================
+   NIGHTFEST - ESTILOS BASE Y RESPONSIVE
+   ====================================================== */
+   
+/* ======================================================
+   MEDIA QUERIES PARA TABLET (Min-width: 768px)
+   ====================================================== */
+@media (min-width: 768px) {
+    .nav-menu {
+        order: 2;
+        width: auto;
+        justify-content: center;
+    }
+
+    .hero-container {
+        grid-template-columns: 2fr 1fr; /* Vuelve al diseño original de escritorio */
+    }
+
+    .hero-sidebar {
+        grid-template-columns: 1fr; /* Columna vertical al lado del principal */
+    }
+
+    #map-container {
+        height: 500px;
+    }
+
+    .nav-menu a {
+        font-size: 0.9rem;
+    }
+}
+
+/* ======================================================
+   MEDIA QUERIES PARA MÓVILES MUY PEQUEÑOS
+   ====================================================== */
+@media (max-width: 480px) {
+    .hero-sidebar {
+        grid-template-columns: 1fr; /* Todo en una sola columna */
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .auth-buttons {
+        gap: 5px;
+    }
+
+    .btn-login, .btn-register {
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
+}
