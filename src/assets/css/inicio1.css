@@ -2,7 +2,60 @@
 /* ======================================================
    NIGHTFEST - ESTILOS PRINCIPALES (PALETA DARK & GOLD)
    ====================================================== */
+body {
+    background-color: #000; /* Negro absoluto de fondo */
+    color: #fff; /* Texto base en blanco */
+    font-family: 'Montserrat', sans-serif; /* Fuente principal [cite: 2, 55] */
+    line-height: 1.6;
+}
 
+/* 2. PALETA DE COLORES (Variables para reutilizar) */
+:root {
+    --oro-premium: #D4AF37;  /* Dorado NightFest [cite: 4, 11] */
+    --negro-tarjeta: #1a1a1a; /* Gris muy oscuro para contraste [cite: 21] */
+    --gris-suave: #888888;    /* Para textos secundarios [cite: 36, 45] */
+}
+
+/* 3. CENTRADO Y CONTENEDORES */
+.container {
+    max-width: 1100px; /* Ancho máximo de la web [cite: 15] */
+    margin: 0 auto;    /* Centrado horizontal automático [cite: 15] */
+}
+
+/* Centrado absoluto para el menú de navegación */
+.nf-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Alineación perfecta al centro [cite: 6] */
+}
+
+/* 4. COLORES DE NAVEGACIÓN (Lógica solicitada) */
+.nav-menu a {
+    color: var(--oro-premium); /* Dorado por defecto */
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+/* Página actual resalta en blanco */
+.nav-menu a.active {
+    color: #fff !important; /* Blanco cuando estás en la página [cite: 55, 56] */
+}
+
+.nav-menu a:hover {
+    color: #fff; /* Cambio a blanco al pasar el ratón [cite: 8, 12] */
+}
+
+/* 5. ELEMENTOS DE IDENTIDAD */
+.user-circle {
+    background-color: var(--oro-premium);
+    color: #000; /* Texto negro sobre fondo dorado [cite: 11] */
+}
+
+.gold-subtitle {
+    color: var(--oro-premium); /* Títulos de sección en dorado [cite: 25, 34] */
+}
 
 
    /* Contenedor principal de la cabecera */

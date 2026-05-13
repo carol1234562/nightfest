@@ -24,9 +24,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <link rel="stylesheet" href="../assets/css/STYLE1.css">
     <link rel="stylesheet" href="../assets/css/inicio1.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
 
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -49,41 +47,43 @@ if ($is_logged && isset($_SESSION['user_name'])) {
         <button id="accept-cookies">ACEPTAR</button>
     </div>
 
-    <header class="main-header">
-    <div class="header-left">
+    <header class="nf-header-main">
+    <div class="nf-logo-side">
         <a href="inicio1.php">
-            <img src="../assets/img/logo.png" class="logo-medium" alt="NightFest Logo">
+            <img src="../assets/img/logo.png" alt="NightFest Logo">
         </a>
-        
-        <nav class="nav-menu">
-            <a href="inicio1.php" class="active">HOME</a>
-            <a href="destacados_page.php">DESTACADOS</a>
-            <a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a>
-            <a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a>
-            <a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a>
-            <a href="<?php echo $is_logged ? 'restaurantes.php' : 'login.php'; ?>">RESTAURANTES</a>
-            <?php if ($es_admin): ?>
-                <a href="mis_eventos.php" class="admin-link">MIS EVENTOS</a>
-            <?php endif; ?>
-        </nav>
     </div>
 
-    <div class="auth-buttons">
+    <nav class="nf-nav">
+        <ul>
+            <li><a href="inicio1.php" class="active">HOME</a></li>
+            <li><a href="destacados_page.php">DESTACADOS</a></li>
+            <li><a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a></li>
+            <li><a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a></li>
+            <li><a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a></li>
+            <li><a href="<?php echo $is_logged ? 'restaurantes.php' : 'login.php'; ?>">RESTAURANTES</a></li>
+            <?php if ($es_admin): ?>
+                <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+    <div class="nf-user-controls">
         <?php if ($is_logged): ?>
-            <div class="user-panel">
-                <a href="perfil.php" class="user-avatar-link">
-                    <div class="user-avatar"><?php echo $inicial; ?></div>
+            <a href="perfil.php">
+                <div class="user-circle"><?php echo $inicial; ?></div>
+            </a>
+            <?php if ($es_admin): ?>
+                <a href="crear_evento.php" title="Crear Evento">
+                    <i class="fas fa-plus icon-add"></i>
                 </a>
-                <div class="user-actions">
-                    <?php if ($es_admin): ?>
-                        <a href="crear_evento.php" class="icon-plus" title="Crear Evento"><i class="fas fa-plus"></i></a>
-                    <?php endif; ?>
-                    <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
-                </div>
-            </div>
+            <?php endif; ?>
+            <a href="../Controller/UserController.php?action=logout" title="Cerrar Sesión">
+                <i class="fas fa-sign-out-alt icon-logout"></i>
+            </a>
         <?php else: ?>
-            <a href="login.php" class="btn-login">Iniciar Sesión</a>
-            <a href="registro_estandar.php" class="btn-register">Registrarse</a>
+            <a href="login.php" class="nf-nav a" style="margin-right: 15px;">Iniciar Sesión</a>
+            <a href="registro_estandar.php" class="btn-mis-eventos">Registrarse</a>
         <?php endif; ?>
     </div>
 </header>
@@ -117,11 +117,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 </div>
             </div>
         </section>
-        
-        <section class="hero-section">
-         <h2 class="section-title"></h2>
-        </section>
-
+     
        <section class="section-map">
     <h2 class="section-title">Cerca de ti</h2>
     <div class="map-wrapper">

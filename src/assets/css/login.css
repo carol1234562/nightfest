@@ -1,227 +1,298 @@
-/*
-=========================================================================
-LOGIN
-=========================================================================
-*/
+/* ======================================================
+   NIGHTFEST MASTER CSS - COORDINADO CON PHP
+   ====================================================== */
 
-.login-page {
-    background-color: #000;
+:root {
+    --oro: #D4AF37;
+    --oro-hover: #b8952e;
+    --negro-bg: #000000;
+    --negro-card: #1a1a1a;
+    --blanco: #ffffff;
+    --fuente: 'Montserrat', sans-serif;
+    --max-width: 1200px;
+}
+
+* {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
-/* El "wrapper" que centra el formulario en pantalla */
-.login-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 100vh;
-    padding: 20px;
+body {
+    background-color: var(--negro-bg);
+    color: var(--blanco);
+    font-family: var(--fuente);
+    line-height: 1.6;
 }
 
-/* Botón Volver (Esquina superior izquierda) */
-.login-page .return-container {
+/* 1. HEADER & NAVEGACIÓN (Lógica PHP) */
+.nf-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background-color: var(--negro-bg);
+    border-bottom: 2px solid var(--oro);
+    height: 90px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nf-nav {
     position: absolute;
-    top: 30px;
-    left: 40px;
-    cursor: pointer;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nf-nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nf-nav a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.nf-nav a.active { color: var(--oro); }
+
+/* Botón especial "MIS EVENTOS" (Solo para Admin) */
+.btn-mis-eventos {
+    background-color: var(--oro);
+    color: #000 !important;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 800 !important;
+}
+
+/* 2. CONTROLES DE USUARIO (Avatar e Iconos) */
+.nf-user-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #ffffff;
-    transition: 0.3s ease;
-    z-index: 10;
+    gap: 15px;
 }
 
-.login-page .return-container:hover {
-    color: #D4AF37;
-    transform: translateX(-5px);
-}
-
-/* Caja del Formulario */
-.login-form-container {
-    background: rgba(20, 20, 20, 0.8);
-    backdrop-filter: blur(10px); /* Efecto cristal esmerilado */
-    padding: 50px 40px;
-    border-radius: 15px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-}
-
-/* Logo dentro del login */
-.logo-login {
-    display: block;
-    width: 160px;
-    margin: 0 auto 35px auto;
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
-}
-
-/* Grupos de Input */
-.input-group {
-    margin-bottom: 22px;
-    display: flex;
-    flex-direction: column;
-}
-
-.login-form-container label {
-    color: #D4AF37;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    letter-spacing: 1.5px;
-}
-
-.login-form-container input[type="email"],
-.login-form-container input[type="password"] {
-    background: #111;
-    border: 1px solid #333;
-    padding: 14px;
-    color: #fff;
-    border-radius: 6px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    transition: 0.3s;
-}
-
-.login-form-container input:focus {
-    border-color: #D4AF37;
-    outline: none;
-    background: #1a1a1a;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
-}
-
-/* Enlaces y Textos */
-.forgot-link {
-    color: #888;
-    font-size: 0.75rem;
-    text-decoration: none;
-    align-self: flex-end; /* Lo alinea a la derecha */
-    margin-top: 8px;
-    transition: 0.3s;
-}
-
-.forgot-link:hover {
-    color: #D4AF37;
-}
-
-.texto-cuenta {
-    text-align: center;
-    margin: 25px 0;
-    font-size: 0.85rem;
-    color: #bbb;
-}
-
-.link-registro {
-    color: #D4AF37;
-    text-decoration: none;
-    font-weight: 700;
-    margin-left: 5px;
-}
-
-.link-registro:hover {
-    text-decoration: underline;
-}
-
-/* Botón de Envío */
-.btn-login-submit {
-    width: 100%;
-    background-color: #D4AF37;
+.user-circle {
+    width: 35px;
+    height: 35px;
+    background-color: var(--oro);
     color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.icon-add { color: #2ecc71; font-size: 1.2rem; } /* Verde para crear */
+.icon-logout { color: #e74c3c; font-size: 1.2rem; } /* Rojo para salir */
+
+/* 3. SECCIÓN DESTACADOS (HERO GRID) */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.hero-container {
+    display: flex;
+    gap: 15px;
+    height: 500px;
+    margin-bottom: 50px;
+}
+
+.hero-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    flex: 2;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.hero-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hero-sidebar .hero-item { flex: 1; }
+
+.hero-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.overlay-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+
+.overlay-info h1, .overlay-info h2 { color: var(--oro); text-transform: uppercase; }
+
+/* 4. MAPA "CERCA DE TI" */
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin: 30px 0;
+    border: 1px solid var(--oro);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#map-container {
+    width: 100%;
+    height: 100%;
+}
+
+#btn-recenter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--oro);
     border: none;
-    padding: 16px;
-    border-radius: 6px;
-    font-weight: 700;
-    text-transform: uppercase;
+    padding: 10px 15px;
+    font-weight: 800;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+}
+
+/* Marcador Dorado personalizado */
+.gold-marker {
+    background-color: var(--oro);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--oro);
+}
+
+/* 5. GRID DE CLUBS & BOTONES */
+.section-title {
+    border-left: 4px solid var(--oro);
+    padding-left: 15px;
+    text-transform: uppercase;
+    margin: 40px 0 20px;
+}
+
+.clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.club-card {
+    background: var(--negro-card);
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #333;
     transition: 0.3s;
 }
 
-.btn-login-submit:hover {
-    background-color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+.club-card:hover { border-color: var(--oro); transform: translateY(-5px); }
+
+.club-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
-/* Mensaje de Error (PHP) */
-.error-msg {
-    color: #ff4d4d;
-    background: rgba(255, 77, 77, 0.1);
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 0.8rem;
+.club-info { padding: 20px; }
+
+.club-info .btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: 1px solid var(--oro);
+    color: var(--oro);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.club-info .btn:hover { background: var(--oro); color: #000; }
+
+/* 6. MODAL Y COOKIES */
+#welcome-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
     text-align: center;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255, 77, 77, 0.3);
+    border: 2px solid var(--oro);
+    padding: 40px;
+    border-radius: 20px;
 }
 
-/* ======================================================
-   FOOTER (PIE DE PÁGINA)
-   ====================================================== */
-.simple-footer {
-    background-color: #0a0a0a;
-    padding: 60px 0 40px;
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111;
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid var(--oro);
+    z-index: 2000;
+}
+
+#accept-cookies {
+    background: var(--oro);
+    border: none;
+    padding: 5px 15px;
+    margin-left: 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 7. SLIDERS (Slick) */
+.slider-section { margin: 60px 0; }
+
+.promotor-item {
+    background: var(--negro-card);
+    padding: 30px;
+    margin: 10px;
+    text-align: center;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.promotor-item h3 { color: var(--oro); }
+
+/* 8. FOOTER */
+.main-footer {
+    background: #0a0a0a;
+    padding: 60px 5% 30px;
     border-top: 1px solid #222;
     text-align: center;
-    margin-top: 60px;
-}
-
-.footer-socials {
-    margin-bottom: 20px;
 }
 
 .footer-socials a {
-    color: #D4AF37;
+    color: var(--oro);
     font-size: 1.5rem;
     margin: 0 15px;
-    transition: color 0.3s ease;
-}
-
-.footer-socials a:hover {
-    color: #fff;
 }
 
 .footer-legal a {
-    color: #555;
+    color: #666;
     text-decoration: none;
-    font-size: 0.8rem;
     margin: 0 10px;
+    font-size: 0.8rem;
 }
-
-.footer-legal .divider {
-    color: #222;
-}
-
-.copyright {
-    margin-top: 25px;
-    color: #444;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-}
-/* Responsive para el login */
-@media (max-width: 480px) {
-    .login-form-container {
-        padding: 35px 25px;
-        width: 90%;
-    }
-    .login-page .return-container {
-        top: 20px;
-        left: 20px;
-    }
-} 
