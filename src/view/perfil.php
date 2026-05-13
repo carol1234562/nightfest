@@ -32,7 +32,7 @@ $foto = $user['foto_perfil'];
     <title>Perfil | NightFest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/PROJECT1.DIS/src/assets/css/perfil.css">
-    <link rel="stylesheet" href="../assets/css/STYLE1.css">
+    <link rel="stylesheet" href="../assets/css/perfil.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -40,24 +40,43 @@ $foto = $user['foto_perfil'];
 <body class="pf-body">
 
     <header class="main-header">
+    <div class="header-left">
+        <a href="inicio1.php">
+            <img src="../assets/img/logo.png" class="logo-medium" alt="NightFest Logo">
+        </a>
         
         <nav class="nav-menu">
-            <a href="inicio1.php">HOME</a>
-            <a href="#">DESTACADOS</a>
-            <a href="#">DISCOTECAS</a>
-            <a href="#">BARES</a>
-            <a href="#">FESTIVALES</a>
-            <a href="#">RESTAURANTES</a>
-            <a href="#" class="btn-mis-eventos">MIS EVENTOS</a>
+            <a href="inicio1.php" class="active">HOME</a>
+            <a href="destacados_page.php">DESTACADOS</a>
+            <a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a>
+            <a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a>
+            <a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a>
+            <a href="<?php echo $is_logged ? 'restaurantes.php' : 'login.php'; ?>">RESTAURANTES</a>
+            <?php if ($es_admin): ?>
+                <a href="mis_eventos.php" class="admin-link">MIS EVENTOS</a>
+            <?php endif; ?>
         </nav>
-        <div class="user-panel">
-            <div class="user-avatar"><?php echo strtoupper(substr($rol, 0, 1)); ?></div>
-            <div class="user-actions">
-                <a href="#" class="icon-plus">+</a>
-                <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión">➜</a>
+    </div>
+
+    <div class="auth-buttons">
+        <?php if ($is_logged): ?>
+            <div class="user-panel">
+                <a href="perfil.php" class="user-avatar-link">
+                    <div class="user-avatar"><?php echo $inicial; ?></div>
+                </a>
+                <div class="user-actions">
+                    <?php if ($es_admin): ?>
+                        <a href="crear_evento.php" class="icon-plus" title="Crear Evento"><i class="fas fa-plus"></i></a>
+                    <?php endif; ?>
+                    <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
             </div>
-        </div>
-    </header>
+        <?php else: ?>
+            <a href="login.php" class="btn-login">Iniciar Sesión</a>
+            <a href="registro_estandar.php" class="btn-register">Registrarse</a>
+        <?php endif; ?>
+    </div>
+</header>
 
     <main class="container pf-main-content">
     <h2 class="section-title">MI PERFIL</h2>
@@ -91,16 +110,26 @@ $foto = $user['foto_perfil'];
     </div>
 </main>
 
-    <footer class="simple-footer">
+    <footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+
         <div class="footer-legal">
-            <a href="#">Términos</a> <span class="divider">|</span>
-            <a href="#">Ayuda</a> <span class="divider">|</span>
-            <a href="#">Privacidad</a>
+            <a href="#">Términos y Condiciones</a>
+            <span class="divider">|</span>
+            <a href="#">Política de Privacidad</a>
+            <span class="divider">|</span>
+            <a href="#">Ayuda</a>
         </div>
-        <div class="copyright">
+
         <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-        </div>
-    </footer>
+    </div>
+</footer>
 
     <script>
     function confirmarBorrado() {

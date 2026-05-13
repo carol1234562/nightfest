@@ -6,21 +6,21 @@ if ($conexion->connect_error) {
     die("Error de conexión");
 }
 
-// Verificar si el usuario está logueado y su rol
+// Lógica de usuario logueado
 $is_logged = isset($_SESSION['user_id']);
 $es_admin = ($is_logged && $_SESSION['rol'] === 'admin');
 $inicial = ($is_logged && isset($_SESSION['user_name'])) ? strtoupper(substr($_SESSION['user_name'], 0, 1)) : "";
 
-// Obtener ID del evento por la URL
+// Obtener ID del evento
 $id_evento = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
-// Consulta para obtener datos del evento y del artista
+// Consulta de datos del artista/evento
 $sql = "SELECT * FROM eventos WHERE id = $id_evento";
 $resultado = $conexion->query($sql);
 $evento = $resultado->fetch_assoc();
 
 if (!$evento) {
-    die("Evento no encontrado");
+    die("Artista no encontrado");
 }
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ if (!$evento) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NightFest - Información del Artista</title>
+    <title>NightFest - <?php echo htmlspecialchars($evento['artista']); ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/infoartista.css">
@@ -75,27 +75,40 @@ if (!$evento) {
         </div>
 
         <div class="paginacion-container tabs-navegacion">
-            <a href="infoevento.php?id=<?php echo $id_evento; ?>" class="pag-link">INFO EVENTO</a>
-            <a href="infoartista.php?id=<?php echo $id_evento; ?>" class="pag-link active">EL ARTISTA</a>
+            <a href="infoevento.php?id=<?php echo $id_evento; ?>" class="pag-link">INFORMACIÓN DEL EVENTO</a>
+            <a href="infoartista.php?id=<?php echo $id_evento; ?>" class="pag-link active">INFORMACIÓN DEL ARTISTA</a>
         </div>
 
         <div class="evento-row tarjeta-artista">
-            <div class="flex-artista">
-                <div class="img-container">
-                    <img src="../assets/img/<?php echo $evento['imagen']; ?>" alt="<?php echo htmlspecialchars($evento['artista']); ?>">
+            <div class="artista-bio-flex">
+                
+                <div class="artista-col-img">
+                    <div class="img-container profile-shadow">
+                        <img src="../assets/img/<?php echo $evento['imagen']; ?>" alt="<?php echo htmlspecialchars($evento['artista']); ?>">
+                    </div>
                 </div>
 
-                <div class="info-principal">
+                <div class="artista-col-info">
                     <span class="fecha-badge">BIOGRAFÍA Y TRAYECTORIA</span>
-                    <h3>Sobre el artista</h3>
-                    <p class="bio-texto">
-                        <?php echo htmlspecialchars($evento['artista']); ?> representa una nueva ola de música auténtica que rompe moldes y conecta directamente con su audiencia. 
-                        Con un estilo único que mezcla diversos géneros, el proyecto ha ganado fama internacional conectando con las emociones de las nuevas generaciones.
-                    </p>
-                    <p class="origen-texto">
-                        <i class="fas fa-map-marker-alt"></i> Origen: <?php echo htmlspecialchars($evento['ubicacion']); ?>
-                    </p>
+                    <h3 class="gold-subtitle">Sobre el artista</h3>
+                    
+                    <div class="bio-content">
+                        <p>
+                            <?php echo htmlspecialchars($evento['artista']); ?> representa una nueva ola de música auténtica que rompe moldes y conecta directamente con su audiencia. Con una propuesta sonora innovadora, ha logrado posicionarse en los mejores escenarios internacionales.
+                        </p>
+                        <p>
+                            Su trayectoria se caracteriza por una evolución constante, mezclando ritmos vanguardistas con una puesta en escena de alto nivel, diseñada para ofrecer una experiencia nocturna inigualable en los clubes más exclusivos.
+                        </p>
+                    </div>
+
+                    <div class="artista-meta">
+                        <p class="origen-tag">
+                            <i class="fas fa-map-marker-alt"></i> 
+                            <strong>Origen:</strong> <?php echo htmlspecialchars($evento['ubicacion']); ?>
+                        </p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </main>
@@ -113,7 +126,7 @@ if (!$evento) {
                 <span class="divider">|</span>
                 <a href="#">Política de Privacidad</a>
             </div>
-        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
+            <p class="copyright">© 2026 NightFest. <br> Johan & Carolina.</p>
         </div>
     </footer>
 

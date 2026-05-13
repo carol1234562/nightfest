@@ -52,7 +52,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     <header class="main-header">
     <div class="header-left">
         <a href="inicio1.php">
-            <img src="../assets/img/logoNight.png" class="logo-medium" alt="NightFest Logo">
+            <img src="../assets/img/logo.png" class="logo-medium" alt="NightFest Logo">
         </a>
         
         <nav class="nav-menu">

@@ -12,10 +12,11 @@ body {
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 /* ======================================================
-   2. EL HEADER (ESTILO PREMIUM CENTRADO)
+   2. HEADER PREMIUM (DORADO Y NEGRO)
    ====================================================== */
 .nf-header-main {
     display: flex;
@@ -43,7 +44,7 @@ body {
 
 .nf-nav ul {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     list-style: none;
 }
 
@@ -69,8 +70,8 @@ body {
 }
 
 .user-circle {
-    width: 35px;
-    height: 35px;
+    width: 38px;
+    height: 38px;
     background-color: #D4AF37;
     color: #000;
     border-radius: 50%;
@@ -78,11 +79,12 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: 800;
+    font-size: 1rem;
 }
 
 .icon-add, .icon-logout {
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: color 0.3s;
 }
 
@@ -90,59 +92,62 @@ body {
     color: #D4AF37;
 }
 
-.btn-mis-eventos {
-    border: 1px solid #D4AF37;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #D4AF37 !important;
-}
-
 .btn-login {
     color: #D4AF37;
     text-decoration: none;
     font-weight: 700;
     border: 1px solid #D4AF37;
-    padding: 8px 15px;
+    padding: 8px 20px;
     border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    background: #D4AF37;
+    color: #000;
 }
 
 /* ======================================================
-   3. ESTRUCTURA DE CONTENIDO (INFO ARTISTA / EVENTO)
+   3. ESTRUCTURA DE CONTENIDO
    ====================================================== */
 .container {
-    max-width: 1100px;
-    margin: 40px auto;
+    max-width: 1200px;
+    margin: 60px auto;
     padding: 0 20px;
 }
 
 .section-header {
-    margin-bottom: 30px;
-    border-left: 4px solid #D4AF37;
-    padding-left: 15px;
-}
-
-.section-title-line {
-    font-size: 2rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* Tabs Navegación */
-.paginacion-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    text-align: center;
     margin-bottom: 40px;
 }
 
-.pag-link {
-    padding: 10px 20px;
-    border: 1px solid #333;
+.section-title-line {
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
     color: #fff;
+    position: relative;
+    display: inline-block;
+}
+
+/* Pestañas de Navegación */
+.paginacion-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.pag-link {
+    padding: 12px 30px;
+    border: 1px solid #333;
+    color: #888;
     text-decoration: none;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
     transition: all 0.3s ease;
 }
 
@@ -152,109 +157,129 @@ body {
     border-color: #D4AF37;
 }
 
-/* La Tarjeta Principal */
-.evento-row {
-    background-color: #1a1a1a;
-    border-radius: 20px;
-    padding: 40px;
-    border: 1px solid rgba(212, 175, 55, 0.1);
+/* ======================================================
+   4. TARJETA DEL ARTISTA (DISEÑO PREMIUM)
+   ====================================================== */
+.tarjeta-artista {
+    background-color: #1a1a1a; /* Gris oscuro NightFest */
+    border-radius: 25px;
+    padding: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-/* Layout flexible para Artista */
-.flex-artista, .flex-info-mapa {
+.artista-bio-flex {
     display: flex;
-    gap: 40px;
+    gap: 60px;
+    align-items: center;
 }
 
-.img-container {
-    flex-shrink: 0;
-    border-radius: 15px;
+/* Columna Imagen */
+.artista-col-img {
+    flex: 1;
+    max-width: 450px;
+}
+
+.profile-shadow {
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid #333;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
 }
 
-.img-container img {
+.profile-shadow img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
 }
 
-/* Textos */
-.info-principal h3 {
-    color: #D4AF37;
-    margin-bottom: 15px;
-    text-transform: uppercase;
+.profile-shadow:hover img {
+    transform: scale(1.05);
+}
+
+/* Columna Texto */
+.artista-col-info {
+    flex: 1.2;
 }
 
 .fecha-badge {
     color: #D4AF37;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
 }
 
-.bio-texto, .texto-blanco {
+.gold-subtitle {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 25px;
     color: #fff;
-    font-size: 1rem;
+}
+
+.bio-content p {
+    font-size: 1.1rem;
+    color: #ccc;
     line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: justify;
 }
 
-.origen-texto, .texto-gris {
-    color: #888;
-    margin-top: 20px;
+/* Meta Datos (Origen) */
+.artista-meta {
+    margin-top: 30px;
 }
 
-.info-principal i {
+.origen-tag {
+    background: rgba(212, 175, 55, 0.08);
+    padding: 12px 25px;
+    display: inline-block;
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
     color: #D4AF37;
-    margin-right: 8px;
+    font-size: 0.95rem;
 }
 
-/* Mapa */
-.mapa-container {
-    flex: 1;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #333;
+.origen-tag i {
+    margin-right: 10px;
 }
 
-.mapa-container iframe {
-    filter: grayscale(1) invert(0.9) contrast(1.2);
-}
 /* ======================================================
-   4. FOOTER PREMIUM (ESTILO AZUL)
+   5. FOOTER AZUL PREMIUM
    ====================================================== */
 .simple-footer {
-    padding: 60px 0 30px;
+    padding: 60px 0 40px;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 80px;
+    margin-top: 100px;
     width: 100%;
 }
 
 .footer-socials {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    margin-bottom: 25px;
+    gap: 30px;
+    margin-bottom: 30px;
 }
 
 .footer-socials a {
-    color: #ffffff; /* Iconos en blanco para resaltar sobre el azul */
-    font-size: 1.5rem;
+    color: #fff;
+    font-size: 1.6rem;
     transition: transform 0.3s, color 0.3s;
 }
 
 .footer-socials a:hover {
     transform: translateY(-5px);
-    color: #D4AF37; /* El dorado solo al pasar el ratón */
+    color: #D4AF37;
 }
 
 .footer-legal a {
-    color: #ffffff; /* Enlaces legales en blanco */
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 .footer-legal a:hover {
@@ -262,21 +287,32 @@ body {
 }
 
 .divider {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.3);
 }
 
 .copyright {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-top: 25px;
-    font-weight: 400;
+    margin-top: 30px;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-    .nf-nav { position: static; transform: none; }
-    .flex-artista, .flex-info-mapa { flex-direction: column; }
-    .img-container { width: 100% !important; height: auto !important; }
+/* ======================================================
+   6. RESPONSIVO
+   ====================================================== */
+@media (max-width: 992px) {
+    .artista-bio-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .artista-col-img {
+        max-width: 100%;
+    }
+    .section-title-line {
+        font-size: 2.2rem;
+    }
+    .nf-nav {
+        display: none; /* Podrías añadir un menú hamburguesa aquí */
+    }
 }
