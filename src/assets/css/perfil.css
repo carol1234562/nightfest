@@ -1,5 +1,5 @@
 /* ======================================================
-   1. RESET Y BASE
+   1. RESET Y ESTILOS BASE
    ====================================================== */
 * {
     margin: 0;
@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-body.pf-body {
+body {
     background-color: #000;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
@@ -15,9 +15,9 @@ body.pf-body {
 }
 
 /* ======================================================
-   2. HEADER (ESTILO PREMIUM)
+   2. HEADER PREMIUM (DORADO Y BLANCO ACTIVO)
    ====================================================== */
-.main-header {
+.nf-header-main {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,40 +30,54 @@ body.pf-body {
     z-index: 1000;
 }
 
-.logo-medium {
+.nf-logo-side img {
     height: 50px;
     width: auto;
 }
 
-.nav-menu {
-    display: flex;
-    gap: 20px;
-    margin-left: 40px;
+.nf-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.nav-menu a {
-    color: #fff;
+.nf-nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+/* Color dorado para todos los enlaces por defecto */
+.nf-nav a {
+    color: #D4AF37; 
     text-decoration: none;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
 }
 
-.nav-menu a:hover, .nav-menu a.active {
-    color: #D4AF37;
+/* Color blanco SOLO cuando estás en esa página (clase .active) */
+.nf-nav a.active {
+    color: #fff !important;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
 }
 
-.auth-buttons {
+.nf-nav a:hover {
+    color: #fff;
+}
+
+.nf-user-controls {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.user-avatar {
-    width: 40px;
-    height: 40px;
+.user-circle {
+    width: 35px;
+    height: 35px;
     background-color: #D4AF37;
     color: #000;
     border-radius: 50%;
@@ -71,141 +85,145 @@ body.pf-body {
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    text-decoration: none;
 }
 
 /* ======================================================
-   3. CONTENIDO PRINCIPAL - PERFIL
+   3. ESTRUCTURA DE CONTENIDO (EVENTO Y ARTISTA)
    ====================================================== */
-.pf-main-content {
-    max-width: 900px;
-    margin: 60px auto;
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
     padding: 0 20px;
 }
 
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-    text-align: center;
-    margin-bottom: 50px;
-    color: #fff;
-}
-
-.pf-profile-card {
-    background-color: #1a1a1a;
-    border-radius: 25px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-.pf-card-header {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.section-header {
     margin-bottom: 30px;
+    border-left: 4px solid #D4AF37;
+    padding-left: 15px;
 }
 
-.pf-avatar-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #D4AF37;
-    padding: 5px;
-}
-
-.pf-user-info h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.pf-email {
-    color: #888;
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-.pf-role-badge {
-    background-color: rgba(212, 175, 55, 0.1);
-    color: #D4AF37;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-/* ======================================================
-   4. OPCIONES DE CUENTA (GRID)
-   ====================================================== */
-.pf-options-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #D4AF37;
-    margin-bottom: 20px;
+.section-title-line {
+    font-size: 2rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-.pf-options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
+.paginacion-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
 }
 
-.pf-btn {
-    background-color: transparent;
-    color: #fff;
+.pag-link {
+    padding: 10px 20px;
     border: 1px solid #333;
-    padding: 15px;
-    border-radius: 12px;
-    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
     font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
+    font-size: 0.8rem;
     transition: all 0.3s ease;
-    text-transform: uppercase;
 }
 
-.pf-btn:hover {
-    border-color: #D4AF37;
-    background-color: rgba(212, 175, 55, 0.05);
-}
-
-.pf-btn-admin {
+.pag-link.active, .pag-link:hover {
     background-color: #D4AF37;
     color: #000;
-    border: none;
+    border-color: #D4AF37;
 }
 
-.pf-btn-admin:hover {
-    background-color: #bfa030;
+/* Tarjeta Principal Dividida */
+.evento-row-split {
+    display: flex;
+    gap: 50px;
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    align-items: stretch; 
 }
 
-.pf-btn-logout {
-    border-color: #ff4444;
-    color: #ff4444;
+.col-izquierda {
+    flex: 1;
+    max-width: 48%;
 }
 
-.pf-btn-logout:hover {
-    background-color: rgba(255, 68, 68, 0.1);
-    border-color: #ff4444;
+.col-izquierda .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+    border: 1px solid #333;
+}
+
+.col-derecha {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.gold-subtitle {
+    color: #D4AF37;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fecha-badge {
+    background: rgba(212, 175, 55, 0.1);
+    color: #D4AF37;
+    padding: 8px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.btn-ubicacion {
+    background: transparent;
+    border: 1px solid #D4AF37;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    width: fit-content;
+    margin: 15px 0;
+    transition: 0.3s;
+}
+
+.btn-ubicacion:hover {
+    background: #D4AF37;
+    color: #000;
+}
+
+.mapa-container-mini {
+    height: 250px;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid #333;
+    overflow: hidden;
+}
+
+.leaflet-tile-pane {
+    filter: grayscale(1) invert(0.9) contrast(1.2);
 }
 
 /* ======================================================
-   5. FOOTER (ESTILO DORADO)
+   4. FOOTER MINIMALISTA (NEGRO Y DORADO)
    ====================================================== */
-.main-footer {
+.simple-footer {
     background-color: #000;
     padding: 60px 0 30px;
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.3);
-    margin-top: 100px;
+    margin-top: 80px;
+    width: 100%;
 }
 
 .footer-socials {
@@ -216,25 +234,27 @@ body.pf-body {
 }
 
 .footer-socials a {
-    color: #D4AF37;
+    color: #D4AF37; 
     font-size: 1.8rem;
-    transition: transform 0.3s, color 0.3s;
+    transition: transform 0.3s, color 0.3s, filter 0.3s;
 }
 
 .footer-socials a:hover {
     transform: translateY(-5px);
     color: #fff;
-}
-
-.footer-legal {
-    margin-bottom: 20px;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
 }
 
 .footer-legal a {
     color: #888;
     text-decoration: none;
     font-size: 0.85rem;
-    margin: 0 10px;
+    font-weight: 600;
+    margin: 0 15px;
+}
+
+.footer-legal a:hover {
+    color: #D4AF37;
 }
 
 .divider {
@@ -243,22 +263,24 @@ body.pf-body {
 
 .copyright {
     color: #555;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
 }
 
 /* ======================================================
-   6. RESPONSIVO
-   ====================================================== */
-@media (max-width: 768px) {
-    .pf-card-header {
+   5. RESPONSIVO
+   ===================================================== */
+@media (max-width: 992px) {
+    .evento-row-split {
         flex-direction: column;
-        text-align: center;
     }
-    .nav-menu {
-        display: none;
+    .col-izquierda, .col-derecha {
+        max-width: 100%;
     }
-    .pf-options-grid {
-        grid-template-columns: 1fr;
+    .nf-nav {
+        position: static;
+        transform: none;
     }
 }
