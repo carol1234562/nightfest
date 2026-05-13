@@ -1,7 +1,73 @@
 /* ==========================================================================
    STYLE1.CSS - NIGHTFEST VERSIÓN FINAL RESTAURADA
    ========================================================================== */
+/*CARACTERISTICAS DEL MAPA 
+*/
+.section-map {
+    width: 100%;
+    padding: 20px 0;
+    position: relative;
+}
 
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px; /* ALTURA FIJA: Esto es lo más importante */
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #333;
+    background-color: #111; /* Color de fondo mientras carga */
+}
+
+#map-container {
+    width: 100%;
+    height: 100%; /* Ocupa todo el wrapper */
+    z-index: 1;
+}
+
+#btn-recenter {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Siempre por encima del mapa */
+    background: rgba(17, 17, 17, 0.85);
+    color: #D4AF37;
+    border: 1px solid #D4AF37;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+#btn-recenter:hover {
+    background: #D4AF37;
+    color: #111;
+}
+/* Marcador circular dorado con pulso */
+.gold-marker {
+    background-color: #D4AF37;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #D4AF37, 0 0 20px rgba(212, 175, 55, 0.5);
+    cursor: pointer;
+}
+
+/* Efecto de pulsación para que parezca que el local está "vivo" */
+.gold-marker-pulse {
+    background-color: #D4AF37;
+    border-radius: 50%;
+    border: 2px solid #D4AF37;
+    animation: pulse-gold 2s infinite;
+}
+
+@keyframes pulse-gold {
+    0% { transform: scale(0.9); opacity: 1; }
+    70% { transform: scale(2); opacity: 0; }
+    100% { transform: scale(0.9); opacity: 0; }
+}
 /* --- 1. BASES --- */
 * {
     margin: 0;
