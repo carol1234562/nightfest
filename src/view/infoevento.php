@@ -8,6 +8,8 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="infoevento.css">
+      <link rel="stylesheet" href="../assets/css/STYLE1.css">
+
 </head>
 
 <body id="infoevento-page">

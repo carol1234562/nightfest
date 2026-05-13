@@ -44,6 +44,8 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/discotecas.css">
+        <link rel="stylesheet" href="../assets/css/STYLE1.css">
+
 </head>
 <body id="discotecas-page">
 
