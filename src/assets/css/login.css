@@ -1,298 +1,194 @@
-/* ======================================================
-   NIGHTFEST MASTER CSS - COORDINADO CON PHP
-   ====================================================== */
+/* login.css */
 
-:root {
-    --oro: #D4AF37;
-    --oro-hover: #b8952e;
-    --negro-bg: #000000;
-    --negro-card: #1a1a1a;
-    --blanco: #ffffff;
-    --fuente: 'Montserrat', sans-serif;
-    --max-width: 1200px;
-}
-
-* {
+body.login-page {
+    background-color: #000000;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--negro-bg);
-    color: var(--blanco);
-    font-family: var(--fuente);
-    line-height: 1.6;
-}
-
-/* 1. HEADER & NAVEGACIÓN (Lógica PHP) */
-.nf-header-main {
+    font-family: 'Montserrat', sans-serif;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-    background-color: var(--negro-bg);
-    border-bottom: 2px solid var(--oro);
-    height: 90px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nf-nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nf-nav ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-}
-
-.nf-nav a {
-    color: var(--blanco);
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.nf-nav a.active { color: var(--oro); }
-
-/* Botón especial "MIS EVENTOS" (Solo para Admin) */
-.btn-mis-eventos {
-    background-color: var(--oro);
-    color: #000 !important;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: 800 !important;
-}
-
-/* 2. CONTROLES DE USUARIO (Avatar e Iconos) */
-.nf-user-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.user-circle {
-    width: 35px;
-    height: 35px;
-    background-color: var(--oro);
-    color: #000;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-weight: 900;
-    font-size: 1rem;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.icon-add { color: #2ecc71; font-size: 1.2rem; } /* Verde para crear */
-.icon-logout { color: #e74c3c; font-size: 1.2rem; } /* Rojo para salir */
-
-/* 3. SECCIÓN DESTACADOS (HERO GRID) */
-.container {
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.hero-container {
-    display: flex;
-    gap: 15px;
-    height: 500px;
-    margin-bottom: 50px;
-}
-
-.hero-item {
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    flex: 2;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-.hero-sidebar {
-    flex: 1;
+.login-screen {
+    width: 100%;
+    /* Aumentamos el ancho máximo de la columna central */
+    max-width: 500px; 
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.hero-sidebar .hero-item { flex: 1; }
-
-.hero-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.5s;
-}
-
-.overlay-info {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 20px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
-}
-
-.overlay-info h1, .overlay-info h2 { color: var(--oro); text-transform: uppercase; }
-
-/* 4. MAPA "CERCA DE TI" */
-.map-wrapper {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    margin: 30px 0;
-    border: 1px solid var(--oro);
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-#map-container {
-    width: 100%;
-    height: 100%;
-}
-
-#btn-recenter {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    background: var(--oro);
-    border: none;
-    padding: 10px 15px;
-    font-weight: 800;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Marcador Dorado personalizado */
-.gold-marker {
-    background-color: var(--oro);
-    border: 2px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--oro);
-}
-
-/* 5. GRID DE CLUBS & BOTONES */
-.section-title {
-    border-left: 4px solid var(--oro);
-    padding-left: 15px;
-    text-transform: uppercase;
-    margin: 40px 0 20px;
-}
-
-.clubs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-}
-
-.club-card {
-    background: var(--negro-card);
-    border-radius: 15px;
-    overflow: hidden;
-    text-align: center;
-    border: 1px solid #333;
-    transition: 0.3s;
-}
-
-.club-card:hover { border-color: var(--oro); transform: translateY(-5px); }
-
-.club-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.club-info { padding: 20px; }
-
-.club-info .btn {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 8px 20px;
-    border: 1px solid var(--oro);
-    color: var(--oro);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.club-info .btn:hover { background: var(--oro); color: #000; }
-
-/* 6. MODAL Y COOKIES */
-#welcome-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 9999;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 20px;
 }
 
-.modal-content {
-    text-align: center;
-    border: 2px solid var(--oro);
-    padding: 40px;
-    border-radius: 20px;
-}
-
-#cookie-banner {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #111;
-    padding: 15px;
-    text-align: center;
-    border-top: 1px solid var(--oro);
-    z-index: 2000;
-}
-
-#accept-cookies {
-    background: var(--oro);
-    border: none;
-    padding: 5px 15px;
-    margin-left: 20px;
-    font-weight: bold;
-    border-radius: 4px;
+/* Botón Volver más visible */
+.return-container {
+    align-self: flex-start;
+    color: #D4AF37;
     cursor: pointer;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 1.1rem; /* Más grande */
+    transition: 0.3s;
 }
 
-/* 7. SLIDERS (Slick) */
-.slider-section { margin: 60px 0; }
+.return-container:hover {
+    color: #ffffff;
+    transform: translateX(-5px);
+}
 
-.promotor-item {
-    background: var(--negro-card);
-    padding: 30px;
-    margin: 10px;
+.login-form-container {
+    background-color: transparent !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo más grande */
+.logo-login {
+    max-width: 250px; /* Aumentado de 180px */
+    margin: 0 auto 50px auto;
+    display: block;
+}
+
+/* Inputs y Labels más grandes */
+.input-group {
+    width: 100%;
+    margin-bottom: 30px; /* Más espacio entre campos */
+}
+
+.input-group label {
+    color: #D4AF37;
+    text-transform: uppercase;
+    font-size: 0.9rem; /* Aumentado */
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.input-group input {
+    background: transparent;
+    border: 1px solid #444;
+    padding: 18px; /* Más acolchado interno */
+    color: #fff;
+    border-radius: 6px;
+    font-size: 1.1rem; /* Texto de entrada más grande */
+    width: 100%;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #D4AF37;
+    background-color: rgba(212, 175, 55, 0.05);
+    outline: none;
+}
+
+/* Enlaces más legibles */
+.forgot-link {
+    color: #D4AF37;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.texto-cuenta {
     text-align: center;
-    border: 1px solid #333;
-    border-radius: 10px;
+    color: #bbb;
+    margin: 30px 0;
+    font-size: 1.05rem;
 }
 
-.promotor-item h3 { color: var(--oro); }
+.link-registro {
+    color: #D4AF37;
+    font-weight: 800;
+    text-decoration: none;
+}
 
-/* 8. FOOTER */
-.main-footer {
-    background: #0a0a0a;
-    padding: 60px 5% 30px;
-    border-top: 1px solid #222;
+/* BOTÓN PRINCIPAL MÁS GRANDE */
+.btn-login-submit {
+    background-color: #D4AF37;
+    color: #000;
+    border: none;
+    padding: 20px; /* Botón más alto y robusto */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Texto del botón más grande */
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-login-submit:hover {
+    background-color: #ffffff;
+    transform: scale(1.02); /* Efecto de crecimiento suave */
+}
+
+/* Asegura que el footer se mantenga siempre al final */
+body.login-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #000000;
+}
+
+.login-screen {
+    flex: 1; /* Empuja el footer hacia abajo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* FOOTER - Estilos de color y posición */
+.simple-footer {
+    width: 100%;
+    padding: 30px 0;
     text-align: center;
+    background-color: #000000;
 }
 
+/* Iconos de redes sociales en Dorado */
 .footer-socials a {
-    color: var(--oro);
+    color: #D4AF37 !important; 
     font-size: 1.5rem;
     margin: 0 15px;
+    transition: transform 0.3s ease;
+    display: inline-block;
 }
 
+.footer-socials a:hover {
+    transform: scale(1.2);
+    color: #ffffff !important;
+}
+
+/* Términos, condiciones y legal en Dorado */
+.footer-legal {
+    margin: 15px 0;
+}
+
+
 .footer-legal a {
-    color: #666;
+    color: #D4AF37 !important;
     text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.footer-legal .divider {
+    color: #444; /* El separador se queda oscuro para no distraer */
     margin: 0 10px;
+}
+
+/* Copyright y nombres en el tono gris actual */
+.copyright {
+    color: #666666; /* Mantiene el tono discreto solicitado */
     font-size: 0.8rem;
+    margin-top: 10px;
+    letter-spacing: 1px;
 }

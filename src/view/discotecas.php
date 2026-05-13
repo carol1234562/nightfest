@@ -49,30 +49,43 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
 <body id="discotecas-page">
 
     <header class="nf-header-main">
-        <div class="nf-logo-side">
-            <a href="inicio1.php">
-                <img src="../assets/img/logo.png" alt="NightFest Logo">
+    <div class="nf-logo-side">
+        <a href="inicio1.php">
+            <img src="../assets/img/logo.png" alt="NightFest Logo">
+        </a>
+    </div>
+
+    <nav class="nf-nav">
+        <ul>
+            <li><a href="inicio1.php">HOME</a></li>
+            <li><a href="destacados_page.php">DESTACADOS</a></li>
+            <li><a href="discotecas.php" class="active">DISCOTECAS</a></li>
+            <li><a href="#">BARES</a></li>
+            <li><a href="#">FESTIVALES</a></li>
+            <li><a href="#">RESTAURANTES</a></li>
+            
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+                <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+    <div class="nf-user-controls">
+        <div class="user-circle">
+            <?php echo isset($_SESSION['user_name']) ? strtoupper($_SESSION['user_name'][0]) : 'U'; ?>
+        </div>
+
+        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+            <a href="registro_admin.php" class="icon-add" title="Agregar Evento">
+                <i class="fas fa-plus-circle"></i>
             </a>
-        </div>
+        <?php endif; ?>
 
-        <nav class="nf-nav">
-            <ul>
-                <li><a href="inicio1.php">HOME</a></li>
-                <li><a href="destacados_page.php">DESTACADOS</a></li>
-                <li><a href="discotecas.php" class="active">DISCOTECAS</a></li>
-                <li><a href="#">BARES</a></li>
-                <li><a href="#">FESTIVALES</a></li>
-                <li><a href="#">RESTAURANTES</a></li>
-                <li><a href="#" class="btn-mis-eventos">MIS EVENTOS</a></li>
-            </ul>
-        </nav>
-
-        <div class="nf-user-controls">
-            <div class="user-circle">A</div>
-            <a href="registro_admin.php" class="icon-add"><i class="fas fa-plus-circle"></i></a>
-            <a href="login.php" class="icon-logout"><i class="fas fa-sign-out-alt"></i></a>
-        </div>
-    </header>
+        <a href="logout.php" class="icon-logout" title="Cerrar Sesión">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </div>
+</header>
 
     <main class="container">
         <div class="section-header">
