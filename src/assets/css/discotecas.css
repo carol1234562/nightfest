@@ -271,7 +271,7 @@ body {
 }
 
 .footer-legal a {
-    color: #0056b3; /* Azul de tu captura image_467939.png */
+    color: #666; 
     text-decoration: underline;
     font-size: 0.85rem;
     margin: 0 10px;
