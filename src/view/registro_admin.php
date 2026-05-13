@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 
             <input type="hidden" name="rol" value="admin">
 
-            <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
+            <img src="../assets/img/logo.png" class="logo-login" alt="Logo NightFest">
 
             <h2 style="text-align:center; color:#D4AF37; margin-bottom:25px; font-size:1rem; letter-spacing:2px; text-transform:uppercase;">Registro Administrador</h2>
 

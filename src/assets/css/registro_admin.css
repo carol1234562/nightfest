@@ -1,310 +1,208 @@
-
-
-/* ==========================================================================
-   NIGHTFEST - HOJA DE ESTILOS PROFESIONAL (FINAL)
-   ========================================================================== */
-
-/* --- 1. RESET Y VARIABLES --- */
+/* --- CONFIGURACIÓN NIGHTFEST --- */
 :root {
-    --gold: #D4AF37;
-    --black-deep: #050505;
-    --card-bg: #111111;
-    --text-gray: #cccccc;
-    --glass: rgba(0, 0, 0, 0.85);
+    --gold: #D4AF37;          /* Dorado corporativo NightFest */
+    --gold-hover: #f1c40f;
+    --dark-pure: #000000;    /* Fondo negro absoluto */
+    --card-bg: #000000;      /* Gris muy oscuro para tarjetas de perfil y formularios */
+    --input-bg: #111111;     /* Fondo de los campos de texto */
+    --border-color: #333333; /* Gris para bordes (reemplaza cualquier azul) */
+    --text-white: #ffffff;
+    --text-gray: #a0a0a0;
+    --danger: #e74c3c;
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Asegura que el padding no ensanche los inputs */
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--black-deep);
-    color: #ffffff;
+body.login-page, body.pf-body {
+    background-color: var(--dark-pure);
+    color: var(--text-white);
     font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
 }
 
-/* --- 2. HEADER Y NAVEGACIÓN (6 ELEMENTOS) --- */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 4%;
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+/* --- LOGO DE FONDO (MARCA DE AGUA) --- */
+/* Esto soluciona el desborde que se ve en la imagen 8 */
+.background-logo-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    opacity: 0.1; /* Muy sutil detrás del contenido */
+    z-index: 0;
+    pointer-events: none;
 }
 
-.logo {
-    height: 65px;
-    width: auto;
-    transition: 0.3s;
-}
-
-.nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.nav-links-wrapper {
-    display: flex;
-    gap: 12px; /* Espacio reducido para que quepan los 6 links */
-}
-
-.nav-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.65rem; /* Tamaño optimizado para menú largo */
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: 0.3s;
-    padding: 5px 0;
-    border-bottom: 2px solid transparent;
-}
-
-.nav-link:hover, .nav-link.active {
-    color: var(--gold);
-    border-bottom: 2px solid var(--gold);
-}
-
-.admin-link {
-    color: var(--gold) !important;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-decoration: none;
-    border: 1px solid var(--gold);
-    padding: 4px 10px;
-    border-radius: 4px;
-    margin-left: 10px;
-    transition: 0.3s;
-}
-
-.admin-link:hover {
-    background: var(--gold);
-    color: #000 !important;
-}
-
-/* --- 3. PANEL DE USUARIO (DERECHA) --- */
-.user-panel {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 6px 15px;
-    border-radius: 40px;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.user-avatar {
-    width: 32px;
-    height: 32px;
-    background-color: var(--gold) !important;
-    color: #000 !important;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 800;
-    font-size: 0.9rem;
-}
-
-.user-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.icon-plus, .btn-logout-icon {
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: 0.3s;
-}
-
-.icon-plus:hover, .btn-logout-icon:hover {
-    color: #fff;
-    transform: scale(1.2);
-}
-
-/* --- 4. SECCIÓN HERO --- */
-.hero {
-    height: 45vh;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), 
-                url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-bottom: 2px solid var(--gold);
-}
-
-.hero-content h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    letter-spacing: 4px;
-    margin-bottom: 10px;
-}
-
-.hero-content p {
-    font-size: 1rem;
-    color: var(--text-gray);
-    letter-spacing: 1px;
-}
-
-.gold-text { color: var(--gold); }
-
-/* --- 5. GRID DE CARTILLAS (EVENTOS) --- */
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 50px 20px;
-}
-
-.section-intro {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-title {
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-left: 4px solid var(--gold);
-    padding-left: 15px;
-    display: inline-block;
-}
-
-.clubs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-}
-
-/* --- 6. ESTILO DE LA CARTILLA (CARD) --- */
-.club-card {
-    background-color: var(--card-bg);
-    border: 1px solid #222;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    flex-direction: column;
-}
-
-.club-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--gold);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
-}
-
-.card-img-wrapper {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    background-color: #1a1a1a;
-    overflow: hidden;
-}
-
-.card-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.6s;
-}
-
-.club-card:hover .card-img-wrapper img {
-    transform: scale(1.1);
-}
-
-/* Etiqueta flotante sobre la imagen */
-.card-badge {
+/* --- POSICIONAMIENTO DEL 'VOLVER' --- */
+/* Ubicado en la esquina superior izquierda tal como en la referencia  */
+.return-container {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(0, 0, 0, 0.8);
+    top: 30px;
+    left: 30px;
     color: var(--gold);
-    padding: 4px 10px;
-    font-size: 0.6rem;
-    font-weight: 800;
-    border: 1px solid var(--gold);
-    border-radius: 3px;
-    z-index: 5;
-    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    text-decoration: none;
 }
 
-.club-info {
+.return-container:hover {
+    color: var(--text-white);
+}
+
+/* --- CONTENEDOR CENTRAL (LOGIN / REGISTRO) --- */
+.login-screen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    text-align: center;
-    flex-grow: 1;
+    position: relative;
+    z-index: 1;
 }
 
-.club-info h4 {
+.login-form-container {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color); /* Gris NightFest  */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);
+}
+
+.logo-login {
+    display: block;
+    width: 180px;
+    margin: 0 auto 25px;
+}
+
+/* --- FORMULARIO E INPUTS (SIN AZUL) --- */
+.reg-title {
     color: var(--gold);
-    font-size: 1rem;
-    margin-bottom: 12px;
+    text-align: center;
     text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
     letter-spacing: 1px;
 }
 
-.club-info p {
-    color: var(--text-gray);
-    font-size: 0.8rem;
-    line-height: 1.6;
+.input-group input {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color); /* Borde gris  */
+    padding: 14px;
+    color: #fff;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    transition: 0.3s;
 }
 
-/* --- 7. FOOTER --- */
-.simple-footer {
-    padding: 40px 20px;
+.input-group input:focus {
+    border-color: var(--gold);
+}
+
+/* --- BOTÓN DORADO --- */
+.btn-login-submit {
+    width: 100%;
+    background-color: var(--gold);
+    color: #000;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-login-submit:hover {
+    background-color: var(--gold-hover);
+    transform: translateY(-2px);
+}
+
+/* --- TEXTOS ADICIONALES --- */
+.texto-cuenta {
     text-align: center;
-    background: #000;
-    border-top: 1px solid #222;
-    margin-top: 50px;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    margin-top: 20px;
+}
+
+.link-registro {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.link-registro:hover {
+    text-decoration: underline;
+}
+
+/* --- FOOTER INTEGRADO --- */
+.main-footer {
+    background-color: var(--dark-pure);
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid #111;
+}
+
+.footer-socials {
+    margin-bottom: 20px;
 }
 
 .footer-socials a {
-    color: #fff;
+    color: var(--gold);
+    margin: 0 15px;
     font-size: 1.4rem;
-    margin: 0 12px;
-    text-decoration: none;
     transition: 0.3s;
 }
 
-.footer-socials a:hover { color: var(--gold); }
-
-.footer-legal {
-    margin: 15px 0;
-    font-size: 0.75rem;
-    color: #666;
+.footer-socials a:hover {
+    transform: translateY(-3px);
+    color: var(--text-white);
 }
 
-.divider { color: var(--gold); margin: 0 8px; }
+.footer-legal a {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin: 0 10px;
+}
+
+.divider {
+    color: #333;
+}
 
 .copyright {
-    color: #444;
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* --- 8. RESPONSIVE --- */
-@media (max-width: 1024px) {
-    .nav-links-wrapper { gap: 8px; }
-    .nav-link { font-size: 0.6rem; }
-}
-
-@media (max-width: 768px) {
-    .main-header { flex-direction: column; gap: 15px; }
-    .nav-links-wrapper { flex-wrap: wrap; justify-content: center; }
-    .hero-content h1 { font-size: 2rem; }
+    color: #555;
+    font-size: 0.75rem;
+    margin-top: 20px;
 }

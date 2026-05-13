@@ -13,7 +13,6 @@ if (isset($_SESSION['user_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/registro_estandar.css">
-        <link rel="stylesheet" href="../assets/css/STYLE1.css">
 
 </head>
 <body class="login-page">
@@ -28,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
 
             <input type="hidden" name="rol" value="estandar">
 
-            <img src="../assets/img/logoNight.png" class="logo-login" alt="Logo NightFest">
+            <img src="../assets/img/logo.png" class="logo-login" alt="Logo NightFest">
 
             <h2 style="text-align:center; color:#D4AF37; margin-bottom:25px; font-size:1rem; letter-spacing:2px; text-transform:uppercase;">Registro Estándar</h2>
 
