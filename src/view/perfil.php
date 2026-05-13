@@ -1,12 +1,15 @@
 <?php
 require_once '../Controller/UserController.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
+
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache"); 
 header("Expires: 0");
 
 // 1. Verificar si está logueado
-if (!isset($_SESSION['user_id'])) {
+$is_logged = isset($_SESSION['user_id']); // Definimos si está logueado
+
+if (!$is_logged) {
     header("Location: login.php");
     exit();
 }
@@ -19,10 +22,13 @@ if (!$user) {
     exit();
 }
 
-$nombre = $user['nombre'];
-$email = $user['email'];
-$rol = $user['rol'];
-$foto = $user['foto_perfil'];
+// 2. Extraer datos y definir variables faltantes
+$nombre  = $user['nombre'];
+$email   = $user['email'];
+$rol     = $user['rol'];
+$foto    = $user['foto_perfil'];
+$inicial = strtoupper(substr($nombre, 0, 1)); // Crea la inicial para el avatar
+$es_admin = ($rol === 'admin'); // Define si es admin para el menú
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -17,7 +17,7 @@ body {
 /* ======================================================
    2. HEADER PREMIUM (DORADO Y BLANCO ACTIVO)
    ====================================================== */
-.nf-header-main {
+.nf-header-main, .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,25 +30,20 @@ body {
     z-index: 1000;
 }
 
-.nf-logo-side img {
+.nf-logo-side img, .logo-medium {
     height: 50px;
     width: auto;
 }
 
-.nf-nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nf-nav ul {
+.nf-nav, .nav-menu {
     display: flex;
     gap: 20px;
     list-style: none;
+    align-items: center;
 }
 
-/* Color dorado para todos los enlaces por defecto */
-.nf-nav a {
+/* Estilo base: Todos los enlaces en DORADO */
+.nf-nav a, .nav-menu a {
     color: #D4AF37; 
     text-decoration: none;
     font-size: 0.8rem;
@@ -58,26 +53,27 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Color blanco SOLO cuando estás en esa página (clase .active) */
-.nf-nav a.active {
+/* Estilo ACTIVO: Página actual en BLANCO */
+.nf-nav a.active, .nav-menu a.active {
     color: #fff !important;
     border-bottom: 1px solid #fff;
     padding-bottom: 5px;
 }
 
-.nf-nav a:hover {
+.nf-nav a:hover, .nav-menu a:hover {
     color: #fff;
 }
 
-.nf-user-controls {
+/* Controles de usuario */
+.nf-user-controls, .auth-buttons {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.user-circle {
-    width: 35px;
-    height: 35px;
+.user-circle, .user-avatar {
+    width: 38px;
+    height: 38px;
     background-color: #D4AF37;
     color: #000;
     border-radius: 50%;
@@ -85,10 +81,11 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: 800;
+    text-decoration: none;
 }
 
 /* ======================================================
-   3. ESTRUCTURA DE CONTENIDO (EVENTO Y ARTISTA)
+   3. PERFIL Y CONTENIDO (CORRECCIÓN DE DISEÑO)
    ====================================================== */
 .container {
     max-width: 1100px;
@@ -96,169 +93,92 @@ body {
     padding: 0 20px;
 }
 
-.section-header {
-    margin-bottom: 30px;
-    border-left: 4px solid #D4AF37;
-    padding-left: 15px;
-}
-
-.section-title-line {
-    font-size: 2rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.paginacion-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
-}
-
-.pag-link {
-    padding: 10px 20px;
-    border: 1px solid #333;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    transition: all 0.3s ease;
-}
-
-.pag-link.active, .pag-link:hover {
-    background-color: #D4AF37;
-    color: #000;
-    border-color: #D4AF37;
-}
-
-/* Tarjeta Principal Dividida */
-.evento-row-split {
-    display: flex;
-    gap: 50px;
+/* Estilos para que el perfil no se vea como en la captura image_3ab25f.jpg */
+.pf-profile-card {
     background-color: #1a1a1a;
     border-radius: 20px;
     padding: 40px;
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    align-items: stretch; 
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    margin-top: 30px;
 }
 
-.col-izquierda {
-    flex: 1;
-    max-width: 48%;
-}
-
-.col-izquierda .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
-    display: block;
-    border: 1px solid #333;
-}
-
-.col-derecha {
-    flex: 1;
+.pf-card-header {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
-.gold-subtitle {
+.pf-avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #D4AF37;
+    object-fit: cover;
+}
+
+.pf-role-badge {
     color: #D4AF37;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 15px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.fecha-badge {
-    background: rgba(212, 175, 55, 0.1);
-    color: #D4AF37;
-    padding: 8px 15px;
-    border-radius: 5px;
-    display: inline-block;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.btn-ubicacion {
-    background: transparent;
     border: 1px solid #D4AF37;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
     font-weight: 700;
+}
+
+/* Grid de opciones del perfil */
+.pf-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.pf-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 8px;
     cursor: pointer;
-    width: fit-content;
-    margin: 15px 0;
+    font-weight: 600;
     transition: 0.3s;
 }
 
-.btn-ubicacion:hover {
-    background: #D4AF37;
-    color: #000;
-}
-
-.mapa-container-mini {
-    height: 250px;
-    width: 100%;
-    border-radius: 15px;
-    border: 1px solid #333;
-    overflow: hidden;
-}
-
-.leaflet-tile-pane {
-    filter: grayscale(1) invert(0.9) contrast(1.2);
+.pf-btn:hover {
+    border-color: #D4AF37;
+    color: #D4AF37;
 }
 
 /* ======================================================
-   4. FOOTER MINIMALISTA (NEGRO Y DORADO)
+   4. FOOTER (ICONOS DORADOS)
    ====================================================== */
-.simple-footer {
+.main-footer, .simple-footer {
     background-color: #000;
     padding: 60px 0 30px;
     text-align: center;
     border-top: 1px solid rgba(212, 175, 55, 0.3);
     margin-top: 80px;
-    width: 100%;
-}
-
-.footer-socials {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 25px;
 }
 
 .footer-socials a {
-    color: #D4AF37; 
+    color: #D4AF37; /* Iconos dorados */
     font-size: 1.8rem;
-    transition: transform 0.3s, color 0.3s, filter 0.3s;
+    margin: 0 15px;
+    transition: transform 0.3s, color 0.3s;
+    display: inline-block;
 }
 
 .footer-socials a:hover {
     transform: translateY(-5px);
     color: #fff;
-    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
 }
 
 .footer-legal a {
     color: #888;
     text-decoration: none;
     font-size: 0.85rem;
-    font-weight: 600;
-    margin: 0 15px;
-}
-
-.footer-legal a:hover {
-    color: #D4AF37;
-}
-
-.divider {
-    color: #333;
+    margin: 0 10px;
 }
 
 .copyright {
@@ -267,20 +187,4 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-top: 25px;
-}
-
-/* ======================================================
-   5. RESPONSIVO
-   ===================================================== */
-@media (max-width: 992px) {
-    .evento-row-split {
-        flex-direction: column;
-    }
-    .col-izquierda, .col-derecha {
-        max-width: 100%;
-    }
-    .nf-nav {
-        position: static;
-        transform: none;
-    }
 }
