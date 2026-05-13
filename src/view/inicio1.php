@@ -24,10 +24,10 @@ if ($is_logged && isset($_SESSION['user_name'])) {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/STYLE1.css">
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body id="inicio">
@@ -113,10 +113,20 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 </div>
             </div>
         </section>
-
+        
         <section class="hero-section">
          <h2 class="section-title"></h2>
         </section>
+
+       <section class="section-map">
+    <h2 class="section-title">Cerca de ti</h2>
+    <div class="map-wrapper">
+        <div id="map-container"></div>
+        <button id="btn-recenter">
+            <i class="fas fa-location-arrow"></i> MI UBICACIÓN
+        </button>
+    </div>
+</section>
 
         </section> <section class="section-bottom">
              <h2 class="section-title">Discotecas</h2>
@@ -227,22 +237,22 @@ if ($is_logged && isset($_SESSION['user_name'])) {
         </section>
 
         <section class="slider-section">
-    <h2 class="section-title">Galería NightFest</h2>
-    
-    <div class="slider-galeria">
-        <div class="slick-box">
-            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="G1">
-        </div>
-        <div class="slick-box">
-            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=500" alt="G2">
-        </div>
-        <div class="slick-box">
-            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500" alt="G3">
-        </div>
-        <div class="slick-box">
-            <img src="https://images.ecestaticos.com/hpVN2sFeMh4Ryku5yiRFyH9o7VY=/40x9:1367x1004/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fcbe%2F472%2F961%2Fcbe472961f53a4a238bf493f79d42e51.jpg" alt="G4">
-        </div>
-    </div> </section>
+            <h2 class="section-title">Galería NightFest</h2>
+        <div class="slider-galeria">
+            <div class="slick-box">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="G1">
+            </div>
+            <div class="slick-box">
+                <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=500" alt="G2">
+            </div>
+            <div class="slick-box">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500" alt="G3">
+            </div>
+            <div class="slick-box">
+                <img src="https://images.ecestaticos.com/hpVN2sFeMh4Ryku5yiRFyH9o7VY=/40x9:1367x1004/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fcbe%2F472%2F961%2Fcbe472961f53a4a238bf493f79d42e51.jpg" alt="G4">
+            </div>
+            </div>
+        </section>
 
         <section class="slider-section">
             <h2 class="section-title">Nuestros Promotores</h2>
@@ -273,9 +283,95 @@ if ($is_logged && isset($_SESSION['user_name'])) {
         </div>
     </footer>
 
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="../assets/css/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="../assets/css/jquery.js"></script>
+    <script>
+window.onload = function() {
+    console.log("Cargando mapa NightFest...");
+    
+    try {
+        // 1. Inicialización del mapa centrado en Barcelona
+        var map = L.map('map-container').setView([41.3851, 2.1734], 14);
+
+        // 2. Capa Oscura Premium (CartoDB Dark Matter)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // 3. Configuración del Icono Dorado (Toque NightFest)
+        var goldIcon = L.divIcon({
+            className: 'gold-marker', // Asegúrate de tener el CSS que definimos antes
+            iconSize: [12, 12],
+            iconAnchor: [6, 6]
+        });
+
+        // 4. Base de datos de locales (Discotecas y Bares)
+        var locales = [
+            { name: "SUTTON", lat: 41.3965, lng: 2.1523, type: "Discoteca" },
+            { name: "PACHA", lat: 41.3831, lng: 2.1973, type: "Discoteca" },
+            { name: "OPIUM", lat: 41.3842, lng: 2.1965, type: "Discoteca" },
+            { name: "REY DE COPAS", lat: 41.3802, lng: 2.1754, type: "Bar" },
+            { name: "DOWNTOWN", lat: 41.3731, lng: 2.1465, type: "Discoteca" },
+            { name: "NEON BAR", lat: 41.3815, lng: 2.1720, type: "Bar" }
+        ];
+
+        // 5. Añadir marcadores al mapa
+        locales.forEach(function(local) {
+            L.marker([local.lat, local.lng], { icon: goldIcon }).addTo(map)
+                .bindPopup(`
+                    <div style="text-align:center; font-family: 'Montserrat', sans-serif;">
+                        <strong style="color:#D4AF37; font-size:14px;">${local.name}</strong><br>
+                        <span style="color:#666; font-size:11px;">${local.type}</span><br>
+                        <a href="reservar.php" style="
+                            display:inline-block; 
+                            margin-top:8px; 
+                            padding:6px 12px; 
+                            background:#D4AF37; 
+                            color:white; 
+                            text-decoration:none; 
+                            border-radius:4px; 
+                            font-weight:bold; 
+                            font-size:10px;
+                        ">RESERVAR MESA</a>
+                    </div>
+                `);
+        });
+
+        // 6. Función para el botón "Mi Ubicación"
+        document.getElementById('btn-recenter').onclick = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latlng = [position.coords.latitude, position.coords.longitude];
+                    
+                    // Marcador especial para el usuario (puedes diferenciarlo)
+                    L.circleMarker(latlng, {
+                        radius: 8,
+                        fillColor: "#fff",
+                        color: "#D4AF37",
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map).bindPopup("<b>Estás aquí</b>").openPopup();
+
+                    map.flyTo(latlng, 15);
+                });
+            }
+        };
+
+        // 7. Forzar renderizado final (Corrección image_49c5b8.jpg)
+        setTimeout(function() {
+            map.invalidateSize();
+            console.log("Mapa renderizado correctamente con iconos dorados.");
+        }, 500);
+
+    } catch (e) {
+        console.error("Error crítico en el script del mapa:", e);
+    }
+};
+</script>
 
 </body>
 </html>
