@@ -1,190 +1,269 @@
-/* ======================================================
-   1. RESET Y ESTILOS BASE
-   ====================================================== */
+/* --- CONFIGURACIÓN BASE --- */
+:root {
+    --gold: #D4AF37;
+    --gold-hover: #f1c40f;
+    --dark-bg: #000000;
+    --card-bg: #1a1a1a;
+    --text-white: #ffffff;
+    --text-gray: #a0a0a0;
+    --danger: #e74c3c;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    background-color: #000;
-    color: #fff;
+body.pf-body {
+    background-color: var(--dark-bg);
+    color: var(--text-white);
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
 }
 
-/* ======================================================
-   2. HEADER PREMIUM (DORADO Y BLANCO ACTIVO)
-   ====================================================== */
-.nf-header-main, .main-header {
+/* --- HEADER NIGHTFEST --- */
+.nf-header-main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    background-color: #000;
-    border-bottom: 2px solid #D4AF37;
-    height: 90px;
+    padding: 1rem 5%;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid var(--gold);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.nf-logo-side img, .logo-medium {
-    height: 50px;
+.nf-logo-side img {
+    height: 45px;
     width: auto;
 }
 
-.nf-nav, .nav-menu {
+.nf-nav ul {
     display: flex;
-    gap: 20px;
     list-style: none;
-    align-items: center;
+    gap: 20px;
 }
 
-/* Estilo base: Todos los enlaces en DORADO */
-.nf-nav a, .nav-menu a {
-    color: #D4AF37; 
+.nf-nav a {
+    color: var(--text-white);
     text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: 0.3s;
 }
 
-/* Estilo ACTIVO: Página actual en BLANCO */
-.nf-nav a.active, .nav-menu a.active {
-    color: #fff !important;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 5px;
+.nf-nav a:hover, .nf-nav a.active {
+    color: var(--gold);
 }
 
-.nf-nav a:hover, .nav-menu a:hover {
-    color: #fff;
-}
-
-/* Controles de usuario */
-.nf-user-controls, .auth-buttons {
+.nf-user-controls {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.user-circle, .user-avatar {
+.user-circle {
     width: 38px;
     height: 38px;
-    background-color: #D4AF37;
-    color: #000;
+    background-color: var(--gold);
+    color: black;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    text-decoration: none;
+    cursor: pointer;
 }
 
-/* ======================================================
-   3. PERFIL Y CONTENIDO (CORRECCIÓN DE DISEÑO)
-   ====================================================== */
-.container {
-    max-width: 1100px;
-    margin: 40px auto;
+.icon-add i, .icon-logout i {
+    color: var(--gold);
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.icon-logout i:hover {
+    color: var(--danger);
+}
+
+/* --- CONTENIDO DE PERFIL --- */
+.pf-main-content {
+    max-width: 800px;
+    margin: 60px auto;
     padding: 0 20px;
 }
 
-/* Estilos para que el perfil no se vea como en la captura image_3ab25f.jpg */
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
 .pf-profile-card {
-    background-color: #1a1a1a;
-    border-radius: 20px;
+    background-color: var(--card-bg);
+    border-radius: 15px;
     padding: 40px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #333;
 }
 
 .pf-card-header {
     display: flex;
-    gap: 30px;
     align-items: center;
-    margin-bottom: 30px;
+    gap: 30px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
 }
 
 .pf-avatar-img {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    border: 2px solid #D4AF37;
     object-fit: cover;
+    border: 3px solid var(--gold);
+    background-color: #fff; /* Resalta el icono estándar si no hay foto */
 }
 
-.pf-role-badge {
-    color: #D4AF37;
-    border: 1px solid #D4AF37;
-    padding: 4px 12px;
-    border-radius: 5px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
+.pf-user-info h2 {
+    font-size: 1.8rem;
     font-weight: 700;
+    margin-bottom: 5px;
 }
 
-/* Grid de opciones del perfil */
+.pf-email {
+    color: var(--text-gray);
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+/* --- LÓGICA DE ROLES EN CSS --- */
+.pf-role-badge {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+/* Estilo si es ADMIN */
+.pf-role-badge[data-role="admin"] {
+    background-color: var(--gold);
+    color: black;
+}
+
+/* Estilo si es ESTANDAR */
+.pf-role-badge[data-role="estandar"] {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+/* --- CUADRÍCULA DE OPCIONES --- */
+.pf-options-title {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
 .pf-options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 15px;
 }
 
 .pf-btn {
     background: transparent;
-    color: #fff;
-    border: 1px solid #333;
+    border: 1px solid #444;
+    color: var(--text-white);
     padding: 12px;
     border-radius: 8px;
-    cursor: pointer;
     font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
     transition: 0.3s;
+    text-transform: uppercase;
 }
 
 .pf-btn:hover {
-    border-color: #D4AF37;
-    color: #D4AF37;
+    border-color: var(--gold);
+    background-color: rgba(212, 175, 55, 0.05);
 }
 
-/* ======================================================
-   4. FOOTER (ICONOS DORADOS)
-   ====================================================== */
-.main-footer, .simple-footer {
-    background-color: #000;
-    padding: 60px 0 30px;
-    text-align: center;
-    border-top: 1px solid rgba(212, 175, 55, 0.3);
+/* Botón especial para Admin */
+.pf-btn-admin {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.pf-btn-admin:hover {
+    background-color: var(--gold);
+    color: black;
+}
+
+/* Botón Cerrar Sesión */
+.pf-btn-logout {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.pf-btn-logout:hover {
+    background-color: var(--danger);
+    color: white;
+}
+
+/* --- FOOTER --- */
+.main-footer {
+    padding: 40px 0;
+    border-top: 1px solid #333;
     margin-top: 80px;
+    text-align: center;
+}
+
+.footer-socials {
+    margin-bottom: 20px;
 }
 
 .footer-socials a {
-    color: #D4AF37; /* Iconos dorados */
-    font-size: 1.8rem;
-    margin: 0 15px;
-    transition: transform 0.3s, color 0.3s;
-    display: inline-block;
+    color: var(--gold);
+    font-size: 1.4rem;
+    margin: 0 12px;
+    transition: 0.3s;
 }
 
-.footer-socials a:hover {
-    transform: translateY(-5px);
-    color: #fff;
+.footer-legal {
+    margin-bottom: 20px;
 }
 
 .footer-legal a {
-    color: #888;
+    color: var(--gold);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     margin: 0 10px;
 }
 
+.divider {
+    color: #444;
+}
+
 .copyright {
-    color: #555;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 25px;
+    color: var(--text-gray);
+    font-size: 0.75rem;
+}
+
+/* --- RESPONSIVIDAD --- */
+@media (max-width: 768px) {
+    .pf-card-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .nf-nav {
+        display: none; /* Podrías implementar un menú hamburguesa aquí */
+    }
 }

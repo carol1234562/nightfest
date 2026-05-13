@@ -2,14 +2,12 @@
 require_once '../Controller/UserController.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
+// Seguridad: Evitar caché y verificar sesión
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache"); 
 header("Expires: 0");
 
-// 1. Verificar si está logueado
-$is_logged = isset($_SESSION['user_id']); // Definimos si está logueado
-
-if (!$is_logged) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
@@ -22,128 +20,127 @@ if (!$user) {
     exit();
 }
 
-// 2. Extraer datos y definir variables faltantes
-$nombre  = $user['nombre'];
-$email   = $user['email'];
-$rol     = $user['rol'];
-$foto    = $user['foto_perfil'];
-$inicial = strtoupper(substr($nombre, 0, 1)); // Crea la inicial para el avatar
-$es_admin = ($rol === 'admin'); // Define si es admin para el menú
+// Variables de usuario
+$nombre   = $user['nombre'];
+$email    = $user['email'];
+$rol      = $user['rol'];
+$es_admin = ($rol === 'admin');
+
+// Inicial para el avatar circular
+$inicial  = strtoupper(substr(trim($nombre), 0, 1));
+
+// Lógica de foto: Si no hay en DB, usa el link de Flaticon
+$foto_url = !empty($user['foto_perfil']) ? "../assets/img/" . $user['foto_perfil'] : "https://cdn-icons-png.flaticon.com/512/21/21104.png";
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Perfil | NightFest</title>
+    <title>Mi Perfil | NightFest</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/PROJECT1.DIS/src/assets/css/perfil.css">
-    <link rel="stylesheet" href="../assets/css/perfil.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/perfil.css">
 </head>
 
 <body class="pf-body">
 
-    <header class="main-header">
-    <div class="header-left">
-        <a href="inicio1.php">
-            <img src="../assets/img/logo.png" class="logo-medium" alt="NightFest Logo">
-        </a>
-        
-        <nav class="nav-menu">
-            <a href="inicio1.php" class="active">HOME</a>
-            <a href="destacados_page.php">DESTACADOS</a>
-            <a href="<?php echo $is_logged ? 'discotecas.php' : 'login.php'; ?>">DISCOTECAS</a>
-            <a href="<?php echo $is_logged ? 'bares.php' : 'login.php'; ?>">BARES</a>
-            <a href="<?php echo $is_logged ? 'festivales.php' : 'login.php'; ?>">FESTIVALES</a>
-            <a href="<?php echo $is_logged ? 'restaurantes.php' : 'login.php'; ?>">RESTAURANTES</a>
-            <?php if ($es_admin): ?>
-                <a href="mis_eventos.php" class="admin-link">MIS EVENTOS</a>
-            <?php endif; ?>
-        </nav>
-    </div>
+    <header class="nf-header-main">
+        <div class="nf-logo-side">
+            <a href="inicio1.php">
+                <img src="../assets/img/logo.png" alt="NightFest Logo">
+            </a>
+        </div>
 
-    <div class="auth-buttons">
-        <?php if ($is_logged): ?>
-            <div class="user-panel">
-                <a href="perfil.php" class="user-avatar-link">
-                    <div class="user-avatar"><?php echo $inicial; ?></div>
+        <nav class="nf-nav">
+            <ul>
+                <li><a href="inicio1.php">HOME</a></li>
+                <li><a href="destacados_page.php">DESTACADOS</a></li>
+                <li><a href="discotecas.php">DISCOTECAS</a></li>
+                <li><a href="bares.php">BARES</a></li>
+                <li><a href="festivales.php">FESTIVALES</a></li>
+                <li><a href="restaurantes.php">RESTAURANTES</a></li>
+                <?php if ($es_admin): ?>
+                    <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+
+        <div class="nf-user-controls">
+            <a href="perfil.php" style="text-decoration: none;">
+                <div class="user-circle"><?php echo $inicial; ?></div>
+            </a>
+            
+            <?php if ($es_admin): ?>
+                <a href="registro_admin.php" class="icon-add" title="Agregar Evento">
+                    <i class="fas fa-plus-circle"></i>
                 </a>
-                <div class="user-actions">
-                    <?php if ($es_admin): ?>
-                        <a href="crear_evento.php" class="icon-plus" title="Crear Evento"><i class="fas fa-plus"></i></a>
-                    <?php endif; ?>
-                    <a href="../Controller/UserController.php?action=logout" class="btn-logout-icon" title="Cerrar Sesión"><i class="fas fa-sign-out-alt"></i></a>
-                </div>
-            </div>
-        <?php else: ?>
-            <a href="login.php" class="btn-login">Iniciar Sesión</a>
-            <a href="registro_estandar.php" class="btn-register">Registrarse</a>
-        <?php endif; ?>
-    </div>
-</header>
+            <?php endif; ?>
+            
+            <a href="../Controller/UserController.php?action=logout" class="icon-logout" title="Cerrar Sesión">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </header>
 
     <main class="container pf-main-content">
-    <h2 class="section-title">MI PERFIL</h2>
+        <h2 class="section-title">MI PERFIL</h2>
 
-    <div class="pf-profile-card">
-        <div class="pf-card-header">
-            <div class="pf-avatar-wrapper">
-<img src="../assets/img/<?php echo $foto; ?>" alt="Foto Perfil" class="pf-avatar-img">            </div>
-            <div class="pf-user-info">
-                <h2><?php echo htmlspecialchars($nombre); ?></h2>
-                <p class="pf-email"><?php echo htmlspecialchars($email); ?></p>
-                <span class="pf-role-badge"><?php echo htmlspecialchars($rol); ?></span>
+        <div class="pf-profile-card">
+            <div class="pf-card-header">
+                <div class="pf-avatar-wrapper">
+                    <img src="<?php echo $foto_url; ?>" alt="Foto Perfil" class="pf-avatar-img">
+                </div>
+                <div class="pf-user-info">
+                    <h2><?php echo htmlspecialchars($nombre); ?></h2>
+                    <p class="pf-email"><?php echo htmlspecialchars($email); ?></p>
+                    <span class="pf-role-badge" data-role="<?php echo $rol; ?>">
+                        <?php echo strtoupper($rol); ?>
+                    </span>
+                </div>
+            </div>
+
+            <div class="pf-card-options">
+                <h4 class="pf-options-title">Opciones de Cuenta</h4>
+                <div class="pf-options-grid">
+                    <?php if ($es_admin): ?>
+                        <button class="pf-btn pf-btn-admin" onclick="window.location.href='admin_panel.php'">PANEL ADMIN</button>
+                        <button class="pf-btn" onclick="window.location.href='mis_publicaciones.php'">PUBLICACIONES</button>
+                    <?php else: ?>
+                        <button class="pf-btn" onclick="window.location.href='favoritos.php'">FAVORITOS</button>
+                        <button class="pf-btn" onclick="window.location.href='reservas.php'">RESERVAS</button>
+                    <?php endif; ?>
+                    
+                    <button class="pf-btn">SEGURIDAD</button>
+                    <button class="pf-btn pf-btn-logout" onclick="window.location.href='../Controller/UserController.php?action=logout'">
+                        CERRAR SESIÓN
+                    </button>
+                </div>
             </div>
         </div>
-
-        <div class="pf-card-options">
-            <h4 class="pf-options-title">Opciones de Cuenta</h4>
-            <div class="pf-options-grid">
-                <?php if ($rol === 'admin'): ?>
-                    <button class="pf-btn pf-btn-admin">PANEL ADMIN</button>
-                <?php endif; ?>
-                <button class="pf-btn">Publicaciones</button>
-                <button class="pf-btn">Favoritos</button>
-                <button class="pf-btn">Seguridad</button>
-<button class="pf-btn pf-btn-logout" 
-        onclick="window.location.href='../Controller/UserController.php?action=logout'">
-    Cerrar sesión
-</button>
-            </div>
-        </div>
-    </div>
-</main>
+    </main>
 
     <footer class="main-footer">
-    <div class="footer-content">
-        <div class="footer-socials">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
+        <div class="footer-content">
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+
+            <div class="footer-legal">
+                <a href="#">Términos y Condiciones</a>
+                <span class="divider">|</span>
+                <a href="#">Política de Privacidad</a>
+                <span class="divider">|</span>
+                <a href="#">Ayuda</a>
+            </div>
+
+            <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
         </div>
-
-        <div class="footer-legal">
-            <a href="#">Términos y Condiciones</a>
-            <span class="divider">|</span>
-            <a href="#">Política de Privacidad</a>
-            <span class="divider">|</span>
-            <a href="#">Ayuda</a>
-        </div>
-
-        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-    </div>
-</footer>
-
-    <script>
-    function confirmarBorrado() {
-        if (confirm("¿Estás COMPLETAMENTE SEGURO? Esta acción no se puede deshacer y perderás todos tus datos.")) {
-            alert("Acción de borrado simulada. Aquí redirigirías al controlador.");
-        }
-    }
-    </script>
+    </footer>
 
 </body>
 </html>
