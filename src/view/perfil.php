@@ -98,7 +98,7 @@ $foto = $user['foto_perfil'];
             <a href="#">Privacidad</a>
         </div>
         <div class="copyright">
-            NightFest © 2023 - Todos los derechos reservados
+        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
         </div>
     </footer>
 

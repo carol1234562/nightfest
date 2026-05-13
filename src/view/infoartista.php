@@ -113,7 +113,7 @@ if (!$evento) {
                 <span class="divider">|</span>
                 <a href="#">Política de Privacidad</a>
             </div>
-            <p class="copyright">© 2026 NightFest. PREMIUM NIGHTLIFE EXPERIENCES. <br> Johan & Carolina.</p>
+        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
         </div>
     </footer>
 

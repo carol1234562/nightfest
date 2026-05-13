@@ -128,7 +128,7 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
             <span class="divider">|</span>
             <a href="#">Política de Privacidad</a>
         </div>
-        <p class="copyright">© 2026 NightFest. PREMIUM NIGHTLIFE EXPERIENCES.</p>
+        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
     </div>
 </footer>
 

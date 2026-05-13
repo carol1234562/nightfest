@@ -1,5 +1,5 @@
 /* ======================================================
-   ESTILOS BASE (INCORPORADOS PARA INDEPENDENCIA TOTAL)
+   1. RESET Y ESTILOS BASE
    ====================================================== */
 * {
     margin: 0;
@@ -15,7 +15,99 @@ body {
 }
 
 /* ======================================================
-   INFOEVENTO & INFOARTISTA: ESTRUCTURA PRINCIPAL
+   2. EL HEADER (ESTILO PREMIUM CENTRADO)
+   ====================================================== */
+.nf-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    background-color: #000;
+    border-bottom: 2px solid #D4AF37;
+    height: 90px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nf-logo-side img {
+    height: 50px;
+    width: auto;
+}
+
+.nf-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nf-nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nf-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nf-nav a:hover, .nf-nav a.active {
+    color: #D4AF37;
+}
+
+/* Controles de usuario */
+.nf-user-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-circle {
+    width: 35px;
+    height: 35px;
+    background-color: #D4AF37;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.icon-add, .icon-logout {
+    color: #fff;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.icon-add:hover, .icon-logout:hover {
+    color: #D4AF37;
+}
+
+.btn-mis-eventos {
+    border: 1px solid #D4AF37;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #D4AF37 !important;
+}
+
+.btn-login {
+    color: #D4AF37;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid #D4AF37;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+/* ======================================================
+   3. ESTRUCTURA DE CONTENIDO (INFO ARTISTA / EVENTO)
    ====================================================== */
 .container {
     max-width: 1100px;
@@ -23,138 +115,120 @@ body {
     padding: 0 20px;
 }
 
-/* Título de la sección */
-.section-title-line {
-    color: #D4AF37;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 40px;
+.section-header {
+    margin-bottom: 30px;
+    border-left: 4px solid #D4AF37;
+    padding-left: 15px;
 }
 
-/* Tabs de Navegación (Botones de Info Evento / Artista) */
+.section-title-line {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Tabs Navegación */
 .paginacion-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     margin-bottom: 40px;
 }
 
 .pag-link {
-    display: inline-block;
-    padding: 12px 25px;
+    padding: 10px 20px;
     border: 1px solid #333;
-    color: #888;
+    color: #fff;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: 700;
+    border-radius: 5px;
+    font-weight: 600;
     font-size: 0.8rem;
-    text-transform: uppercase;
     transition: all 0.3s ease;
 }
 
 .pag-link.active, .pag-link:hover {
+    background-color: #D4AF37;
+    color: #000;
     border-color: #D4AF37;
-    color: #D4AF37;
-    background: rgba(212, 175, 55, 0.05);
 }
 
-/* ======================================================
-   DISEÑO DE CONTENIDO (LA "TARJETA" GRIS)
-   ====================================================== */
+/* La Tarjeta Principal */
 .evento-row {
-    background-color: #1a1a1a; /* Gris muy oscuro premium */
+    background-color: #1a1a1a;
     border-radius: 20px;
     padding: 40px;
     border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
-/* Imagen Destacada */
+/* Layout flexible para Artista */
+.flex-artista, .flex-info-mapa {
+    display: flex;
+    gap: 40px;
+}
+
 .img-container {
-    width: 100%;
+    flex-shrink: 0;
     border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 30px;
     border: 1px solid #333;
 }
 
 .img-container img {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
     object-fit: cover;
 }
 
-/* Texto de Información */
+/* Textos */
 .info-principal h3 {
     color: #D4AF37;
-    font-size: 1.5rem;
     margin-bottom: 15px;
     text-transform: uppercase;
 }
 
-.info-principal p {
-    color: #ccc;
+.fecha-badge {
+    color: #D4AF37;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bio-texto, .texto-blanco {
+    color: #fff;
     font-size: 1rem;
     line-height: 1.8;
 }
 
-/* Badge de fecha y ubicación */
-.fecha-badge {
-    color: #D4AF37;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: block;
+.origen-texto, .texto-gris {
+    color: #888;
+    margin-top: 20px;
 }
 
-/* ======================================================
-   ELEMENTOS ESPECÍFICOS DE INFOEVENTO (MAPA)
-   ====================================================== */
-.mapa-wrapper {
-    margin-top: 30px;
+.info-principal i {
+    color: #D4AF37;
+    margin-right: 8px;
+}
+
+/* Mapa */
+.mapa-container {
+    flex: 1;
     border-radius: 15px;
     overflow: hidden;
-    border: 2px solid #333;
+    border: 1px solid #333;
 }
 
-iframe {
-    width: 100%;
-    height: 350px;
-    filter: grayscale(1) invert(0.9) contrast(1.2); /* Mapa estilo oscuro */
+.mapa-container iframe {
+    filter: grayscale(1) invert(0.9) contrast(1.2);
 }
-
 /* ======================================================
-   ELEMENTOS ESPECÍFICOS DE INFOARTISTA (BIO)
-   ====================================================== */
-.artista-bio-flex {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.artista-texto {
-    flex: 1;
-}
-
-.artista-foto-perfil {
-    width: 300px;
-    height: 400px;
-    border-radius: 15px;
-    object-fit: cover;
-}
-
-/* ======================================================
-   FOOTER PREMIUM
+   4. FOOTER PREMIUM (ESTILO AZUL)
    ====================================================== */
 .simple-footer {
-    background-color: #000;
     padding: 60px 0 30px;
     text-align: center;
-    border-top: 1px solid #222;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-top: 80px;
+    width: 100%;
 }
 
 .footer-socials {
@@ -165,26 +239,44 @@ iframe {
 }
 
 .footer-socials a {
-    color: #D4AF37;
+    color: #ffffff; /* Iconos en blanco para resaltar sobre el azul */
     font-size: 1.5rem;
-    transition: transform 0.3s;
+    transition: transform 0.3s, color 0.3s;
 }
 
 .footer-socials a:hover {
     transform: translateY(-5px);
+    color: #D4AF37; /* El dorado solo al pasar el ratón */
 }
 
 .footer-legal a {
-    color: #0056b3; /* Azul de tus capturas */
-    text-decoration: underline;
+    color: #ffffff; /* Enlaces legales en blanco */
+    text-decoration: none;
     font-size: 0.85rem;
+    font-weight: 600;
     margin: 0 10px;
 }
 
+.footer-legal a:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .copyright {
-    color: #444;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-top: 20px;
+    margin-top: 25px;
+    font-weight: 400;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .nf-nav { position: static; transform: none; }
+    .flex-artista, .flex-info-mapa { flex-direction: column; }
+    .img-container { width: 100% !important; height: auto !important; }
 }

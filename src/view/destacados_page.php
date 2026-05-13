@@ -155,7 +155,7 @@ if ($is_logged && isset($_SESSION['user_name'])) {
                 <span class="divider">|</span>
                 <a href="#">Política de Privacidad</a>
             </div>
-            <p class="copyright">© 2026 NightFest. PREMIUM NIGHTLIFE EXPERIENCES.</p>
+        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
         </div>
     </footer>
 
