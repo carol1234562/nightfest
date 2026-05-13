@@ -38,7 +38,7 @@ if (!$evento) {
     <header class="nf-header-main">
         <div class="nf-logo-side">
             <a href="inicio1.php">
-                <img src="../assets/img/logonight.png" alt="NightFest Logo">
+                <img src="../assets/img/logo.png" alt="NightFest Logo">
             </a>
         </div>
 
