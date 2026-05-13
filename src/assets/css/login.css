@@ -1,0 +1,184 @@
+/*
+=========================================================================
+LOGIN
+=========================================================================
+*/
+
+.login-page {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* El "wrapper" que centra el formulario en pantalla */
+.login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Botón Volver (Esquina superior izquierda) */
+.login-page .return-container {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #ffffff;
+    transition: 0.3s ease;
+    z-index: 10;
+}
+
+.login-page .return-container:hover {
+    color: #D4AF37;
+    transform: translateX(-5px);
+}
+
+/* Caja del Formulario */
+.login-form-container {
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(10px); /* Efecto cristal esmerilado */
+    padding: 50px 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo dentro del login */
+.logo-login {
+    display: block;
+    width: 160px;
+    margin: 0 auto 35px auto;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+}
+
+/* Grupos de Input */
+.input-group {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-container label {
+    color: #D4AF37;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 1.5px;
+}
+
+.login-form-container input[type="email"],
+.login-form-container input[type="password"] {
+    background: #111;
+    border: 1px solid #333;
+    padding: 14px;
+    color: #fff;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.login-form-container input:focus {
+    border-color: #D4AF37;
+    outline: none;
+    background: #1a1a1a;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+}
+
+/* Enlaces y Textos */
+.forgot-link {
+    color: #888;
+    font-size: 0.75rem;
+    text-decoration: none;
+    align-self: flex-end; /* Lo alinea a la derecha */
+    margin-top: 8px;
+    transition: 0.3s;
+}
+
+.forgot-link:hover {
+    color: #D4AF37;
+}
+
+.texto-cuenta {
+    text-align: center;
+    margin: 25px 0;
+    font-size: 0.85rem;
+    color: #bbb;
+}
+
+.link-registro {
+    color: #D4AF37;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.link-registro:hover {
+    text-decoration: underline;
+}
+
+/* Botón de Envío */
+.btn-login-submit {
+    width: 100%;
+    background-color: #D4AF37;
+    color: #000;
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-login-submit:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Mensaje de Error (PHP) */
+.error-msg {
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+}
+
+/* Responsive para el login */
+@media (max-width: 480px) {
+    .login-form-container {
+        padding: 35px 25px;
+        width: 90%;
+    }
+    .login-page .return-container {
+        top: 20px;
+        left: 20px;
+    }
+}
