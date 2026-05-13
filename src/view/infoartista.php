@@ -7,7 +7,7 @@
   <title>NightFest - Información del artista</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="infoartista.css">
 </head>
 
 <body id="infoartista-page">
