@@ -3,39 +3,28 @@
 class UserController
 {
     private $connection;
-
+    /* Cargamos la clase db.php y devolvemos la conexión PDO */
     public function __construct()
     {
-        // --- CONFIGURACIÓN DE CONEXIÓN ---
-        $host = "localhost";
-        $user = "root";
-        $pass = "";
-        $db   = "nightfest";
-
-        $this->connection = new mysqli($host, $user, $pass, $db);
-
-        if ($this->connection->connect_error) {
-            die("Error de conexión: " . $this->connection->connect_error);
-        }
-
-        $this->connection->set_charset("utf8mb4");
+    require_once __DIR__ . '/../../model/db.php';
+    $this->connection = Db::getInstance()->getConnection();
     }
 
     // --- MÉTODO: LOGIN ---
     public function login() {
         if (session_status() === PHP_SESSION_NONE) session_start();
-
+        /* El sql busca solo por email */
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $email = $this->connection->real_escape_string(trim($_POST['email']));
-            $password = $this->connection->real_escape_string(trim($_POST['password']));
+                $email    = trim($_POST['email']);
+                $password = trim($_POST['password']);
 
-            $sql = "SELECT id, nombre, email, rol FROM usuarios 
-                    WHERE email = '$email' AND password = '$password'";
-            
-            $result = $this->connection->query($sql);
-
-            if ($result && $result->num_rows > 0) {
-                $user = $result->fetch_assoc();
+                $stmt = $this->connection->prepare(
+                    "SELECT id, nombre, email, rol, password FROM usuarios WHERE email = ?"
+                );
+                $stmt->execute([$email]);
+                $user = $stmt->fetch();
+                /* Compara el texto que escribe el usuario con el hash de la BD */
+                if ($user && password_verify($password, $user['password'])) {
 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['nombre'];
@@ -94,12 +83,13 @@ public function register()
             $nombre_foto = "perfil_" . time() . "." . $ext;
             move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/img/" . $nombre_foto);
         }
+        /* Encripta la constraseña */
+        $passHash = password_hash($pass, PASSWORD_BCRYPT);
 
         $stmt = $this->connection->prepare(
             "INSERT INTO usuarios (nombre, email, password, rol, foto_perfil) VALUES (?, ?, ?, ?, ?)"
         );
-        $stmt->bind_param("sssss", $nombre, $email, $pass, $rol, $nombre_foto);
-
+        
         if ($stmt->execute()) {
             // Redirige a la pagina principal si todo esta bien 
             header("Location: ../view/inicio1.php");
