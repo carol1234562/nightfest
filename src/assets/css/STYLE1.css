@@ -1058,7 +1058,7 @@ body {
 
 .nf-nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #D4AF37;
     font-size: 0.85rem;
     font-weight: 600;
     transition: 0.3s;
@@ -1066,7 +1066,7 @@ body {
 }
 
 .nf-nav ul li a:hover, .nf-nav ul li a.active {
-    color: #D4AF37;
+    color: #fff;
 }
 
 /* Botón especial MIS EVENTOS */
