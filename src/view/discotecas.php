@@ -44,7 +44,6 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/discotecas.css">
-        <link rel="stylesheet" href="../assets/css/STYLE1.css">
 
 </head>
 <body id="discotecas-page">
@@ -52,7 +51,7 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
     <header class="nf-header-main">
         <div class="nf-logo-side">
             <a href="inicio1.php">
-                <img src="../assets/img/logonight.png" alt="NightFest Logo">
+                <img src="../assets/img/logo.png" alt="NightFest Logo">
             </a>
         </div>
 
@@ -116,19 +115,22 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
         <?php endif; ?>
     </main>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <span>Términos</span>
-            <span>Ayuda</span>
-            <span>Privacidad</span>
+   <footer class="simple-footer">
+    <div class="footer-content">
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
         </div>
-        <div class="footer-redes">
-            <span>🎵</span>
-            <span>✖</span>
-            <span>📷</span>
-            <span>📘</span>
+        <div class="footer-legal">
+            <a href="#">Términos y Condiciones</a>
+            <span class="divider">|</span>
+            <a href="#">Política de Privacidad</a>
         </div>
-    </footer>
+        <p class="copyright">© 2026 NightFest. PREMIUM NIGHTLIFE EXPERIENCES.</p>
+    </div>
+</footer>
 
 </body>
 </html>

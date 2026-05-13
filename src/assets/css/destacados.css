@@ -1,0 +1,234 @@
+/* ======================================================
+   RESET Y ESTILOS BASE (NIGHTFEST)
+   ====================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000; /* Fondo negro puro característico */
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+}
+
+/* ======================================================
+   HEADER REORGANIZADO: LOGO MEDIANO E INDEPENDIENTE
+   ====================================================== */
+.main-header {
+    display: flex;
+    justify-content: space-between; /* Distribuye grupos a los extremos */
+    align-items: center;
+    padding: 12px 5%;
+    background-color: #000;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Grupo Izquierdo: Contiene Logo y Navegación principal */
+.header-left {
+    display: flex;
+    align-items: flex;
+    gap: 35px; /* Espacio entre logo y el inicio del menú */
+}
+
+/* Tamaño de logo mediano solicitado */
+.logo {
+    height: 55px; 
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    color: #D4AF37; /* Dorado NightFest */
+}
+
+/* Grupo Derecho: Acceso de usuario y Registro */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-login {
+    color: #D4AF37;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.btn-register {
+    background-color: #D4AF37;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: background 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #b8962e;
+}
+
+/* Panel de usuario cuando está logueado */
+.user-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: #D4AF37;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* ======================================================
+   CONTENIDO: CARTELERA DE DESTACADOS
+   ====================================================== */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    color: #D4AF37;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 50px;
+    font-weight: 800;
+}
+
+/* Grid de tarjetas de eventos */
+.clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.club-card {
+    background-color: #111;
+    border-radius: 25px; /* Bordes redondeados solicitados */
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.card-img-wrapper {
+    height: 250px;
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que las fotos no se deformen */
+    transition: transform 0.5s ease;
+}
+
+.club-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.club-info h4 {
+    color: #D4AF37;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.club-info p {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Efectos Hover para las tarjetas */
+.club-card:hover {
+    transform: translateY(-10px);
+    border-color: #D4AF37;
+}
+
+.club-card:hover img {
+    transform: scale(1.1);
+}
+
+/* ======================================================
+   FOOTER (PIE DE PÁGINA)
+   ====================================================== */
+.simple-footer {
+    background-color: #0a0a0a;
+    padding: 60px 0 40px;
+    border-top: 1px solid #222;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.footer-socials {
+    margin-bottom: 20px;
+}
+
+.footer-socials a {
+    color: #D4AF37;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.footer-socials a:hover {
+    color: #fff;
+}
+
+.footer-legal a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin: 0 10px;
+}
+
+.footer-legal .divider {
+    color: #222;
+}
+
+.copyright {
+    margin-top: 25px;
+    color: #444;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}

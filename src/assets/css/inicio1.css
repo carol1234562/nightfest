@@ -11,6 +11,7 @@
     justify-content: space-between; /* Empuja el grupo izquierdo y el derecho a los bordes */
     align-items: center;
     padding: 10px 4%;
+
     background-color: #000;
     border-bottom: 1px solid #222;
 }
@@ -36,7 +37,10 @@
 /* Navegación */
 .nav-menu {
     display: flex;
-    gap: 18px;
+    gap: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-menu a {
