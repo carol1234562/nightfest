@@ -1,88 +1,121 @@
+<?php
+session_start();
+$conexion = new mysqli("localhost", "root", "", "NightFest");
+
+if ($conexion->connect_error) {
+    die("Error de conexión");
+}
+
+// Verificar si el usuario está logueado y su rol
+$is_logged = isset($_SESSION['user_id']);
+$es_admin = ($is_logged && $_SESSION['rol'] === 'admin');
+$inicial = ($is_logged && isset($_SESSION['user_name'])) ? strtoupper(substr($_SESSION['user_name'], 0, 1)) : "";
+
+// Obtener ID del evento por la URL
+$id_evento = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+
+// Consulta para obtener datos del evento y del artista
+$sql = "SELECT * FROM eventos WHERE id = $id_evento";
+$resultado = $conexion->query($sql);
+$evento = $resultado->fetch_assoc();
+
+if (!$evento) {
+    die("Evento no encontrado");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NightFest - Información del artista</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="infoartista.css">
-      <link rel="stylesheet" href="../assets/css/STYLE1.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NightFest - Información del Artista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/infoartista.css">
 </head>
-
 <body id="infoartista-page">
 
-  <header class="nf-header">
-    <div class="nf-menu">☰</div>
+    <header class="nf-header-main">
+        <div class="nf-logo-side">
+            <a href="inicio1.php">
+                <img src="../assets/img/logonight.png" alt="NightFest Logo">
+            </a>
+        </div>
 
-    <div class="nf-logo">
-      <a href="inicioconlogin.html">
-        <img src="logo NightFestSinFondo.png" class="logo" alt="Logo NightFest">
-      </a>
-    </div>
+        <nav class="nf-nav">
+            <ul>
+                <li><a href="inicio1.php">HOME</a></li>
+                <li><a href="destacados_page.php">DESTACADOS</a></li>
+                <li><a href="discotecas.php">DISCOTECAS</a></li>
+                <li><a href="#">BARES</a></li>
+                <li><a href="#">FESTIVALES</a></li>
+                <li><a href="#">RESTAURANTES</a></li>
+                <?php if ($es_admin): ?>
+                    <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
 
-    <div class="nf-user">
-      <a href="perfil.html">Usuario</a>
-    </div>
-  </header>
+        <div class="nf-user-controls">
+            <?php if ($is_logged): ?>
+                <div class="user-circle"><?php echo $inicial; ?></div>
+                <?php if ($es_admin): ?>
+                    <a href="crear_evento.php" class="icon-add"><i class="fas fa-plus-circle"></i></a>
+                <?php endif; ?>
+                <a href="../Controller/UserController.php?action=logout" class="icon-logout"><i class="fas fa-sign-out-alt"></i></a>
+            <?php else: ?>
+                <a href="login.php" class="btn-login">LOGIN</a>
+            <?php endif; ?>
+        </div>
+    </header>
 
-  <main class="infoevento">
+    <main class="container">
+        <div class="section-header">
+            <h2 class="section-title-line"><?php echo htmlspecialchars($evento['artista']); ?></h2>
+        </div>
 
-    <h2 class="evento-titulo">LATIN MAFIA</h2>
+        <div class="paginacion-container tabs-navegacion">
+            <a href="infoevento.php?id=<?php echo $id_evento; ?>" class="pag-link">INFO EVENTO</a>
+            <a href="infoartista.php?id=<?php echo $id_evento; ?>" class="pag-link active">EL ARTISTA</a>
+        </div>
 
-    <div class="evento-imagen">
-      <img src="latinmafia.jpg" alt="Latin Mafia">
-    </div>
+        <div class="evento-row tarjeta-artista">
+            <div class="flex-artista">
+                <div class="img-container">
+                    <img src="../assets/img/<?php echo $evento['imagen']; ?>" alt="<?php echo htmlspecialchars($evento['artista']); ?>">
+                </div>
 
-    <p class="evento-datos">
-      Barcelona, Palau Sant Jordi &nbsp;&nbsp;|&nbsp;&nbsp; Viernes 22 de Octubre 2026
-    </p>
+                <div class="info-principal">
+                    <span class="fecha-badge">BIOGRAFÍA Y TRAYECTORIA</span>
+                    <h3>Sobre el artista</h3>
+                    <p class="bio-texto">
+                        <?php echo htmlspecialchars($evento['artista']); ?> representa una nueva ola de música auténtica que rompe moldes y conecta directamente con su audiencia. 
+                        Con un estilo único que mezcla diversos géneros, el proyecto ha ganado fama internacional conectando con las emociones de las nuevas generaciones.
+                    </p>
+                    <p class="origen-texto">
+                        <i class="fas fa-map-marker-alt"></i> Origen: <?php echo htmlspecialchars($evento['ubicacion']); ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <div class="evento-tabs">
-      <a href="infoevento.html"><button>Información del evento</button></a>
-      <a href="infoartista.html"><button class="activo">Información del artista</button></a>
-    </div>
-
-    <div class="evento-contenido">
-
-      <div class="evento-texto">
-        <h3>Informacion del artista</h3>
-        <p>Latin Mafia es un popular grupo musical mexicano de Monterrey Nuevo León formado por tres hermanos Mike
-          Milton y Emilio de la Rosa Su estilo es una mezcla de pop R&B reguetón trap y house sin etiquetas rígidas
-          El proyecto comenzó en su casa con Mike aprendiendo a producir música por su cuenta creando un sonido único y
-          una estética "hazlo tú mismo" Ganaron mucha fama en plataformas como TikTok conectando con la gente joven que
-          buscaba música que expresara sus emociones.
-          Su primer álbum de larga duración se llama TODOS LOS DÍAS TODO EL DÍA lanzado en 2024 y ha sido muy aclamado
-          Han sido nominados a los Latin Grammy. Representan una nueva ola de música latina auténtica que rompe moldes y
-          conecta directamente con su audiencia</p>
-      </div>
-
-      <div class="imageneslm">
-        <img src="gente.jpeg" alt="gente">
-        <img src="portadaLM.jpg" alt="portada">
-      </div>
-
-    </div>
-
-  </main>
-
-  <footer class="footer">
-    <div class="footer-links">
-      <span>Términos</span>
-      <span>Ayuda</span>
-      <span>Privacidad</span>
-    </div>
-
-    <div class="footer-redes">
-      <span>🎵</span>
-      <span>✖</span>
-      <span>📷</span>
-      <span>📘</span>
-    </div>
-  </footer>
+    <footer class="simple-footer">
+        <div class="footer-content">
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="footer-legal">
+                <a href="#">Términos y Condiciones</a>
+                <span class="divider">|</span>
+                <a href="#">Política de Privacidad</a>
+            </div>
+            <p class="copyright">© 2026 NightFest. PREMIUM NIGHTLIFE EXPERIENCES. <br> Johan & Carolina.</p>
+        </div>
+    </footer>
 
 </body>
-
 </html>
