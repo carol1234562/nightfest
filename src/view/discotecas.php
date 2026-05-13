@@ -116,21 +116,21 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
     </main>
 
    <footer class="simple-footer">
-    <div class="footer-content">
-        <div class="footer-socials">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-        </div>
-        <div class="footer-legal">
-            <a href="#">Términos y Condiciones</a>
-            <span class="divider">|</span>
-            <a href="#">Política de Privacidad</a>
-        </div>
+        <div class="footer-content">
+            <div class="footer-socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="footer-legal">
+                <a href="#">Términos y Condiciones</a>
+                <span class="divider">|</span>
+                <a href="#">Política de Privacidad</a>
+            </div>
         <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-    </div>
-</footer>
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -113,7 +113,7 @@ if (!$evento) {
         </div>
     </main>
 
-    <footer class="simple-footer">
+     <footer class="simple-footer">
         <div class="footer-content">
             <div class="footer-socials">
                 <a href="#"><i class="fab fa-instagram"></i></a>
@@ -126,9 +126,10 @@ if (!$evento) {
                 <span class="divider">|</span>
                 <a href="#">Política de Privacidad</a>
             </div>
-            <p class="copyright">© 2026 NightFest. <br> Johan & Carolina.</p>
+        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
         </div>
     </footer>
+
 
 </body>
 </html>
