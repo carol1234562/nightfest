@@ -1,4 +1,5 @@
 <?php
+require_once '../static model/auth_guard.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

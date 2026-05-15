@@ -119,13 +119,29 @@ class UserController
 
     // --- MÉTODO: LOGOUT ---
     public function logout()
-    {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        session_unset();
-        session_destroy();
-        header("Location: ../view/inicio1.php");
-        exit();
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    
+    // 1. Limpiar el array de sesión en el servidor
+    $_SESSION = array(); 
+    session_unset();
+    
+    // 2. Destruir la cookie del navegador del cliente (¡El toque maestro!)
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
     }
+    
+    // 3. Destruir el archivo de sesión en el servidor
+    session_destroy();
+    
+    // 4. Redirigir
+    header("Location: ../view/inicio1.php");
+    exit();
+}
 
     // --- MÉTODO: OBTENER DATOS DE USUARIO ---
     public function getUserData($id) {
