@@ -1,21 +1,36 @@
 <?php
-require_once '../static model/auth_guard.php';
+// 1. Activamos el búfer para que PHP guarde el HTML de forma segura en memoria
+ob_start();
+
+// 2. Control seguro de sesión
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 1. Detectar si el usuario está logueado
+// 3. Destrucción de la caché del navegador (Previene el fallo al volver atrás)
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+/**
+ * Función auxiliar para sanitizar salidas y prevenir XSS
+ */
+function e($string) {
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+}
+
+// Identificación de usuario 
 $is_logged = isset($_SESSION['user_id']);
+$es_admin = ($is_logged && ($_SESSION['rol'] ?? '') === 'admin');
 
-// 2. Obtener el rol para saber si es admin
-$es_admin = (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin');
+// Lógica de destino para secciones privadas
+$destino_privado = $is_logged ? "reservar.php" : "login.php";
 
-// 3. Sincronizar la foto de perfil guardada en el controlador
+// Sincronización del Avatar
 $foto_perfil = $_SESSION['user_photo'] ?? 'default.png';
-
-// 4. Calcular la inicial automáticamente si no hay foto o es la por defecto
-$inicial = 'U'; // Valor por defecto (Usuario)
-if (isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])) {
+$inicial = "U";
+if ($is_logged && isset($_SESSION['user_name'])) {
     $inicial = strtoupper(substr($_SESSION['user_name'], 0, 1));
 }
 ?>
@@ -240,3 +255,7 @@ if (isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])) {
         <?php endif; ?>
     </div>
 </header>
+<?php
+// Desactiva el búfer y envía la página procesada al navegador
+ob_end_flush();
+?>

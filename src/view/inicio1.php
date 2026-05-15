@@ -1,29 +1,35 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+    ob_start();
 
-/**
- * Función auxiliar para sanitizar salidas y prevenir XSS
- */
-function e($string) {
-    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-}
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-// Identificación de usuario 
-$is_logged = isset($_SESSION['user_id']);
-$es_admin = ($is_logged && ($_SESSION['rol'] ?? '') === 'admin');
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 
-// Lógica de destino para secciones privadas
-$destino_privado = $is_logged ? "reservar.php" : "login.php";
+    function e($string) {
+        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    }
 
-// Sincronización del Avatar
-$foto_perfil = $_SESSION['user_photo'] ?? 'default.png';
-$inicial = "U";
-if ($is_logged && isset($_SESSION['user_name'])) {
-    $inicial = strtoupper(substr($_SESSION['user_name'], 0, 1));
-}
+    // Identificación de usuario 
+    $is_logged = isset($_SESSION['user_id']);
+    $es_admin = ($is_logged && ($_SESSION['rol'] ?? '') === 'admin');
+
+    // Lógica de destino para secciones privadas
+    $destino_privado = $is_logged ? "reservar.php" : "login.php";
+
+    // Sincronización del Avatar
+    $foto_perfil = $_SESSION['user_photo'] ?? 'default.png';
+    $inicial = "U";
+    if ($is_logged && isset($_SESSION['user_name'])) {
+        $inicial = strtoupper(substr($_SESSION['user_name'], 0, 1));
+    }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
