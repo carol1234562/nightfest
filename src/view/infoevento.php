@@ -43,36 +43,7 @@ $lng = !empty($evento['longitud']) ? $evento['longitud'] : 2.1734;
 </head>
 <body id="infoevento-page">
 
-    <header class="nf-header-main">
-        <div class="nf-logo-side">
-            <a href="inicio1.php">
-                <img src="../assets/img/logo.png" alt="NightFest Logo">
-            </a>
-        </div>
-
-        <nav class="nf-nav">
-            <ul>
-                <li><a href="inicio1.php">HOME</a></li>
-                <li><a href="destacados_page.php">DESTACADOS</a></li>
-                <li><a href="discotecas.php">DISCOTECAS</a></li>
-                <li><a href="#">BARES</a></li>
-                <li><a href="#">FESTIVALES</a></li>
-                <li><a href="#">RESTAURANTES</a></li>
-                <?php if ($es_admin): ?>
-                    <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-
-        <div class="nf-user-controls">
-            <?php if ($is_logged): ?>
-                <div class="user-circle"><?php echo $inicial; ?></div>
-                <a href="../Controller/UserController.php?action=logout" class="icon-logout"><i class="fas fa-sign-out-alt"></i></a>
-            <?php else: ?>
-                <a href="login.php" class="btn-login">LOGIN</a>
-            <?php endif; ?>
-        </div>
-    </header>
+        <?php include '../static model/header.php'; ?>
 
     <main class="container">
     <div class="section-header">
