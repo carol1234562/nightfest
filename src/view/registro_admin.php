@@ -74,26 +74,8 @@ if (isset($_SESSION['user_id'])) {
             <input type="submit" value="Crear Cuenta Admin" class="btn-login-submit">
         </form>
     </div>
-    <footer class="main-footer">
-    <div class="footer-content">
-        <div class="footer-socials">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-        </div>
+      <?php include '../static model/footer.php'; ?>
 
-        <div class="footer-legal">
-            <a href="#">Términos y Condiciones</a>
-            <span class="divider">|</span>
-            <a href="#">Política de Privacidad</a>
-            <span class="divider">|</span>
-            <a href="#">Ayuda</a>
-        </div>
-
-        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-    </div>
-</footer>
 
 </body>
 </html>

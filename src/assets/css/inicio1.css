@@ -1,237 +1,31 @@
-#welcome-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px); /* Añade un toque premium */
-}
-
-.modal-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra todo el contenido interno */
-    gap: 20px;
-}
-
-
 /* ======================================================
-   AVISO DE COOKIES - CENTRADO TOTAL
+   1. VARIABLES, RESET Y ESTILOS BASE
    ====================================================== */
-/* Color para el enlace de la página actual */
-.nav-menu a.active {
-    color: #D4AF37 !important; /* El amarillo/dorado de NightFest */
-    border-bottom: 2px solid #D4AF37; /* Opcional: una línea debajo para resaltar más */
-    padding-bottom: 5px;
+:root {
+    --oro-premium: #D4AF37;
+    --gold-hover: #b8952e;
+    --gold-dark: #bfa030;
+    --negro-absoluto: #000000;
+    --negro-suave: #111111;
+    --negro-tarjeta: #1a1a1a;
+    --gris-suave: #888888;
+    --white: #ffffff;
+    --font-main: 'Montserrat', sans-serif;
 }
 
-/* Color para los demás enlaces (blanco) */
-.nav-menu a {
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-/* Efecto al pasar el ratón por los que no están activos */
-.nav-menu a:hover {
-    color: #D4AF37;
-}
-
-#cookie-banner {
-    position: fixed;
-    bottom: 30px;      /* Distancia desde el suelo */
-    left: 50%;         /* Lo mueve al centro de la pantalla */
-    transform: translateX(-50%); /* Ajuste fino: lo centra sobre su propio eje */
-    
-    width: 90%;
-    max-width: 500px;  /* Tamaño elegante para que no ocupe todo el ancho */
-    
-    background-color: #1a1a1a;
-    border: 1px solid #D4AF37; /* Borde dorado premium */
-    padding: 20px;
-    border-radius: 12px;
-    z-index: 10001;    /* Asegura que esté por encima de todo */
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
-    text-align: center;
-}
-
-#cookie-banner span {
-    color: #ffffff;
-    font-size: 0.95rem;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Botón Aceptar dentro del banner */
-#accept-cookies {
-    background-color: #D4AF37;
-    color: #000;
-    border: none;
-    padding: 10px 30px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-#accept-cookies:hover {
-    background-color: #b8952e;
-    transform: scale(1.05);
-}
-/* ======================================================
-   NIGHTFEST - HEADER PERSONALIZADO
-   ====================================================== */
-.nf-header-main {
-    display: flex;
-    justify-content: space-between; /* Logo a la izquierda, Controles a la derecha */
-    align-items: center;
-    padding: 10px 4%; /* */
-    background-color: #000; /* */
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    height: 80px;
-}
-
-/* 1. LADO IZQUIERDO: LOGO */
-.nf-logo-side img {
-    height: 55px; /* Altura ideal mediano */
-    width: auto;
-    transition: transform 0.3s ease;
-}
-
-.nf-logo-side img:hover {
-    transform: scale(1.05); /* */
-}
-
-/* 1. Limpieza: Quitamos el posicionamiento absoluto que causaba el conflicto */
-.nf-nav {
-    /* Mantenemos el centrado del menú principal */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* 2. Arreglo específico para el grupo de la derecha */
-.nf-user-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Espacio entre Iniciar Sesión y Registrarse */
-    z-index: 1010; /* Asegura que esté por encima del menú centrado */
-}
-
-/* 3. Estilo para el enlace de "Iniciar Sesión" (corrigiendo el conflicto) */
-.nf-user-controls a.nf-nav.a, 
-.nf-user-controls a:not(.btn-mis-eventos) {
-    position: static !important; /* Anula el absolute */
-    transform: none !important;  /* Anula el desplazamieto al centro */
-    color: #D4AF37;              /* Dorado NightFest */
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-right: 0 !important;  /* Limpiamos márgenes manuales */
-}
-
-.nf-user-controls a:not(.btn-mis-eventos):hover {
-    color: #fff; /* Cambio a blanco al pasar el ratón */
-}
-
-/* 4. El botón de Registrarse (btn-mis-eventos) */
-.btn-mis-eventos {
-    background-color: #D4AF37 !important;
-    color: #000 !important;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 700 !important;
-    font-size: 0.85rem;
-    display: inline-block;
-    transition: background 0.3s ease;
-}
-
-.btn-mis-eventos:hover {
-    background-color: #b8962e !important;
-}
-
-.nf-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px; /* */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.nf-nav ul li a {
-    color: #fff; /* */
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif; /* */
-    font-size: 0.85rem; /* */
-    font-weight: 600; /* */
-    text-transform: uppercase;
-    transition: color 0.3s ease;
+body {
+    background-color: var(--negro-absoluto);
+    color: var(--white);
+    font-family: var(--font-main);
+    line-height: 1.6;
 }
 
-/* Estado activo y hover */
-.nf-nav ul li a:hover, 
-.nf-nav ul li a.active {
-    color: #D4AF37 !important; /* Dorado Premium */
-}
-
-/* Estilo para Iniciar Sesión (Link simple) */
-.nf-user-controls a {
-    color: #D4AF37; /* */
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-/* Botón de Registro / Mis Eventos */
-.btn-mis-eventos {
-    background-color: #D4AF37 !important; /* */
-    color: #000 !important; /* */
-    padding: 8px 18px; /* */
-    border-radius: 5px; /* */
-    font-weight: 700 !important;
-    font-size: 0.8rem;
-    transition: background 0.3s ease;
-}
-
-.btn-mis-eventos:hover {
-    background-color: #b8962e !important; /* */
-}
-
-/* Círculo de Avatar de Usuario */
-.user-circle {
-    width: 40px;
-    height: 40px;
-    background-color: #D4AF37; /* */
-    color: #000; /* */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900; /* */
-    font-size: 1.2rem;
-}
-
-/* Iconos de acción (Añadir y Logout) */
-.icon-add, .icon-logout {
-    color: #fff;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.icon-add:hover { color: #28a745; }
-.icon-logout:hover { color: #dc3545; }
-
-/* ======================================================
-   NIGHTFEST - ESTILOS PRINCIPALES (PALETA DARK & GOLD)
-   ====================================================== */
-   /* Centrado de secciones generales */
 section {
     max-width: 1300px;
     margin: 0 auto;
@@ -239,90 +33,57 @@ section {
 }
 
 .section-title {
-    display: table; /* Permite que el margen auto funcione con el borde izquierdo */
-    margin: 40px auto 30px !important; 
-}
-body {
-    background-color: #000; /* Negro absoluto de fondo */
-    color: #fff; /* Texto base en blanco */
-    font-family: 'Montserrat', sans-serif; /* Fuente principal [cite: 2, 55] */
-    line-height: 1.6;
-}
-
-/* 2. PALETA DE COLORES (Variables para reutilizar) */
-:root {
-    --oro-premium: #D4AF37;  /* Dorado NightFest [cite: 4, 11] */
-    --negro-tarjeta: #1a1a1a; /* Gris muy oscuro para contraste [cite: 21] */
-    --gris-suave: #888888;    /* Para textos secundarios [cite: 36, 45] */
-}
-
-/* 3. CENTRADO Y CONTENEDORES */
-.container {
-    max-width: 1100px; /* Ancho máximo de la web [cite: 15] */
-    margin: 0 auto;    /* Centrado horizontal automático [cite: 15] */
-}
-
-
-/* 4. COLORES DE NAVEGACIÓN (Lógica solicitada) */
-.nav-menu a {
-    color: var(--oro-premium); /* Dorado por defecto */
-    text-decoration: none;
-    font-weight: 700;
+    display: table;
+    color: var(--white) !important; /* [cite: 89] */
+    background: transparent !important; /* [cite: 90] */
+    border-left: 8px solid var(--oro-premium);
+    padding-left: 15px;
+    font-weight: 800;
     text-transform: uppercase;
-    transition: color 0.3s ease;
+    letter-spacing: 2px;
+    margin: 40px auto 30px !important; /* [cite: 53] */
 }
 
-/* Página actual resalta en blanco */
-.nav-menu a.active {
-    color: #fff !important; /* Blanco cuando estás en la página [cite: 55, 56] */
+.section-bottom {
+    background-color: var(--negro-absoluto) !important; /* [cite: 93] */
+    padding: 20px 0;
+    border: none !important; /* [cite: 93] */
 }
 
-.nav-menu a:hover {
-    color: #fff; /* Cambio a blanco al pasar el ratón [cite: 8, 12] */
-}
-
-/* 5. ELEMENTOS DE IDENTIDAD */
-.user-circle {
-    background-color: var(--oro-premium);
-    color: #000; /* Texto negro sobre fondo dorado [cite: 11] */
-}
-
-.gold-subtitle {
-    color: var(--oro-premium); /* Títulos de sección en dorado [cite: 25, 34] */
-}
-
-
-   /* Contenedor principal de la cabecera */
-.main-header {
+/* ======================================================
+   2. CABECERA Y NAVEGACIÓN (NIGHTFEST HEADER)
+   ====================================================== */
+.nf-header-main, .main-header {
     display: flex;
-    justify-content: space-between; /* Empuja el grupo izquierdo y el derecho a los bordes */
+    justify-content: space-between;
     align-items: center;
     padding: 10px 4%;
-
-    background-color: #000;
+    background-color: var(--negro-absoluto);
     border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
 }
 
-/* Grupo Izquierdo */
 .header-left {
     display: flex;
     align-items: center;
-    gap: 35px; /* Espacio entre el logo y el menú */
+    gap: 35px;
 }
 
-/* Logo tamaño mediano */
-.logo-medium {
-    height: 55px; /* Altura ideal para un logo mediano */
+.nf-logo-side img, .logo-medium, .logo {
+    height: 55px;
     width: auto;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
-.logo-medium:hover {
+.nf-logo-side img:hover, .logo-medium:hover, .logo:hover {
     transform: scale(1.05);
 }
 
-/* Navegación */
-.nav-menu {
+/* Menú de Navegación Centrado */
+.nf-nav, .nav-menu {
     display: flex;
     gap: 20px;
     position: absolute;
@@ -330,116 +91,85 @@ body {
     transform: translateX(-50%);
 }
 
-.nav-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: color 0.3s;
-}
-
-.nav-menu a:hover, .nav-menu a.active {
-    color: #D4AF37;
-}
-
-/* Botones de la derecha */
-.auth-buttons {
+.nf-nav ul {
     display: flex;
-    align-items: center;
+    list-style: none;
     gap: 20px;
-}
-
-.btn-login {
-    color: #D4AF37;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.btn-register {
-    background-color: #D4AF37;
-    color: #000;
-    padding: 8px 18px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: background 0.3s;
-}
-
-.btn-register:hover {
-    background-color: #b8962e;
-}
-
-
-/* Variables de Color */
-:root {
-    --bg-black: #000000;
-    --gold-primary: #D4AF37;
-    --gold-hover: #b8952e;
-    --white: #ffffff;
-    --gray-soft: #1a1a1a;
-    --font-main: 'Montserrat', sans-serif;
-}
-
-/* Reset y Base */
-* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body#inicio {
-    background-color: #000;
+.nf-nav ul li a, .nav-menu a {
     color: var(--white);
+    text-decoration: none;
     font-family: var(--font-main);
-    line-height: 1.6;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
 }
 
-/* 1. Modal de Bienvenida */
-#welcome-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+/* Estados activos y hover de enlaces */
+.nf-nav ul li a:hover, 
+.nf-nav ul li a.active,
+.nav-menu a:hover {
+    color: var(--oro-premium) !important; /* [cite: 40] */
+}
+
+.nav-menu a.active {
+    color: var(--white) !important; /* [cite: 64] */
+    border-bottom: 2px solid var(--oro-premium);
+    padding-bottom: 5px;
+}
+
+/* Controles de Usuario e Inicio de Sesión */
+.nf-user-controls, .auth-buttons {
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 9999;
+    gap: 15px;
+    z-index: 1010;
 }
 
-.modal-content {
-    background: var(--gray-soft);
-    padding: 40px;
-    border: 1px solid var(--gold-primary);
-    text-align: center;
-    border-radius: 10px;
-    max-width: 400px;
+.nf-user-controls a.nf-nav.a, 
+.nf-user-controls a:not(.btn-mis-eventos),
+.btn-login {
+    position: static !important; /* [cite: 28] */
+    transform: none !important; /* [cite: 29] */
+    color: var(--oro-premium);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 0 !important; /* [cite: 31] */
+    transition: color 0.3s ease;
 }
 
-
-.logo {
-    height: 60px;
-    transition: transform 0.3s ease;
+.nf-user-controls a:not(.btn-mis-eventos):hover, .btn-login:hover {
+    color: var(--white);
 }
 
-.logo:hover {
-    transform: scale(1.05);
+/* Botón Registrarse / Mis Eventos */
+.btn-mis-eventos, .btn-register {
+    background-color: var(--oro-premium) !important; /* [cite: 33, 43] */
+    color: var(--negro-absoluto) !important; /* [cite: 33, 43] */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700 !important; /* [cite: 34, 45] */
+    font-size: 0.85rem;
+    display: inline-block;
+    transition: background 0.3s ease;
 }
 
-.admin-link {
-    border: 1px solid var(--gold-primary);
-    border-radius: 4px;
-    margin-left: 10px;
+.btn-mis-eventos:hover, .btn-register:hover {
+    background-color: var(--gold-hover) !important; /* [cite: 46] */
 }
 
-/* 4. Panel de Usuario y Avatar */
-.user-avatar {
+/* Componente de Avatar */
+.user-circle, .user-avatar {
     width: 40px;
     height: 40px;
-    background: var(--gold-primary);
-    color: var(--bg-black);
+    background-color: var(--oro-premium);
+    color: var(--negro-absoluto);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -454,27 +184,198 @@ body#inicio {
     gap: 15px;
 }
 
-/* 5. Títulos de Sección */
-/* Limpieza de los títulos de las secciones */
-.section-title {
-    color: #ffffff !important;         /* Texto siempre blanco */
-    background: transparent !important; /* Eliminamos cualquier fondo amarillo */
-    border-left: 8px solid #D4AF37;    /* La línea de llamada en dorado NightFest */
-    padding-left: 15px;
-    font-weight: 800;
+.admin-link {
+    border: 1px solid var(--oro-premium);
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.icon-add, .icon-logout {
+    color: var(--white);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+.icon-add:hover { color: #28a745; }
+.icon-logout:hover { color: #dc3545; }
+
+/* ======================================================
+   3. COMPONENTES BOTONES GENERALES
+   ====================================================== */
+.btn {
+    display: inline-block;
+    background: var(--oro-premium);
+    color: var(--negro-absoluto);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--gold-hover);
+}
+
+/* ======================================================
+   4. MODAL DE BIENVENIDA
+   ====================================================== */
+#welcome-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.modal-content {
+    background: var(--negro-tarjeta);
+    padding: 40px;
+    border: 1px solid var(--oro-premium);
+    text-align: center;
+    border-radius: 10px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#close-welcome.btn-gold {
+    background: var(--oro-premium) !important; /* [cite: 187] */
+    color: var(--negro-absoluto) !important; /* [cite: 188] */
+    border: none !important; /* [cite: 189] */
+    padding: 12px 30px !important; /* [cite: 190] */
+    font-family: var(--font-main) !important;
+    font-weight: 700 !important; /* [cite: 191] */
+    font-size: 14px !important;
+    letter-spacing: 1.5px !important; /* [cite: 192] */
+    text-transform: uppercase !important;
+    border-radius: 25px !important; /* [cite: 193] */
+    cursor: pointer !important; /* [cite: 194] */
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important; /* [cite: 195] */
+    transition: all 0.3s ease !important; /* [cite: 196] */
+    display: inline-block !important; /* [cite: 196] */
+    outline: none !important; /* [cite: 196] */
+}
+
+#close-welcome.btn-gold:hover {
+    background: var(--gold-dark) !important; /* [cite: 197] */
+    transform: translateY(-2px) !important; /* [cite: 198] */
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5) !important; /* [cite: 199] */
+}
+
+#close-welcome.btn-gold:active {
+    transform: translateY(1px) !important; /* [cite: 200] */
+}
+
+/* ======================================================
+   5. AVISO DE COOKIES
+   ====================================================== */
+#cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: var(--negro-tarjeta);
+    border: 1px solid var(--oro-premium);
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+
+#cookie-banner p, #cookie-banner span {
+    color: var(--white);
+    font-size: 0.9rem;
+    font-family: var(--font-main);
+    margin: 0;
+    line-height: 1.4;
+}
+
+#cookie-banner .cookie-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-accept, #accept-cookies {
+    background-color: var(--oro-premium);
+    color: var(--negro-absoluto);
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 40px 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Forzamos que el contenedor de estas secciones sea negro */
-.section-bottom {
-    background-color: #000000 !important;
-    padding: 20px 0;
-    border: none !important;
+.btn-accept:hover, #accept-cookies:hover {
+    background-color: var(--gold-hover);
+    transform: scale(1.05);
 }
 
-/* 6. Hero y Grid de Imágenes */
+.btn-settings {
+    background-color: transparent;
+    color: var(--oro-premium);
+    border: 1px solid var(--oro-premium);
+    padding: 10px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-settings:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+/* ======================================================
+   6. SECCIÓN DESTACADOS (DISEÑO HERO)
+   ====================================================== */
+.hero-container {
+    display: flex;
+    gap: 15px;
+    height: 550px;
+    margin-bottom: 50px;
+}
+
+.hero-container > .hero-item {
+    flex: 2;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.hero-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hero-sidebar .hero-item {
+    flex: 1;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
 .hero-item {
     position: relative;
     overflow: hidden;
@@ -482,10 +383,10 @@ body#inicio {
 }
 
 .hero-item img {
-    filter: none;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: none;
     mix-blend-mode: normal;
     transition: transform 0.5s ease;
 }
@@ -500,24 +401,80 @@ body#inicio {
     left: 0;
     width: 100%;
     padding: 20px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    color: var(--white);
 }
 
 .overlay-info h1, .overlay-info h2 {
-    color: var(--gold-primary);
+    color: var(--oro-premium);
+    font-family: var(--font-main);
     margin: 0;
+    font-size: 1.4rem;
+    text-transform: uppercase;
 }
 
-/* 7. Tarjetas de Locales (Clubs/Bars) */
+.overlay-info p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ======================================================
+   7. GRID Y TARJETAS DE LOCALES (CLUBS/BARS)
+   ====================================================== */
+#inicio .clubs-grid {
+    display: flex !important; /* [cite: 118] */
+    flex-wrap: nowrap !important; /* [cite: 118] */
+    justify-content: flex-start !important; /* [cite: 119] */
+    gap: 25px !important;
+    padding: 20px 10px !important; /* [cite: 120] */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+#inicio .clubs-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+#inicio .clubs-grid::-webkit-scrollbar-thumb {
+    background: var(--oro-premium);
+    border-radius: 10px;
+}
+
+#inicio .club-card {
+    flex: 0 0 340px !important; /* [cite: 123] */
+    background-color: var(--negro-tarjeta) !important; /* [cite: 125] */
+    border-radius: 15px !important; /* [cite: 125] */
+    overflow: hidden !important; /* [cite: 125] */
+    border: 1px solid #333 !important; /* [cite: 126] */
+    margin: 0 !important; /* [cite: 126] */
+}
+
 .club-card {
-   background-color: #1a1a1a !important; /* Fondo oscuro para la tarjeta */
+    background-color: var(--negro-tarjeta) !important; /* [cite: 99] */
     border-radius: 12px;
-    overflow: hidden; /* CRÍTICO: Esto evita que el color se salga de la tarjeta */
+    overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid #333;
 }
+
+#inicio .club-card:hover, .club-card:hover {
+    border-color: var(--oro-premium);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
+}
+
+#inicio .club-card img {
+    width: 100% !important; /* [cite: 127] */
+    height: 280px !important; /* [cite: 127] */
+    object-fit: cover !important; /* [cite: 127] */
+    display: block !important; /* [cite: 128] */
+    transition: transform 0.5s ease;
+}
+
 .club-card img {
     width: 100%;
     height: 250px;
@@ -525,144 +482,11 @@ body#inicio {
     display: block;
 }
 
-.club-card:hover {
-    border-color: var(--gold-primary);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
-}
-
-.club-info {
-    position: absolute; /* Se posiciona sobre la imagen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(212, 175, 55, 0.7); /* Amarillo NightFest con transparencia */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0; /* Oculta por defecto */
-    transition: opacity 0.3s ease;
-}
-.club-card:hover .club-info {
-    opacity: 1;
-}
-
-.club-info h4 {
-   color: #ffffff !important; /* Nombre del local en blanco */
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-}
-.club-info .btn {
-    background-color: #000000 !important; /* Botón negro sobre fondo amarillo */
-    color: #D4AF37 !important; /* Texto del botón dorado */
-    border: 1px solid #D4AF37;
-    padding: 8px 16px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-.btn {
-    display: inline-block;
-    background: var(--gold-primary);
-    color: var(--bg-black);
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-}
-
-.btn:hover {
-    background: var(--gold-hover);
-}
-
-/* 8. Mapa y Marcadores */
-.map-wrapper {
-    position: relative;
-    border: 2px solid var(--gold-primary);
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-#btn-recenter {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background: var(--gold-primary);
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Estilo para los marcadores dorados definidos en JS */
-.gold-marker {
-    background-color: var(--gold-primary);
-    border: 2px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--gold-primary);
-}
-
-.copyright {
-    margin-top: 20px;
-    color: #444;
-    font-size: 0.8rem;
-}
-
-/* ======================================================
-   AJUSTE DE CARTAS: MEDIANAS Y CENTRADAS
-   ====================================================== */
-
-/* 1. Contenedor Grid: Forzamos el centrado */
-#inicio .clubs-grid {
-    display: flex !important;
-    flex-wrap: nowrap !important; /* CRÍTICO: Evita que bajen a la siguiente línea */
-    justify-content: flex-start !important; /* Alinea al inicio para permitir el scroll */
-    gap: 25px !important;
-    padding: 20px 10px !important;
-    overflow-x: auto; /* Activa scroll horizontal si hay muchos bares */
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; /* Suavidad en móviles */
-}
-#inicio .clubs-grid::-webkit-scrollbar {
-    height: 8px;
-}
-#inicio .clubs-grid::-webkit-scrollbar-thumb {
-    background: var(--gold-primary);
-    border-radius: 10px;
-}
-#inicio .club-card {
-    flex: 0 0 340px !important; /* No crece, no se encoge, ancho fijo de 340px */
-    margin-bottom: 20px; /* Espacio por si acaso */
-}
-
-/* 2. Tamaño de la Carta (Mediano) */
-#inicio .club-card {
-    flex: 0 1 340px !important; /* Ancho fijo mediano */
-    background-color: #1a1a1a !important;
-    border-radius: 15px !important;
-    overflow: hidden !important;
-    border: 1px solid #333 !important;
-    margin: 0 !important;
-}
-
-/* 3. Tamaño de la Imagen */
-#inicio .club-card img {
-    width: 100% !important;
-    height: 280px !important; /* Altura mediana para no ocupar toda la pantalla */
-    object-fit: cover !important;
-    display: block !important;
-}
 #inicio .club-card:hover img {
-    transform: scale(1.1); /* Efecto de acercamiento */
+    transform: scale(1.1);
 }
+
+/* Info del Club e Interacciones */
 #inicio .club-info {
     position: absolute;
     bottom: 0;
@@ -678,10 +502,9 @@ body#inicio {
     transition: background 0.3s ease;
 }
 
-/* Título del local siempre visible */
-#inicio .club-info h4 {
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
+#inicio .club-info h4, .club-info h4 {
+    color: var(--white) !important;
+    font-family: var(--font-main);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -689,14 +512,13 @@ body#inicio {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-/* El botón mejorado: Oculto por defecto, sube al hacer hover */
 #inicio .club-info .btn {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.4s ease;
     background: transparent;
-    border: 2px solid #D4AF37; /* Borde dorado premium */
-    color: #D4AF37;
+    border: 2px solid var(--oro-premium);
+    color: var(--oro-premium);
     padding: 10px 25px;
     text-decoration: none;
     font-size: 12px;
@@ -704,149 +526,80 @@ body#inicio {
     text-transform: uppercase;
 }
 
-/* Estado Hover: El botón aparece y se vuelve sólido */
 #inicio .club-card:hover .club-info .btn {
     opacity: 1;
     transform: translateY(0);
 }
 
 #inicio .club-info .btn:hover {
-    background: #D4AF37;
-    color: #000;
+    background: var(--oro-premium);
+    color: var(--negro-absoluto);
 }
 
-/* ======================================================
-   AVISO DE COOKIES - ESTILO NIGHTFEST
-   ====================================================== */
-
-#cookie-banner {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 600px;
-    background-color: #1a1a1a; /* Gris muy oscuro */
-    border: 1px solid #D4AF37; /* Borde dorado */
-    padding: 20px;
-    border-radius: 12px;
-    z-index: 10001;
+/* Fallback/Variante de información clásica */
+.club-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(212, 175, 55, 0.7);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-#cookie-banner p {
-    color: #ffffff;
-    font-size: 0.9rem;
-    margin: 0;
-    line-height: 1.4;
-}
-
-#cookie-banner .cookie-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-/* Botón Aceptar (Dorado sólido) */
-.btn-accept {
-    background-color: #D4AF37;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.btn-accept:hover {
-    background-color: #b8952e;
-}
-
-/* Botón Configurar (Solo borde) */
-.btn-settings {
-    background-color: transparent;
-    color: #D4AF37;
-
-.footer-legal a {
-    color: #888;
+.club-info .btn {
+    background-color: var(--negro-absoluto) !important; /* [cite: 109] */
+    color: var(--oro-premium) !important; /* [cite: 110] */
+    border: 1px solid var(--oro-premium);
+    padding: 8px 16px;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-legal a:hover {
-    color: #D4AF37;
-}
-
-.footer-legal .divider {
-    margin: 0 10px;
-    color: #333;
-}
-
-/* 3. Copyright */
-.copyright {
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #444;
-    margin-top: 20px;
-}
-    border: 1px solid #D4AF37;
-    padding: 10px 20px;
     font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 4px;
 }
 
-.btn-settings:hover {
-    background-color: rgba(212, 175, 55, 0.1);
+.club-card:hover .club-info {
+    opacity: 1;
 }
 
 /* ======================================================
-   SLIDER GALERÍA: UNIFORMIDAD Y PADDING DE 10PX
+   8. SLIDER GALERÍA
    ====================================================== */
-
-/* 1. Contenedor de los elementos del slider */
 .slider-galeria {
-    display: flex !important;
-    gap: 20px !important;
+    display: flex !important; /* [cite: 153] */
+    gap: 20px !important; /* [cite: 153] */
     justify-content: center;
     padding: 30px 0;
 }
 
-/* 2. Caja contenedora (Tamaño mediano idéntico para todas) */
 .slider-galeria .slick-box {
-    flex: 0 0 320px !important; /* Ancho fijo mediano */
-    height: 320px !important;    /* Alto fijo mediano */
-    padding: 10px !important;    /* Tu padding solicitado */
-    background-color: #111 !important; /* Color del marco del padding */
-    border-radius: 35px !important;  /* Borde no rectangular (muy redondeado) */
-    border: 1px solid rgba(212, 175, 55, 0.3); /* Borde dorado sutil */
+    flex: 0 0 320px !important; /* [cite: 154] */
+    height: 320px !important; /* [cite: 155] */
+    padding: 10px !important; /* [cite: 156] */
+    background-color: #111 !important; /* [cite: 157] */
+    border-radius: 35px !important; /* [cite: 158] */
+    border: 1px solid rgba(212, 175, 55, 0.3) !important; /* [cite: 159] */
     box-sizing: border-box !important;
     overflow: hidden;
     transition: all 0.4s ease;
 }
 
-/* 3. La imagen dentro de la caja */
 .slider-galeria .slick-box img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* Mantiene la proporción sin estirar */
-    border-radius: 25px !important; /* Radio menor para encajar con el padding */
+    width: 100% !important; /* [cite: 161] */
+    height: 100% !important; /* [cite: 161] */
+    object-fit: cover !important;
+    border-radius: 25px !important; /* [cite: 162] */
     display: block;
     filter: brightness(0.9);
     transition: filter 0.3s ease;
 }
 
-/* 4. Efectos visuales */
 .slider-galeria .slick-box:hover {
-    border-color: #D4AF37;
+    border-color: var(--oro-premium);
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.2);
 }
@@ -854,127 +607,103 @@ body#inicio {
 .slider-galeria .slick-box:hover img {
     filter: brightness(1.1);
 }
+
 /* ======================================================
-   SECCIÓN DESTACADOS: DISEÑO HERO
+   9. MAPA INTERACTIVO Y MARCADORES
    ====================================================== */
-
-/* Contenedor principal que organiza el grande y los pequeños */
-.hero-container {
-    display: flex;
-    gap: 15px;
-    height: 550px; /* Altura total de la sección */
-    margin-bottom: 50px;
-}
-
-/* El elemento destacado principal (izquierdo) */
-.hero-container > .hero-item {
-    flex: 2; /* Ocupa el doble de ancho */
-    position: relative;
-    border-radius: 20px;
+.map-wrapper {
+    position: relative !important; /* [cite: 201] */
+    width: 100% !important; /* [cite: 201] */
+    margin-top: 20px !important; /* [cite: 202] */
+    border: 2px solid var(--oro-premium);
+    border-radius: 15px;
     overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
-/* Columna de la derecha (Sidebar) */
-.hero-sidebar {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+#btn-recenter {
+    position: absolute !important; /* [cite: 203] */
+    top: 20px !important; /* [cite: 204] */
+    right: 20px !important; /* [cite: 205] */
+    z-index: 1000 !important; /* [cite: 206] */
+    background-color: var(--oro-premium) !important; /* [cite: 207] */
+    color: var(--negro-absoluto) !important; /* [cite: 207] */
+    border: none !important;
+    padding: 10px 16px !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    border-radius: 4px !important; /* [cite: 208] */
+    cursor: pointer !important; /* [cite: 208] */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+    transition: all 0.2s ease !important; /* [cite: 209] */
 }
 
-/* Los dos elementos pequeños de la derecha */
-.hero-sidebar .hero-item {
-    flex: 1;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+#btn-recenter:hover {
+    background-color: var(--gold-dark) !important;
+    transform: translateY(-1px) !important;
 }
 
-/* Ajuste de todas las imágenes del hero */
-.hero-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Evita que las fotos se estiren */
-    transition: transform 0.5s ease;
-}
-
-/* Información superpuesta (Overlay) */
-.overlay-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    color: #fff;
-}
-
-.overlay-info h1, .overlay-info h2 {
-    color: #D4AF37; /* Dorado NightFest */
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-}
-
-.overlay-info p {
-    margin: 5px 0 0;
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-/* Efecto al pasar el ratón */
-.hero-item:hover img {
-    transform: scale(1.05);
-}
-
-.hero-item:hover {
-    border-color: #D4AF37;
+.gold-marker {
+    background-color: var(--oro-premium);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--oro-premium);
 }
 
 
 /* ======================================================
-   NIGHTFEST FOOTER: REDISEÑO PROFESIONAL
+   ALINEACIÓN Y CENTRADO DE BLOQUES (DISCOTECAS / BARES)
    ====================================================== */
 
-.main-footer {
-    background-color: #111111; /* Negro suave NightFest */
-    border-top: 1px solid #222222;
-    padding: 50px 5% 30px;
-    text-align: center;
-    color: #666;
-    width: 100%;
-    margin-top: 50px;
+/* Forzamos a que las secciones de inicio estructuren su contenido al centro */
+#inicio section, 
+section {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centra el título y el grid horizontalmente */
+    text-align: center !important;
+    width: 100% !important;
 }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
+/* Forzamos a que el título mantenga su estructura de bloque centrada */
+.section-title {
+    margin: 40px auto 30px !important; /* El auto horizontal es clave aquí [cite: 262] */
+    display: table !important; /* Garantiza que el borde izquierdo se acople al texto [cite: 261] */
 }
 
-/* 1. Iconos de Redes Sociales */
-.footer-socials {
-    margin-bottom: 25px;
+/* Modificación del Grid para que se centre cuando los elementos quepan en pantalla */
+#inicio .clubs-grid {
+    width: 100% !important;
+    max-width: 1200px !important; /* Ajusta este ancho según el tamaño de tus 3 cartas juntas */
+    justify-content: center !important; /* Cambiado de flex-start a center para lograr el centrado visual */
+    margin: 0 auto !important;
+    
+    /* Mantenemos tus propiedades de scroll intactas por si añades más tarjetas en el futuro */
+    display: flex !important; 
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important; /* Mantiene la flexibilidad en pantallas pequeñas o con más de 3 elementos [cite: 329] */
 }
 
-.footer-socials a {
-    color: #D4AF37; /* Dorado de la marca */
-    font-size: 1.5rem;
-    margin: 0 15px;
-    transition: all 0.3s ease;
-    text-decoration: none;
+/* ======================================================
+   CORRECCIÓN PARA DESTACADOS: TEXTOS A LA IZQUIERDA
+   ====================================================== */
+
+/* Forzamos a que la información superpuesta se alinee a la izquierda */
+.hero-item .overlay-info {
+    text-align: left !important; /* Rompe el centrado general de la sección */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important; /* Mantiene el texto abajo */
+    align-items: flex-start !important;  /* Empuja los títulos y fechas a la izquierda */
 }
 
-.footer-socials a:hover {
-    color: #fff;
-    transform: translateY(-3px);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+/* Ajustes finos de los márgenes internos de los textos del Hero */
+.hero-item .overlay-info h1, 
+.hero-item .overlay-info h2 {
+    text-align: left !important;
+    margin: 0 0 5px 0 !important; /* Espaciado sutil antes de la fecha */
 }
 
-/* 2. Enlaces Legales */
-.footer-legal {
-    margin-bottom: 20px;
-    font-size: 0.9rem;
+.hero-item .overlay-info p {
+    text-align: left !important;
+    margin: 0 !important;
 }

@@ -118,22 +118,8 @@ $lng = !empty($evento['longitud']) ? $evento['longitud'] : 2.1734;
     </div>
 </main>
 
-    <footer class="simple-footer">
-        <div class="footer-content">
-            <div class="footer-socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
-            <div class="footer-legal">
-                <a href="#">Términos y Condiciones</a>
-                <span class="divider">|</span>
-                <a href="#">Política de Privacidad</a>
-            </div>
-        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-        </div>
-    </footer>
+        <?php include '../static model/footer.php'; ?>
+
 
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

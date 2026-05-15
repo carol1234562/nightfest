@@ -48,44 +48,7 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
 </head>
 <body id="discotecas-page">
 
-    <header class="nf-header-main">
-    <div class="nf-logo-side">
-        <a href="inicio1.php">
-            <img src="../assets/img/logo.png" alt="NightFest Logo">
-        </a>
-    </div>
-
-    <nav class="nf-nav">
-        <ul>
-            <li><a href="inicio1.php">HOME</a></li>
-            <li><a href="destacados_page.php">DESTACADOS</a></li>
-            <li><a href="discotecas.php" class="active">DISCOTECAS</a></li>
-            <li><a href="#">BARES</a></li>
-            <li><a href="#">FESTIVALES</a></li>
-            <li><a href="#">RESTAURANTES</a></li>
-            
-            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
-                <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-
-    <div class="nf-user-controls">
-        <div class="user-circle">
-            <?php echo isset($_SESSION['user_name']) ? strtoupper($_SESSION['user_name'][0]) : 'U'; ?>
-        </div>
-
-        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
-            <a href="registro_admin.php" class="icon-add" title="Agregar Evento">
-                <i class="fas fa-plus-circle"></i>
-            </a>
-        <?php endif; ?>
-
-        <a href="logout.php" class="icon-logout" title="Cerrar Sesión">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-    </div>
-</header>
+        <?php include '../static model/header.php'; ?>
 
     <main class="container">
         <div class="section-header">
@@ -128,22 +91,8 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
         <?php endif; ?>
     </main>
 
-   <footer class="simple-footer">
-        <div class="footer-content">
-            <div class="footer-socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
-            <div class="footer-legal">
-                <a href="#">Términos y Condiciones</a>
-                <span class="divider">|</span>
-                <a href="#">Política de Privacidad</a>
-            </div>
-        <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-        </div>
-    </footer>
+    <?php include '../static model/footer.php'; ?>
+
 
 </body>
 </html>

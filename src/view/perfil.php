@@ -54,43 +54,8 @@ if (!empty($foto_usuario) && file_exists($carpeta_img . $foto_usuario)) {
 
 <body class="pf-body">
 
-    <header class="nf-header-main">
-        <div class="nf-logo-side">
-            <a href="inicio1.php">
-                <img src="../assets/img/logo.png" alt="NightFest Logo">
-            </a>
-        </div>
+    <?php include '../static model/header.php'; ?>
 
-        <nav class="nf-nav">
-            <ul>
-                <li><a href="inicio1.php">HOME</a></li>
-                <li><a href="destacados_page.php">DESTACADOS</a></li>
-                <li><a href="discotecas.php">DISCOTECAS</a></li>
-                <li><a href="bares.php">BARES</a></li>
-                <li><a href="festivales.php">FESTIVALES</a></li>
-                <li><a href="restaurantes.php">RESTAURANTES</a></li>
-                <?php if ($es_admin): ?>
-                    <li><a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-
-        <div class="nf-user-controls">
-            <a href="perfil.php" style="text-decoration: none;">
-                <div class="user-circle"><?php echo $inicial; ?></div>
-            </a>
-            
-            <?php if ($es_admin): ?>
-                <a href="registro_admin.php" class="icon-add" title="Agregar Evento">
-                    <i class="fas fa-plus-circle"></i>
-                </a>
-            <?php endif; ?>
-            
-            <a href="../Controller/UserController.php?action=logout" class="icon-logout" title="Cerrar Sesión">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>
-        </div>
-    </header>
 
     <main class="container pf-main-content">
         <h2 class="section-title">MI PERFIL</h2>
@@ -129,26 +94,8 @@ if (!empty($foto_usuario) && file_exists($carpeta_img . $foto_usuario)) {
         </div>
     </main>
 
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-socials">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
+       <?php include '../static model/footer.php'; ?>
 
-            <div class="footer-legal">
-                <a href="#">Términos y Condiciones</a>
-                <span class="divider">|</span>
-                <a href="#">Política de Privacidad</a>
-                <span class="divider">|</span>
-                <a href="#">Ayuda</a>
-            </div>
-
-            <p class="copyright">© 2026 NightFest. Johan & Carolina.</p>
-        </div>
-    </footer>
 
 </body>
 </html>

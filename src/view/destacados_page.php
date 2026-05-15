@@ -1,14 +1,12 @@
 <?php
 session_start();
-
-// 1. Definición de variables de estado
 $is_logged = isset($_SESSION['user_id']);
-
-// CORRECCIÓN: Definir $es_admin para que no dé error en el nav
 $es_admin = ($is_logged && isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin');
-
-// 2. Inicial del nombre para el avatar
 $inicial = ($is_logged && isset($_SESSION['user_name'])) ? strtoupper(substr($_SESSION['user_name'], 0, 1)) : "";
+$foto_perfil = $is_logged ? ($_SESSION['user_photo'] ?? null) : null;
+
+$pagina_actual = 'destacados_page';
+
 ?>
 
 <!DOCTYPE html>
@@ -23,48 +21,7 @@ $inicial = ($is_logged && isset($_SESSION['user_name'])) ? strtoupper(substr($_S
 </head>
 <body class="news-layout">
     
-     <header class="main-header">
-    <div class="header-left">
-        <a href="inicio1.php">
-            <img src="../assets/img/logo.png" class="logo-medium" alt="NightFest Logo">
-        </a>
-    </div>
-
-    <nav class="nav-menu">
-    <a href="inicio1.php">HOME</a>
-    <a href="destacados_page.php" class="active">DESTACADOS</a>
-    
-    <a href="<?= $is_logged ? 'discotecas.php' : 'login.php' ?>">DISCOTECAS</a>
-    <a href="<?= $is_logged ? 'bares.php' : 'login.php' ?>">BARES</a>
-    <a href="<?= $is_logged ? 'festivales.php' : 'login.php' ?>">FESTIVALES</a>
-    <a href="<?= $is_logged ? 'restaurantes.php' : 'login.php' ?>">RESTAURANTES</a>
-    
-    <?php if ($es_admin): ?>
-        <a href="mis_eventos.php" class="btn-mis-eventos">MIS EVENTOS</a>
-    <?php endif; ?>
-</nav>
-
-    <div class="auth-buttons">
-        <?php if ($is_logged): ?>
-            <a href="perfil.php" title="Mi Perfil">
-                <div class="user-circle"><?php echo htmlspecialchars($inicial); ?></div>
-            </a>
-            
-            <?php if ($es_admin): ?>
-                <a href="crear_evento.php" title="Crear Evento">
-                    <i class="fas fa-plus icon-add"></i>
-                </a>
-            <?php endif; ?>
-
-            <a href="../Controller/UserController.php?action=logout" title="Cerrar Sesión">
-                <i class="fas fa-sign-out-alt icon-logout"></i>
-            </a>
-        <?php else: ?>
-            <a href="login.php" class="btn-login" style="margin-right: 15px;">Iniciar Sesión</a>
-            <a href="registro_estandar.php" class="btn-register">Registrarse</a>
-        <?php endif; ?>
-    </div>
-</header>
+    <?php include '../static model/header.php'; ?>
 
     <main class="container">
         <header class="page-intro">
@@ -112,9 +69,7 @@ $inicial = ($is_logged && isset($_SESSION['user_name'])) ? strtoupper(substr($_S
 
         </section>
     </main>
+    <?php include '../static model/footer.php'; ?>
 
-    <footer class="main-footer">
-        <p class="copyright">© 2026 NightFest Informativo. Todos los derechos reservados.</p>
-    </footer>
 </body>
 </html>
