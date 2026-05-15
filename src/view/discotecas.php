@@ -1,4 +1,5 @@
 <?php
+require_once '../static model/seguridad.php';
 $conexion = new mysqli("localhost", "root", "", "NightFest");
 
 if ($conexion->connect_error) {
@@ -48,7 +49,11 @@ $total_paginas_reales = ceil($total_eventos_validos / $eventos_por_pagina);
 </head>
 <body id="discotecas-page">
 
-        <?php include '../static model/header.php'; ?>
+        <?php include '../static model/header.php';
+        if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+} ?>
 
     <main class="container">
         <div class="section-header">

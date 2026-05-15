@@ -1,4 +1,5 @@
 <?php
+require_once '../static model/seguridad.php';
 session_start();
 $conexion = new mysqli("localhost", "root", "", "NightFest");
 
@@ -43,7 +44,12 @@ $lng = !empty($evento['longitud']) ? $evento['longitud'] : 2.1734;
 </head>
 <body id="infoevento-page">
 
-        <?php include '../static model/header.php'; ?>
+        <?php include '../static model/header.php';
+        if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+ ?>
 
     <main class="container">
     <div class="section-header">

@@ -1,4 +1,5 @@
 <?php
+require_once '../static model/seguridad.php';
 require_once '../Controller/UserController.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -39,6 +40,17 @@ if (!empty($foto_usuario) && file_exists($carpeta_img . $foto_usuario)) {
     // Nos aseguramos de apuntar al archivo real que tienes en tu carpeta de assets
     $foto_url = $carpeta_img . 'default.jpg'; 
 }
+
+include_once '../static model/header.php'; 
+
+// 2. MURO DE SEGURIDAD: Si no hay sesión válida, lo expulsamos inmediatamente
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -53,8 +65,6 @@ if (!empty($foto_usuario) && file_exists($carpeta_img . $foto_usuario)) {
 </head>
 
 <body class="pf-body">
-
-    <?php include '../static model/header.php'; ?>
 
 
     <main class="container pf-main-content">
@@ -99,3 +109,4 @@ if (!empty($foto_usuario) && file_exists($carpeta_img . $foto_usuario)) {
 
 </body>
 </html>
+

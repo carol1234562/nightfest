@@ -11,14 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-
-/**
- * Función auxiliar para sanitizar salidas y prevenir XSS
- */
-function e($string) {
-    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-}
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");;
 
 // Identificación de usuario 
 $is_logged = isset($_SESSION['user_id']);
@@ -255,7 +248,18 @@ if ($is_logged && isset($_SESSION['user_name'])) {
         <?php endif; ?>
     </div>
 </header>
-<?php
-// Desactiva el búfer y envía la página procesada al navegador
-ob_end_flush();
-?>
+<?php ob_end_flush(); ?>
+
+<script>
+// 🌟 ROMPER EL BFCACHE (BACK-FORWARD CACHE) DEL NAVEGADOR
+window.addEventListener('pageshow', function (event) {
+    // Si event.persisted es true, significa que el navegador intentó meter la página congelada desde su memoria interna
+    if (event.persisted || (typeof window.performance !== "undefined" && window.performance.navigation.type === 2)) {
+        
+        console.log("Detectado intento de volver atrás. Forzando recarga segura...");
+        
+        // Obliga a la página a descargarse limpiamente desde el servidor de nuevo
+        window.location.reload(true);
+    }
+});
+</script>

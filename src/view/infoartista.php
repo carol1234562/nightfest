@@ -1,4 +1,5 @@
 <?php
+require_once '../static model/seguridad.php';
 session_start();
 $conexion = new mysqli("localhost", "root", "", "NightFest");
 
@@ -35,7 +36,12 @@ if (!$evento) {
 </head>
 <body id="infoartista-page">
 
-    <?php include '../static model/header.php'; ?>
+    <?php include '../static model/header.php'; 
+    if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 
 
     <main class="container">
