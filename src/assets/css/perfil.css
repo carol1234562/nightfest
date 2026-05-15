@@ -22,70 +22,6 @@ body.pf-body {
     line-height: 1.6;
 }
 
-/* --- HEADER NIGHTFEST --- */
-.nf-header-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background-color: rgba(0, 0, 0, 0.95);
-    border-bottom: 1px solid var(--gold);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nf-logo-side img {
-    height: 45px;
-    width: auto;
-}
-
-.nf-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
-
-.nf-nav a {
-    color: var(--text-white);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: 0.3s;
-}
-
-.nf-nav a:hover, .nf-nav a.active {
-    color: var(--gold);
-}
-
-.nf-user-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.user-circle {
-    width: 38px;
-    height: 38px;
-    background-color: var(--gold);
-    color: black;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.icon-add i, .icon-logout i {
-    color: var(--gold);
-    font-size: 1.2rem;
-    transition: 0.3s;
-}
-
-.icon-logout i:hover {
-    color: var(--danger);
-}
 
 /* --- CONTENIDO DE PERFIL --- */
 .pf-main-content {
@@ -217,44 +153,7 @@ body.pf-body {
     color: white;
 }
 
-/* --- FOOTER --- */
-.main-footer {
-    padding: 40px 0;
-    border-top: 1px solid #333;
-    margin-top: 80px;
-    text-align: center;
-}
 
-.footer-socials {
-    margin-bottom: 20px;
-}
-
-.footer-socials a {
-    color: var(--gold);
-    font-size: 1.4rem;
-    margin: 0 12px;
-    transition: 0.3s;
-}
-
-.footer-legal {
-    margin-bottom: 20px;
-}
-
-.footer-legal a {
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 0.8rem;
-    margin: 0 10px;
-}
-
-.divider {
-    color: #444;
-}
-
-.copyright {
-    color: var(--text-gray);
-    font-size: 0.75rem;
-}
 
 /* --- RESPONSIVIDAD --- */
 @media (max-width: 768px) {
