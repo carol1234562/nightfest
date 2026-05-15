@@ -267,3 +267,23 @@ body.pf-body {
         display: none; /* Podrías implementar un menú hamburguesa aquí */
     }
 }
+
+/* Forzar a que el contenedor sea un círculo perfecto */
+.pf-avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #D4AF37; /* Dorado NightFest */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Forzar a la imagen a cubrir el círculo sin deformarse */
+.pf-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

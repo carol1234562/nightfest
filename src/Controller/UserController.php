@@ -145,6 +145,50 @@ public function deleteAccount($id) {
             exit();
         }
     }
+
+    public function actualizarPerfil($userId, $datos, $archivoFoto) {
+        $db = Connection::connect(); // O como gestiones tu conexión PDO/MySQLi
+        
+        // 1. Mantener la foto actual por si el usuario no sube una nueva
+        $sqlActual = "SELECT foto_perfil FROM usuarios WHERE id = :id";
+        $stmtActual = $db->prepare($sqlActual);
+        $stmtActual->execute([':id' => $userId]);
+        $usuario = $stmtActual->fetch(PDO::FETCH_ASSOC);
+        $nombreFotoFinal = $usuario['foto_perfil']; // Valor actual (ej: 'default.png')
+
+        // 2. Validar si el usuario ha subido un archivo real y no hay errores
+        if (isset($archivoFoto['name']) && $archivoFoto['error'] === UPLOAD_ERR_OK) {
+            
+            $carpeta_dest = '../View/img/'; // Ajusta la ruta para llegar a tu carpeta 'img' desde el controlador
+            $extension = pathinfo($archivoFoto['name'], PATHINFO_EXTENSION);
+            
+            // Generar el nombre único para evitar duplicados caóticos
+            $nombreFotoFinal = "perfil_" . $userId . "_" . time() . "." . $extension;
+            
+            // Mover el archivo temporal a la carpeta física
+            if (move_uploaded_file($archivoFoto['tmp_name'], $carpeta_dest . $nombreFotoFinal)) {
+                
+                // OPCIONAL: Borrar la foto anterior del servidor si NO era la por defecto
+                if ($usuario['foto_perfil'] !== 'default.png' && $usuario['foto_perfil'] !== 'default.jpg') {
+                    $fotoAnterior = $carpeta_dest . $usuario['foto_perfil'];
+                    if (file_exists($fotoAnterior)) {
+                        unlink($fotoAnterior);
+                    }
+                }
+            }
+        }
+
+        // 3. Guardar en la Base de Datos únicamente el nombre del archivo
+        $sql = "UPDATE usuarios SET nombre = :nombre, email = :email, foto_perfil = :foto WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        
+        return $stmt->execute([
+            ':nombre' => $datos['nombre'],
+            ':email'  => $datos['email'],
+            ':foto'   => $nombreFotoFinal, // Aquí se guarda el string seguro
+            ':id'     => $userId
+        ]);
+    }
 }
 
 // --- LÓGICA DE CONTROL DE RUTAS ---

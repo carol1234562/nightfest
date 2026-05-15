@@ -19,6 +19,8 @@ if (!$user) {
     header("Location: ../Controller/UserController.php?action=logout");
     exit();
 }
+$foto_usuario = $user['foto_profile'] ?? $user['foto_perfil']; 
+$carpeta_img = '../assets/img/';
 
 // Variables de usuario
 $nombre   = $user['nombre'];
@@ -29,8 +31,14 @@ $es_admin = ($rol === 'admin');
 // Inicial para el avatar circular
 $inicial  = strtoupper(substr(trim($nombre), 0, 1));
 
-// Lógica de foto: Si no hay en DB, usa el link de Flaticon
-$foto_url = !empty($user['foto_perfil']) ? "../assets/img/" . $user['foto_perfil'] : "https://cdn-icons-png.flaticon.com/512/21/21104.png";
+// CORRECCIÓN: Validar si existe el archivo físico en la carpeta
+if (!empty($foto_usuario) && file_exists($carpeta_img . $foto_usuario)) {
+    $foto_url = $carpeta_img . $foto_usuario;
+} else {
+    // Si en la BD dice 'default.png' pero tu archivo físico es 'default.jpg' (o viceversa)
+    // Nos aseguramos de apuntar al archivo real que tienes en tu carpeta de assets
+    $foto_url = $carpeta_img . 'default.jpg'; 
+}
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +97,8 @@ $foto_url = !empty($user['foto_perfil']) ? "../assets/img/" . $user['foto_perfil
 
         <div class="pf-profile-card">
             <div class="pf-card-header">
-                <div class="pf-avatar-wrapper">
-                    <img src="<?php echo $foto_url; ?>" alt="Foto Perfil" class="pf-avatar-img">
+                <div class="pf-avatar-container">
+            <img src="<?php echo $foto_url; ?>" alt="Foto Perfil" class="pf-avatar-img">
                 </div>
                 <div class="pf-user-info">
                     <h2><?php echo htmlspecialchars($nombre); ?></h2>
